@@ -2,59 +2,225 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup | BYC ADMIN</title>
+    <title>Signup | BYC </title>
+    <!-- bootstrap cdn  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
     <link rel="shortcut icon" href="./images/BYC LOGO JPG FILE 1.png" type="image/x-icon">
 
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="./images/BYC LOGO JPG FILE 1.png">
-    <!-- <script src="./js/oAuth.js"></script> -->
+    <!-- font awesome cdn  -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+  
+  <nav class="navbar navbar-expand-lg mb-5 mb-lg-5 pb-lg-5">
+        <div class="container-fluid mt-2"> 
+              <!-- Left UL LI -->
+                <div class="d-none d-lg-flex">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"><a class="nav-link font-seog" href="./allProducts.html">Shop Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./blog.html">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./blog_home.html">FAQ</a></li>
+                    </ul>
+                </div> 
 
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 specta">
-            <div class="container">
-                <center>
-                  <img src="images/sigimg.png" alt="img" class="sign-img">
-                </center>
+            <!-- BYC LOGO (Center) -->
+             <a class="navbar-brand mx-lg-auto" href="./index.html">
+              <img src="./images/BYC LOGO JPG FILE 1.png" alt="BYC Logo">
+            </a> 
+
+            <!-- Right Menu -->
+            <div class="d-none d-lg-flex align-items-center">
+              <ul class="navbar-nav">
+                  <li class="nav-item "><a class="nav-link" href="./aboutUs.html">About Us</a></li>
+                  <li class="nav-item mx-lg-1"><a class="nav-link" href="./contact.html">Contact</a></li>
+              </ul>
+              <div class="icon-links d-flex align-items-center ">
+                  <a href="#"><i class="fas fa-search mx-lg-3"></i></a>
+                  <a href="./signUp.html"><i class="fa-solid fa-user-plus mx-lg-2 "></i></a>
+                  
+                  <a href="./wishlist.html"><i class="far fa-heart mx-lg-2"></i></a>
+                  <a href="./cart.html"><i class="fas fa-shopping-cart mx-lg-2"></i></a>
+              </div>
             </div>
+            <!-- Mobile Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 specta2">
-            <h2 class="text-center mt-5">Admin Register</h2>
-            <form id="signForm">
-                <label for="Name" class="font-mulish font-size-14 font-weight-600">Name</label>
-                <input type="text" name="name" id="name" class="input mb-3" placeholder="Enter Name">
 
-                <label for="Email" class="font-mulish font-size-14 font-weight-600">Email Address</label>
-                <input type="email" name="email" id="email" class="input mb-3" placeholder="Enter Email Address">
+          <!-- Mobile Menu -->
+        <div class="collapse navbar-collapse d" id="mobileMenu">
+            <ul class="navbar-nav text-start">
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./allProducts.html">Shop Products</a></li>
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./blog.html">Blog</a></li>
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./blog_home.html">FAQ</a></li>
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./aboutUs.html">About Us</a></li>
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./contact.html">Contact</a></li>
+                <li class="nav-item d-flex justify-content-start  gap-3 mt-1 text-start">
+                  <!-- <a href="#" class="d-lg-none"><i class="fas fa-search text-dark"></i></a>
+                  <a href="./signUp.html" class="d-lg-none"><i class="fa-solid fa-user-plus mx-lg-2 regIcon"></a>
+                  <a href="./wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark"></i></a>
+                  <a href="./cart.html" class="d-lg-none"><i class="fas fa-cart-shopping text-dark"></i></a> -->
+                  <a href="" class="d-lg-none"><i class="fas fa-search text-dark"></i></a>
+                  <a href="./signUp.html" class="d-lg-none"><i class="fa-solid fa-user-plus mx-lg-2 regIcon text-dark"></i></a>
+                  
+                  <a href="wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark"></i></a>
+                  <a href="./cart.html" class="d-lg-none"><i class="fas fa-cart-shopping text-dark"></i></a>
+                </li>
+            </ul>
+        </div>
+  </nav> 
+    
+  <section class="container-fluid index-login  " style="position: relative; height: 900px;" >
+    <div class="container index  px-lg-5 px-1 px-md-3 ">
+          
+          <div class="d-flex  align-items-center justify-content-center " id="login-form">
+            
+              <form class="mb-3 login-form " >
+                  <div class="text-center ">
+                    <h2 class=" pt-4  my-3 my-lg-5">Create Your Account</h2>
+                  </div>
+                  <label for="Name" class="form-label mb-3" id="form-label">Name</label>
+                  <input type="text" name="Name" id="Name" class="input mb-3" placeholder="Enter Name">
 
-                <label for="Password" class="font-mulish font-size-14 font-weight-600">Password</label>
-                <input type="password" name="password" id="password" class="input mb-3" placeholder="Enter Password">
+                  <label for="Email" class="form-label mb-3" id="form-label">Email Address</label>
+                  <input type="email" name="Email" id="Email" class="input mb-3" placeholder="Enter Email Address">
 
-                <label for="Password" class="font-mulish font-size-14 font-weight-600">Confirm Password</label>
-                <input type="password" name="password" id="confirmPassword" class="input mb-3" placeholder="Confirm Password">
+                  <label for="Password" class="form-label mb-3" id="form-label">Password</label>
+                  <input type="password" name="Password" id="Password" class="input mb-3" placeholder="Enter Password">
 
-                <label for="role" class="font-mulish font-size-14 font-weight-600">Role</label>
-                <input type="text" name="role" id="role" class="input mb-3" placeholder="Enter Role">
+                  <label for="ConfirmPassword" class="form-label mb-3" id="form-label">Confirm Password</label>
+                  <input type="password" name="confirmPassword" id="ConfirmPassword" class="input mb-3" placeholder="Confirm Password">
 
-                <button class="button button-blue font-weight-700" type="button" onclick="signUp(event)">
+                  <div class="d-flex justify-content-between align-items-center  mb-2 mb-lg-3">
+                      <div>
+                        <input type="checkbox" class="form-check-input me-1 mt-2 pt-4 pb-1 me-lg-2" id="rememberMe">
+                        <label class="form-check-label  fg-index" for="rememberMe">Remember me</label>
+                      </div>
+                      <a href="" class="mt-2  fg-index text-decoration-none text-dark">forgot your password?</a>
+                  </div>
+                        <!-- <button class=""   onclick="customerSignup(event)">SIGN UP</button> -->
+                        <button class="login-Btn  mt-3" type="button" id="login-Btn" onclick="customerSignup(event)">
+                      <div class="spinner-border spinner-border-sm text-light spin" role="status">
+                          <span class="sr-only"></span>
+                      </div>
+                      Create account
+                  </button>
+              </form>
+
+              <!-- update forget password  -->
+              
+
+        </div>
+          
+  
+      </div>
+  </section>
+
+    <div class="d-flex update-form align-items-center justify-content-center pt-4" style="position: absolute; top: 170px; width: 100%;">
+
+        <form class="px-4 ms-2" id="update-form"> <!-- style="position: absolute;"-->
+                <h2 class="text-center tin mt-5 mb-5  update">Update Password</h2>
+                <label for="updatePassEmail" class="font-mulish font-size-14 font-weight-600" id="form-label">Enter Current Email</label><br>
+                <input type="email" name="updatePassEmail" id="updatePassEmail" class="input mb-3" placeholder="Enter Email Address"><br>
+
+                <label for="updatePassword" class="font-mulish font-size-14 font-weight-600" id="form-label">New Password</label><br>
+                <input type="password" name="updatePassword" id="updatePassword" class="input mb-3" placeholder="Enter Password"><br>
+
+                <label for="confirmPassword" class="font-mulish font-size-14 font-weight-600" id="form-label"> confirm Password</label><br>
+                <input type="password" name="confirmPassword" id="confirmPassword" class="input mb-3" placeholder="Enter Password"><br>
+
+                <button class="login-Btn  mt-5" type="button" onclick="upDatePassword(event)">
                     <div class="spinner-border spinner-border-sm text-light spin" role="status">
                         <span class="sr-only"></span>
                     </div>
-                    Create account
+                    Update Password
                 </button>
-              </form>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            </form>
+            </div>
 
-    <!-- Custom Javascript -->
+
+
+
+
+
+    <footer class="  py-4 pb-2 footer-font" style="background-color: #212121;">
+      <div class="container pt-lg-5 mt-lg-5 py-md-3 text-light">
+            <div class="row foot-row">
+
+              <div class="col-sm-12 col-md-2 mb-4 col-lg-3 mb-md-0 col-a ps-lg-5">
+                <h5 class="text-captalize mb-lg-3">Company Info </h5>
+                <ul class="list-unstyled text-light">
+                  <li class="my-lg-2"><a href="./aboutUs.html" class="text-light " style="text-decoration: none; ">About Us</a></li>
+                  <li class="my-2"><a href="" class="text-light" style="text-decoration: none;">Affiliate</a></li>
+                  <li class="my-lg-2"><a href="./blog.html" class="text-light"style="text-decoration: none;">Fashion Blogger</a></li>
+                </ul>
+              </div>
+
+              <div class="col-sm-12 col-md-2 mb-4 col-lg-2 mb-md-0 col-b">
+                <h5 class="text-captalize mb-lg-3">Help & Support</h5>
+                <ul class="list-unstyled text-light">
+                    <li class="my-lg-2"><a href="#" class="text-light " style="text-decoration: none;">Shipping Info</a></li>
+                    <li class="my-2"><a href="#" class="text-light" style="text-decoration: none;">Refunds</a></li>
+                    <li class="my-lg-2"><a href="#" class="text-light" style="text-decoration: none;">How to Order</a></li>
+                    <li class="my-2"><a href="#" class="text-light" style="text-decoration: none;">How to Track</a></li>
+                    <li class="my-lg-2"><a href="#" class="text-light" style="text-decoration: none;">Size Guide</a></li>
+                </ul>
+              </div>
+
+              <div class="col-sm-12 col-md-5 mb-4 col-lg-4 mb-md-0 col-c">
+                <h5 class="text-captalize mb-lg-3">Customer Care</h5>
+                <ul class="list-unstyled">
+                    <li class="my-lg-2"><a href="./contact.html" class="text-light " style="text-decoration: none;">Contact Us</a></li>
+                    <li class="my-2"><a href="#" class="text-light" style="text-decoration: none;">payment Methods</a></li>
+                    <li class="my-lg-2 mb-2"><a href="./blog_home.html" class="text-light"style="text-decoration: none;">Fashion Blogger</a></li>
+                      <a href="#"><img src="./images/paypal.png" alt="paypal" style="width: 40px; height: 20px;"></a>
+                      <a href="#"><img src="./images/visa.png" class="mx-4 img-fluid my-lg-2" alt="visa" style="width: 40px; height: 20px;"></a>
+                      <a href="#"><img src="./images/MasterCard.png" alt="MasterCard" style="width: 40px; height: 20px;"></a>
+                </ul>
+              </div>
+
+              <div class="col-sm-12 col-md-3 mb-4 col-lg-3 col-d"> 
+                <h5 class="text-captalize mb-lg-3">Signup For The Latest News</h5>
+                <form class="form">
+                    <span class="mail-span mb-3">
+                        <input type="email" class="text-start mb-lg-5 contact-mail" placeholder="Enter Email" aria-label="Email">
+                        <button class="email-btn" onclick="submitEmail(event)"><i class="fas fa-arrow-right text-light btn-arr"></i></button>
+                    </span>
+                </form>
+
+                <!-- Contact Section -->
+                <div class="contact-info mt-2">
+                  <a href="" class="text-decoration-none text-light">
+                    <i class="fa-regular fa-envelope fa-xl me-2 mb-4"></i>
+                    bycafrica@gmail.com
+                  </a>
+                  <br>
+                  <a href="" class="text-decoration-none text-light">
+                      <i class="fa-solid fa-phone me-2"></i>
+                      ‪+2348101375376‬ : +234905403403
+                  </a>
+                </div>
+              </div>
+            </div>
+
+
+          <div class="text-center text-lg-center mt-5 pt-lg-5">
+                <a href="#" class=""><i class="fa-brands fa-facebook fa-2xl text-dark" ></i></a>
+                <a href="#" class=""><i class="fab fa-instagram fa-2xl text-dark mx-lg-5 mx-3"></i></a>
+                <a href="#" class=""><i class="fab fa-twitter fa-2xl text-dark me-lg-5"></i></a>
+                <a href="#" class=""><i class="fab fa-youtube fa-2xl text-dark mb-3 mb-lg-4 mx-3"></i></a>
+              <hr style="border: 2px solid #fff; background-color: #fff; box-shadow: #e7e6e63d 0px 3px 8px;">
+              <p class="mt-5 copyright">All rights Reserved  copyright bycafrica 2021.</p>
+          </div>
+        <!-- Footer Content ends here -->
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/index.js"></script>
 </body>
 </html>

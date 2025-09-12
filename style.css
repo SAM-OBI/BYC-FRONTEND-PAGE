@@ -325,6 +325,11 @@ hr{
     color: #000;
     word-spacing: 0px;
 }
+#display{
+    display: inline-block;
+    width: 80px;
+    overflow: visible;
+}
 .sec1-h {
     font-family: "Jost", sans-serif;
     font-weight: 700;
@@ -397,14 +402,15 @@ hr{
     margin-bottom: 2px;
 
 }
-.sec4-tag:active,
+.sec4-tag.active,
 .sec4-tag:focus{
     color: #000;
-    text-decoration: underline;
+    font-weight: 600;
+    border-bottom: 3px solid #D7000F;
 }
 .sec4-tag:hover{
     color: #828282;
-    text-decoration: none;
+    /* text-decoration: underline; */
 }
  .sec4-a{
     text-decoration: none;
@@ -418,7 +424,9 @@ hr{
     background-color: #D7000F;
     color: #fff;
 }
-
+#forMen, #forkids{
+    display: none;
+}
 .sec4 .card-title{
     font-family: 'Noto Sans', sans-serif;
     font-weight: 700;
@@ -822,7 +830,7 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2p
     /* #update-form{
         max-width: 96% !important;
     } */
-    .form-check-input{
+    .form-check-input[type=checkbox]{
         max-width: 20px !important;
         max-height: 23px !important;
     }
@@ -857,8 +865,7 @@ box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2p
     }
     .sec1-h{
         font-weight: 500;
-        font-size:28px !important;
-    
+        font-size:22px !important;
         word-spacing: 0px;
         padding: 12px 0px;
     }
