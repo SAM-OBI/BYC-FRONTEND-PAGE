@@ -1,0 +1,2273 @@
+/* google fonts import  */
+/* 1. Jost */
+/* 2. Inter */
+/* 3. Josefin Sans */
+/* 4. Lato */
+/* 5. Noto Sans used to replace segoe ui*/
+/* 6. Nunito Sans */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* Reset CSS for all landing page(index.html) fonts*/
+* {
+    margin: 0 ;
+    padding: 0 ; ;
+    box-sizing: border-box;
+    /* font-family:"Lato", sans-serif;  */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* update password  */
+.update-form{
+    display: none !important;
+}
+.index{
+    display: non;
+}
+.navbar li a{
+    font-family: "Jost" sans-serif;
+    font-weight: 500;
+    font-weight: 16px;
+    line-height: 100%;
+}
+.nav-item {
+    font-family: "Jost", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 100%;
+}
+.navbar {
+      padding: 1rem;
+    }
+.navbar-nav {
+      gap: 1.5rem;
+    }
+.icon-links a {
+      color: #000;
+      font-size: 1.2rem;
+      margin-left: 1rem;
+    }
+.navbar-brand img {
+      height: 40px;
+    }
+.user-login{
+    display: none;
+    position: relative;
+}
+
+.status-dot{
+    position: absolute;
+    top: 10px;
+    right: -3px;
+    width: 10px;
+    height: 10px;
+    background-color: #4CAF50; /* Green color */
+    border-radius: 50%;
+}
+    /* input search button for nav  */
+    .search-box{
+        position: relative;
+        overflow: hidden;
+    }
+    .search-input{
+        border: none;
+        outline: none;
+        border-bottom: 2px solid black;
+        transition:  0.4s ease-in;
+        font-size: 14px;  
+        flex: 1;
+        width: 0; 
+        opacity: 0;
+        background: transparent;
+
+        /* padding-left: 35px; */
+    }
+    .search-btn{
+        cursor: pointer;
+    }
+    
+    .search-box:focus-within .search-input{
+        width: 100%;
+        opacity: 1;
+    }
+    .search-box:focus-within .search-btn{
+        position: absolute;
+        left: 130px;
+        top: 5px;
+        border: none;
+    }
+   
+    .search-input:focus ~ .search-btn,
+    .search-input:focus{
+        outline: #000000;
+    }
+    
+/* END CODE FOR NAV  */
+
+    /* styling for index.html starts here LOGIN FORM*/
+    .index{
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        font-family: "Noto Sans", sans-serif; 
+        height: 820px;
+        border-radius: 10px;
+
+    }
+    #update-form{
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        font-family: "Noto Sans", sans-serif; 
+        height:600px;
+        border-radius: 10px;
+    }
+
+    #index{
+      height: 620px;  
+    }
+    /* .order-md-2{
+        border-right: 1px solid #F3F0F0;
+        height: 500px;
+        /* padding-top: 20px; */
+     
+    /* .loginEmail, .password, */
+    .index-login input,.login-Btn,#update-form input{
+        width: 500px;
+        height: 45px;
+        border: 1px solid #BD3A3A;
+        border-radius: 10px;
+        outline:#BD3A3A;
+        padding: 2px 15px;
+<<<<<<< HEAD
+        font-size: 19px;
+        font-weight: 350 !important;
+        line-height: 100%;
+        font-family: "Noto Sans", sans-serif; 
+        color: black;
+=======
+        font-size: 18px;
+        font-weight: 100 !important;
+        line-height: 100%;
+>>>>>>> b4f7524bc04383ba2e0fa30e4e7a23e08acc32c3
+    }
+    #form-label{
+        font-weight: 400 !important;
+        font-size: 16px;
+        line-height: 100%;
+        color: #000000;
+    }
+    .login-form{
+<<<<<<< HEAD
+        width: 400px;
+        height: 430px;
+    }
+    .form-check-input{
+    width: 30px !important;
+    height: 25px !important;
+    border: 1px solid #B0B0B0;
+    }
+    .index-login, #update-form {
+=======
+        width: 500px;
+        height: 450px;
+    }
+    .form-check-input{
+    width: 30px;
+    height: 25px;
+    border: 1px solid #B0B0B0;
+    }
+    .index-login {
+>>>>>>> b4f7524bc04383ba2e0fa30e4e7a23e08acc32c3
+        color: #212121;
+        font-weight: 700;
+        font-size: 26px;
+    }
+    .fg-index{
+        font-size: 16px;
+        font-weight: 400;
+        color: #000000;
+        line-height: 100%;
+        letter-spacing: 0%;
+    }
+    .login-Btn{
+        height: 55px !important;
+        background-color: #BD3A3A;
+        color: #FFFFFF;        font-size: 16px;
+        font-weight: 700 !important;    
+    }
+<<<<<<< HEAD
+    .spin{
+        display: none ;
+    }
+    .login-Btn:hover{
+        background-color: #D7000F;
+        color: #fff;
+    }
+    .signup-padding{
+        padding-bottom: 19% !important;
+    }
+    /* END CODE FOR LOGIN INDEX.HTML  */
+
+
+    /* footer styling 1 starts here  */
+  
+
+   /* this is a default button for the product  */
+.all-btn{
+    font-family: "Jost", sans-serif;
+    background-color: transparent;
+    font-weight: 700;
+    font-size: 18.56px;
+    line-height: 100%;
+    border: 2px solid #000;
+    width: 237px;
+    height: 56px;
+}
+
+.all-anchor{
+    font-family: "Jost", sans-serif;
+}
+
+.mail-span{
+    position: relative;
+    font-family: "Jost", sans-serif;
+}
+/* footer contact email  */
+.font-seog{
+    font-family: "Noto-Sans", sans-serif !important;
+}
+
+
+.footer-font{
+    font-family: "Jost", sans-serif;
+}
+.contact-mail {
+   width: 320px;
+    height: 56px;
+    padding: 10px;
+    border:0.7px  solid #FFFFFF;
+    border-radius: 5px;
+    font-size: 19px;
+    margin-bottom: 20px;
+    background-color: transparent;
+    outline: none;
+    color: #fff;
+}
+.email-btn{
+    position: absolute;
+    top: 24px;
+    right: 1px;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    cursor: pointer; 
+}
+ ::placeholder {
+    color: #fff;
+    font-family: "jost", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    /* background-color: ; */
+}
+/* styling for arrow icon in footer email, with button as arrow */
+.btn-arr{
+    position: absolute;
+    top: -21px;
+    right: 0px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer; 
+}
+
+/* styling for all anchor-buttons that have arrow icon links  */
+.arrow-btn{
+    position: absolute;
+    top: 4px;
+    right: -15px;
+    padding: 16px 30px 16px 10px;
+    color: black !important;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+}
+/* styling for the a-tag  with arrow icons   */
+.btn-tag{
+    position: relative;
+    width: 90px !important;
+    padding: 16px 40px 16px 10px;
+    color: black !important;
+    text-decoration: none;
+    border: 1px solid #424242;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+}
+
+.contact-info{
+    font-family: "Nunito Sans", sans-serif;
+}
+.fa-facebook, 
+.fa-instagram,
+.fa-twitter ,
+.fa-youtube {
+    border-radius: 100%;
+    background-color: #fff;
+    padding: 25px 10px;
+}
+hr{
+    border: 2px solid #fff;
+    width: 100%;
+    
+}
+.copyright{
+    font-family: "Jost", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    color: #fff;
+}
+/* FOOTER STYLING ENDS HERE  */
+
+
+/*FIRST LANDING PAGE STYLING STARTS HERE */
+/* SECTION 1 STARTS HERE */
+ .sec1{
+    margin-top: 100px;
+   }
+.sec1-p {
+    font-family: "Jost", sans-serif;
+    font-weight: 350;
+    font-size: 26px;
+    line-height: 100%;
+    color: #000;
+    word-spacing: 0px;
+}
+.sec1-h {
+    font-family: "Jost", sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 100%;
+    color: #000;
+    word-spacing: 5px;
+    letter-spacing: 2px;
+}
+
+/* section2 starts here */
+/* sec2 typography  */
+.sec h2 {
+    font-family: "Jost", sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 100%;
+    color: #212121;
+}
+.sec2 .card-title {
+    font-family: "Jost", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    color: #000;
+}
+.sec2 .card-text {
+    font-family: "Jost", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    color: #000;
+}
+
+/* SECTION 2 STOPS HERE  */
+
+/* SECTION 3 STARTS HERE  */
+.sec3 h2{
+    font-family: "Jost", sans-serif;
+    font-weight: 700;
+    font-size: 33px;
+    line-height: 100%;
+    color: #616161;
+}
+.sec3 h3{
+   color: #212121;
+    font-family: "Jost", sans-serif;
+    font-weight: 700;
+    font-size: 54px !important;
+    line-height: 100%;
+}
+.explore-p{
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 140%;
+    color: #424242;
+}
+/* SECTION 3 STOPS HERE  */
+
+/* SECTION 4 STARTS HERE  */
+/* rest for the sec4 typography  anchor tag */
+.sec4-tag{
+    text-decoration: none;
+    color: #333333;
+    font-family: "Jost", sans-serif;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 100%;
+    margin-bottom: 2px;
+
+}
+.sec4-tag:active,
+.sec4-tag:focus{
+    color: #000;
+    text-decoration: underline;
+}
+.sec4-tag:hover{
+    color: #828282;
+    text-decoration: none;
+}
+ .sec4-a{
+    text-decoration: none;
+    color: #000000;
+    font-family: "Jost", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+} 
+.sec4-a:hover{
+    background-color: #D7000F;
+    color: #fff;
+}
+
+.sec4 .card-title{
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;    
+    line-height: 100%;
+    color: #212121;
+    text-transform: uppercase;
+}
+.sec4 .card-text{
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    color: #19191D;
+}
+/* media query for mobile devices */
+
+/* SECTION 5 STARTS HERE */
+.sec5 .card-body{
+    font-family: "Jost", sans-serif;
+    width: 28vw;
+    height: 60vh;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    /* box-shadow: rgba(0, 0, 0, 0.07); */
+    /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; */
+}
+.card-sec5 .d-flex{
+    background-color: #E0E0E0;
+    width: 22rem;
+    font-family: "Jost", sans-serif;
+    
+}
+
+.card-sec5 span, .card-sec5 .fa-regular{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    color: #424242;
+}
+.wade{
+    font-weight: 700 !important;
+    font-size: 20px !important;
+    line-height: 100% !important;
+    color: #212121 !important;
+}
+.sec5 h3{
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 120%;
+    color: #212121;
+}
+.sec5 p{
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 140%;
+    color: #424242;
+}
+/* END CODE FOR FIRST LANDING PAGE */
+
+/* STYLING FOR FIRST BLOG PAGE  */
+/* default typography for h5 and p blog section */
+.blog-section .card-title{
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 100%;
+    color: #212121;
+}
+.blog-section .card-text{
+    font-weight: 400 !important;
+    font-size: 20px;
+    color: #424242;
+    line-height: 100%;
+    /* font-family: "Noto Sans", sans-serif;  */
+}
+
+.default-h1{
+    font-weight: 700;
+    font-size: 48px;
+    font-family: "Jost", sans-serif;
+}
+
+/* PAGINATION START  */
+.page-link{
+    width: 43px;
+    height: 43px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: none;
+    outline: none;
+}
+.page-link:hover
+{
+border: 1px solid #FB8200;
+}
+/* PAGINATION END  */
+/* END FOR FIRST BLOG  */
+
+/* CODE FOR BLOG-HOME SECTION(SECOND BLOG) */
+.home-blog{
+        font-family: "Noto Sans", sans-serif;
+}
+.breadcrumb-item{
+    font-weight: 400;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.homeBlog-p{
+    font-weight: 400 !important;
+    font-size: 20px;
+    width: 100%;
+    color: #424242;
+    word-spacing: 1.9px;
+    line-height: 100%;
+    font-family: "Noto Sans", sans-serif;
+    /* text-align: justify; */
+    /* text-align-last: justify; */
+    /* hyphens: auto; */
+}
+    .homeHeadng{
+        font-size: 48px !important;
+        font-weight: 700;
+        line-height: 100%;
+        font-family: "Noto Sans", sans-serif !important;
+}
+
+/* .home-blog styling ends here  */
+
+/* ABOUT US PAGE STARTS HERE  */
+
+
+.about-p{
+    font-weight: 380 !important;
+    font-size: 32px;
+    line-height: 130%;
+    color: #212121;
+    font-family: "Noto Sans", sans-serif;
+
+}
+.about-card:hover {
+    background-color: rgba(189, 58, 58, 0.04);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    font-weight: 350;
+    color: #383737;
+    font-family: "Noto Sans", sans-serif;
+}
+.about-h3{
+    font-weight: 650;
+    font-size: 26px;
+    color: #D7000F;
+    font-family: "Noto Sans", sans-serif;
+}
+/* .about-h{
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 100%;
+    color: #212121;
+    font-family: "Noto Sans", sans-serif;
+} */
+
+.about-sec3{
+box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+ border-radius: 10px;
+}
+
+.about-sec3 .card-text{
+    font-size: 16px;
+    font-weight: 700;
+    color: #19191D;
+    font-family: "Jost", sans-serif;
+}
+.text-p{
+    font-weight: 450 !important;
+    font-size: 20px;
+}
+/* .about-sec3 .text-p{
+
+} */
+.about-sec3 .men-fash{
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 143%;
+    /* letter-spacing: 1.8%; */
+    color: #787885;
+}
+
+.about-sec3 .price{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    color: #000000DE;
+    font-family: "Noto Sans", sans-serif;
+
+}
+.about-sec3 .rating{
+    font-family: "Roboto ", sans-serif;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 23%;
+    color: #5E6366;
+}
+/* ABOUT US ENDS HERE  */
+
+/* CONTACT US STYLING STARTS HERE  */
+.contact-us h5{
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 100%;
+    color: #000000;
+    font-family: "Noto Sans", sans-serif;
+}
+
+.contact-us p{
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 100%;
+    color: #000000;
+    font-family: 'Segoe UI', sans-serif;
+}
+#floatingTextarea2:focus{
+    border: none;
+    box-shadow: none;
+}
+.contact-product{
+    margin-bottom: 80px !important;
+    height: 2000px;
+}
+.product-shadow{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    width: 215px;
+    height: 300px;
+}
+
+.product-shadow1{
+    border-radius: 4px;
+}
+/* stylinng for all products   */
+.form-group{
+    position: relative;
+}
+#sortBy{
+    padding: 0 20px 0 5px;
+    height: 46px;
+    width: 136px;
+    border: 1.4px solid #5A5B6A;
+    border-radius: 4px;
+    outline: none;
+    color: #19191D;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    
+}
+
+
+.sortBy{
+    position: absolute;
+    top: -8px;
+    left: 10px;
+    background-color: #fff;
+    font-family: "Roboto", sans-serif;
+    color: #787885;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    text-transform: uppercase;
+    transition: 2s ease-in-out; 
+    transform: translateY(2px);
+}
+
+/* .wishlist-btn{
+    
+} */
+
+.Wishlist-btn{
+    opacity: 0;
+    transform: translateY(15px);
+    pointer-events: none;
+    transition: all 0.5s ease;
+}
+
+.card-camsole:hover .Wishlist-btn, 
+.hidden-btn:hover{
+    display: flex !important;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+ .card-camsole:hover .product-shadow1{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    width: 215px;
+    height: 300px;
+    transition: .2s ease-in;
+    /* transform: translateY(-3px); */
+}
+
+/* styling for cart  */
+.cart-sec1{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.carousel-control-next, .carousel-control-prev {
+    width: 12% !important;
+    right: 17%;
+}
+    /* --bs-gutter-x: 1.5rem; */
+
+/* .carousel-control-next-icon, .carousel-control-prev-icon */
+.span-icon{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 3px 7px;
+} 
+.color-options {
+  display: flex;
+  gap: 10px; 
+}
+.color-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  /* border: 2px solid #ddd; */
+  transition: transform 0.2s ease;
+}
+.color-circle:hover {
+  transform: scale(1.2); /* hover zoom effect */
+}
+.blue { 
+    background-color: blue; 
+}
+.magenta {
+     background-color: magenta;
+     }
+.orange {
+     background-color: orange; 
+    }
+.black { 
+    background-color: black; 
+}
+
+.size-option{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 2px 10px;
+}
+.size-option:hover{
+    background-color: transparent;
+    border:1px solid #BD3A3A ;
+
+    /* color: #fff; */
+    cursor: pointer;
+}
+.size-option:active{
+    border:1px solid #BD3A3A ;
+    /* background-color: none; */
+
+}
+
+.size-option:focus{
+    border:1px solid #BD3A3A ;
+    /* background-color: none; */
+=======
+    .signup-padding{
+        padding-bottom: 19% !important;
+    } */
+    /* ends here  */
+
+.row {
+    margin: 0;
+}
+.sign-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.specta {
+    background-color: #2D85DE;
+    min-height: 100vh;
+}
+
+.specta2 {
+    background: url('images/spec.png') no-repeat center center /cover;
+    width: 100%;
+}
+
+form {
+    width: 70%;
+    margin: 5% auto;
+    background: transparent;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+#product-description,#product-category{
+   border: 1px solid #BD3A3A;
+    border-radius: 10px;
+    background-color: #F4F5F6; 
+}
+input, input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 8px;
+    border: 1px solid #BD3A3A;
+    border-radius: 10px;
+    background-color: #F4F5F6;
+    width: 100%;
+}
+
+::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+}
+
+.button-blue {
+    width: 100%;
+    background-color: #BD3A3A;
+    color: #ffffff;
+    border-radius: 10px;
+    outline: none;
+    box-shadow: none;
+    padding: 10px;
+    border: none;
+    font-family: "Noto Sans", sans-serif;
+}
+.err-btn:hover{
+    color: #F4F5F6;
+}
+
+@media screen and (max-width: 650px) {
+    form {
+        width: 100%;
+    }
+    .js-btn{
+    width: 100%;
+    
+}
+
+    .sign-img {
+        height: 305px;
+    }
+
+    .specta {
+        display: none;
+    }
+
+    .specta2 {
+        height: 100vh;
+    }
+}
+
+.sidebar {
+    width: 345px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: #BD3A3A !important;
+    z-index: 100;
+    transition: width 300ms;
+}
+
+.sidebar-brand {
+    height: 90px;
+    padding: 1rem 0rem 1rem 2rem;
+    color: #fff;
+}
+
+.sidebar-menu {
+    margin-top: 1rem;
+}
+
+.sidebar-brand span {
+    display: inline-block;
+    padding: 1rem;
+}
+
+.sidebar-menu li {
+    width: 100%;
+    margin-bottom: 1.7rem;
+    padding-left: 1rem;
+}
+
+.sidebar-menu a {
+    padding-left: 1rem;
+    display: block;
+    color: #fff;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.sidebar-menu a.active {
+    background: #fff;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    color: var(--main-color);
+    border-radius: 30px 0 0 30px;
+}
+
+.sidebar-menu a span:first-child {
+    font-size: 1.5rem;
+    padding-right: 1rem;
+}
+
+
+#nav-toggle:checked + .sidebar {
+    width: 70px;
+}
+
+#nav-toggle:checked + .sidebar .sidebar-brand,
+#nav-toggle:checked + .sidebar li a {
+    padding-left: 1rem;
+    text-align: center;
+}
+
+#nav-toggle:checked + .sidebar li a {
+    padding-left: 0rem;
+}
+
+#nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
+#nav-toggle:checked + .sidebar li a span:last-child {
+    display: none;
+}
+
+#nav-toggle:checked ~ .main-content {
+    margin-left: 70px;
+}
+
+#nav-toggle:checked ~ .main-content header {
+    width: calc(100% - 70px);
+    left: 70px;
+}
+
+.main-content {
+    transition: margin-left 300ms;
+    margin-left: 345px;
+}
+
+header {
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    left: 345px;
+    width: calc(100% - 345px);
+    top: 0;
+    z-index: 100;
+    transition: left 300ms;
+}
+
+#nav-toggle {
+    display: none;
+}
+
+header h2 {
+    color: #222;
+}
+
+header label span {
+    font-size: 1.7rem;
+    padding-right: 1rem;
+    padding-top: 5px;
+}
+
+
+main {
+    margin-top: 85px;
+    padding: 2rem 1.5rem;
+    background: #f1f5f9;
+    min-height: calc(200vh - 50px);
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .sidebar {
+        width: 70px;
+    }
+
+    .sidebar .sidebar-brand,
+    .sidebar li {
+        padding-left: 1rem;
+        text-align: center;
+    }
+
+    .sidebar li a {
+        padding-left: 0rem;
+    }
+
+    .sidebar .sidebar-brand h2 span:last-child,
+    .sidebar li a span:last-child {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 70px;
+    }
+
+    .main-content header {
+        width: calc(100% - 70px);
+        left: 70px;
+    }
+>>>>>>> b4f7524bc04383ba2e0fa30e4e7a23e08acc32c3
+
+}
+
+
+<<<<<<< HEAD
+
+@media screen and (max-width: 600px) {
+    .navbar {
+        padding: 0.1rem !important;
+       /* max-width: 100% !important; */
+    }
+    body{
+        max-width: 100% !important;
+    }
+   /* styling for login OR INDEX.HTML  */
+   .index-login input, .login-form, .login-Btn, #update-form input{
+        width: 99%;
+    }
+    .order-2, .order-md-1{
+        border-right: none;
+        border-bottom: 1px solid #F3F0F0;
+        height: auto;
+        padding-right: 3px;
+        padding-left: 5px;
+        height: 450px;
+    }
+    .index-login,#update-form{
+        padding-right: 0;
+        padding-left: 5px;
+        padding-top: 10px  !important;
+    }
+    .index{
+        height: 720px !important;
+        max-width: 96%;
+    }
+    .update-form{
+        top: 90px !important;
+    }
+    /* #update-form{
+        max-width: 96% !important;
+    } */
+    .form-check-input{
+        max-width: 20px !important;
+        max-height: 23px !important;
+    }
+    .fg-index br{
+        display: none;
+    }
+    .login-form{
+        height: 350px;
+    }
+    .index{
+        height: 870px;
+    }
+    .fg-index{
+        font-size: 15px;
+    }
+
+    /*END CODE FOR INDEX.HTML LOGIN
+    */
+    /* footer  */
+    .contact-info .justify-content-center{
+        justify-content: start !important;
+    }
+    /*MEDIA STYLING FOR FIRST LANDING PAGE   */
+    .sec1{
+        margin-top: 50px;
+    }
+    .sec1-p{
+        font-weight: 350px;
+        font-size: 25px !important;
+        word-spacing: 0px;
+  
+    }
+    .sec1-h{
+        font-weight: 500;
+        font-size:28px !important;
+    
+        word-spacing: 0px;
+        padding: 12px 0px;
+    }
+    .sec1-imgM{
+        width: 88%;
+        height: 400px;
+    }
+    .sec2 h2{
+        font-size: 24px !important;
+        font-weight: 700 !important;
+        margin: 50px 0px !important;
+        word-spacing: 0px !important;
+    }
+    /* .sec3 .all-btn{
+        text-align: center;
+    } */
+
+    .sec3 h2{
+        font-size: 30px !important;
+        font-weight: 400 !important;
+        padding-top: 19px ;
+        word-spacing: 0px !important;
+    }
+    .sec3 h3{
+        font-size: 40px !important;
+        font-weight: 600 !important;
+        padding-top: 4px !important;
+    }
+    .sec3 .all-btn{
+        margin-left: 10px !important;
+    }
+    .sec3 br{
+        display: none !important;
+    }
+    .collection1{
+        width: 97% !important;
+        height: 100% !important;
+    }
+    .collectionb{
+        width: 98% !important;
+        height: 100% !important;
+        margin-bottom: 30px !important;
+    }
+    .collection2,
+    .collection3,
+    .collectionb{
+        width: 98% !important;
+        height: 100% !important;
+        padding-bottom: 0px !important;
+    }
+
+    .sec4-tag{
+        font-size: 20px !important;
+        font-weight: 600 !important;
+        line-height: 100% !important;
+        padding-bottom: 3px !important;
+        
+    }
+    .first-slide{
+        width: 100% !important;
+    }
+
+    .sec4 .rounded {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+     .sec5 .wf,
+     .sec5 h3,
+     .sec5 p
+     {
+        padding: 0px 10px !important;
+     }
+     .sec5 .btn-tag{
+        margin-left: 10px;
+     }
+    .sec5 br{
+        display: none !important;
+          
+     }
+    .card-sec5 .d-flex{
+        margin-top: 20px;
+        width: 100%;
+   }
+   .wade{
+    font-size: 15px !important;
+   }
+   .sec5 .card-body{
+    width: 100%;
+    height: 63vh;
+   }
+   .sec5{
+    padding: 2px 15px;
+   }
+   .sec5 .col-sm-12{
+    margin-bottom:30px;
+   }
+   /* END CODE FOR LANDING PAGE  */
+
+   /* media query for FIRST blog section BLOG.HTML  */
+    .blog-section .default-h1{
+        font-size: 30px !important;
+    }
+   .blog-section br{
+        display: none !important;
+     }
+     .blog-section{
+        max-width: 100%;
+     }
+     .blog-section .container{
+        padding-top: 0px !important;
+        margin-top: 0px !important;
+     }
+    .blog-section .card-title{
+          font-size: 20px !important;
+          font-weight: 700 !important;
+          line-height: 100% !important;
+     }
+    .blog-section .card-text{
+          font-size: 15px !important;
+          font-weight: 500 !important;
+          line-height: 100% !important;
+          letter-spacing: 1px;
+          word-spacing: 0px;
+          width: 100%;
+     }
+
+     /* ENDS HERE FIRST BLOG  */
+
+     /* media for home blog  */
+     .homeHeadng{
+        font-size: 28px !important;
+        margin: 30px 0px !important;
+     }
+     .card-home-blog p br{
+        display: none
+     }
+     .card-home-blog p{
+        font-size: 18.7px;
+        padding: 10px 0;
+        margin-bottom: 20px !important;
+     }
+     /* ends here  */
+
+     /* media for about us page  */
+     .ABOUT-PAGE .default-h1{
+        margin: 20px !important;
+     }
+     .about-h{
+        text-align: center;
+    }
+     .about-p{
+        font-size: 15px !important;
+        text-align: center;
+     }
+
+     .about-sec2 .default-h1{
+        padding-top: 30px;
+        font-size: 25px !important;
+        text-align: start;
+     }
+     
+     .about-card{
+        width: 100% !important;
+        height: 28% !important;
+     }
+     .about-card {
+        background-color: rgba(189, 58, 58, 0.04);
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+        font-weight: 350;
+        color: #383737;
+        font-family: "Noto Sans", sans-serif;
+        height: 30%;
+    }
+    .about-card .down{
+        height: 800px !important;
+        /* padding-bottom: 0 !important; */
+        margin-bottom: 0 !important;
+    }
+    .about-sec2 .card-body{
+        padding: 5px;
+    }
+    .about-h3{
+        padding-top: 3px !important;
+    }
+    .about-text br{
+        display: none;
+    }
+    .flow-col{
+        position: relative;
+        top: -50px;
+        z-index: 2;
+    }
+    .flow-col3{
+        position: relative;
+        top: -90px;
+        z-index: 2;
+        opacity: 0.9;
+    }
+    .about-card .middle br{
+        display: none;
+    }
+    .about-card .middle{
+        height: 800px !important;
+    }
+     
+    /* ABOUT SEC3 STYLING  */
+    .about-sec3{
+        position: relative;
+        top: -60px;
+    }
+    .card-aboutUs{
+        padding-left: 30px !important;
+        margin: 15px 2px;
+    }
+}
+
+/* media query for device width 768px and above */
+@media (min-width: 700px) and (max-width: 790px){
+    .index-login{
+        height: 700px;
+    }
+    .index{
+        height: 1000px;
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+    /* section 1 landing page  */
+    .sec1-imgL{
+        
+       width: 300px !important;
+    
+    }
+    .sec1-imgM{
+       width: 300px !important;
+       height: 430px;
+       padding-top: 30px;
+    }
+
+    .sec3right-col{
+        padding-top: 45px ;
+    }
+    .sec3-left{
+ 
+        padding: 0px !important;
+    }
+    .collection1 h2{
+        padding-top: 15px !important;
+ 
+    }
+    .collection1 h3{
+        margin: 0px !important;
+        padding: 0px !important;
+        font-size: 40px !important;
+    }
+    .sec3-pad{
+        padding: 0px !important;
+        height:60% !important;
+    }
+    .img-col{
+        margin-top: 25px !important;
+    }
+    
+}
+
+@media (min-width: 800px) and (max-width: 1240px){
+    .index{
+        height: 1100px !important;
+    }
+    .signup-padding{
+        padding: 170px !important;
+    }    
+     
+    /* about page sec3  */
+    
+}
+
+/* media query for tablet and desktop  */
+@media (min-width: 601px) and (max-width: 1200px) {
+    /* update password  */
+   
+    .form-check-input{
+        max-width: 20px !important;
+        max-height: 23px !important;
+    }
+  /* login  */
+    .index{
+        height: 720px !important;
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+        
+    }
+     #update-form{
+        width: 100%;
+     }
+    /* styling for section1 landing page  */
+   .sec1 .all-btn {
+    margin-right: 0px !important;
+   }
+   .IMG-SEC {
+    margin-top: 70px;
+   }
+   .sec1-imgL{
+    padding-top: 0px !important;
+   }
+   .sec1-imgR{
+    margin-top: 70px !important;
+   }
+    /* footer  styling for nav list*/
+    .footer-col{
+        padding-left: 0px !important;
+    }
+    .col-a{
+        flex: 0 0 50%;
+        max-width: 30%;
+    }
+    .col-b{
+        flex: 0 0 50%;
+        max-width: 30%;
+    }
+    .col-c{
+        flex: 0 0 50%;
+        max-width: 30%;
+    }
+    .col-d{
+        padding-top: 50px;
+        flex: 0 0 100%;
+        padding-left: 30%;
+    }
+
+/* media for footer  max-with 1200px    */
+    .footer-font h5{
+        font-size: 15px !important;
+        padding-bottom: 30px;
+    }
+    .footer-font .form{
+        width: 90%;
+        margin: 0px;
+    }
+    .contact-mail{
+        margin-left: 0px !important;
+    }
+    .home-main{
+        max-width: 100%;
+    }
+    /* ends here  */
+
+    /* media for section 3 landing page  */
+    .sec3-left{
+        height:43.3% !important;
+    }
+    .collection1 h2{
+        padding-top: 15px !important;
+        /* height: 100% !important; */
+    }
+    .collection1 h3{
+        margin-top: 15px !important;
+    }
+    .collection1 p{
+        margin-bottom: 13px !important;
+        font-size: 20.5px !important;
+    }
+    .collectionb{
+        height: 20% !important;
+        margin-top: 5px !important;
+        width: 100% !important;
+    }
+    .sec3-pad .text-center{
+        margin-top: 0 !important;
+    }
+    .sec3-pad{
+        margin: 0px !important;
+        padding: 0 15px !important;
+        
+    }
+    .sec2 .all-btn {
+        width: 200px;
+        height: 60px;
+        margin-bottom: 60px !important;
+        margin-top: 0px !important;
+     }
+
+     .collection1 br{
+        display: none;
+     }
+     /* reset for explore more btn  */
+     .explore{
+        height: 60px !important;
+     }
+     /* ends  */
+     .all-btn{
+        width: 50%;
+        height: 90px;
+     }
+     .sec3 .text-center{
+        margin-top: 10px !important;
+        padding-top: 0 !important;
+     }
+     .collection2{
+        margin: 0 !important;
+     }
+     .collection3{
+        margin-top: 30px !important;
+     }
+    
+    /* ends here  */
+     .sec3-left{
+        height: 360px !important;
+     }
+     .sec3 h2{
+        font-size: 25px;
+     }
+     .sec3 h3{
+        font-size: 40px !important;
+        margin-bottom: 10px !important;
+     }
+     .sec3 p{
+        font-size: 20px !important;
+        /* margin-bottom: 5px !important; */
+     }
+     .sec3 .all-btn {
+        width: 200px;
+        height: 60px;
+        margin-top: 30px !important;
+     }
+
+    /* section 5 landing page  */
+    /* .sec5 br{
+        display: none;
+    } */
+    .sec5 .card-body{
+        width: 100%;
+        height: 600px;
+        padding-left: 0px !important;
+    }
+    .sec5 br{
+        display: none;
+    }
+
+    .card-sec5 .d-flex{
+        width: 100%;
+    }
+    /* section 5 ENDS HERE  */
+
+    /* QUERY FOR LOGIN FORM STARTS HERE  */
+    .order-md-2, .order-md-1{
+        width: 100% !important;
+        text-align: center;
+    }
+    .index-login input, .login-form, .login-Btn, #update-form input{
+        width: 100% !important;
+    }
+    .login-Btn{
+        margin-top: 50px !important;
+    }
+    .Signup-2{
+    text-align: center !important;    
+    }
+    .login-form{
+        height: 350px;
+    }
+    /* ENDS HERE  */
+}
+=======
+@media screen and (max-width: 1200px) {
+
+    .sidebar {
+        left: -100% !important;
+    }
+
+    header h2 {
+        display: flex;
+        align-items: center;
+    }
+
+    header h2 label {
+        display: inline-block;
+        background: var(--main-color);
+        padding-left: 0rem;
+        margin-right: 1rem;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-content: center;
+        justify-content: center !important;
+    }
+
+    header h2 span {
+        text-align: center;
+        padding-right: 0rem;
+    }
+
+    header h2 {
+        font-size: 1.1rem;
+    }
+
+    .main-content {
+        width: 100%;
+        margin-left: 0rem;
+    }
+
+    header {
+        width: 100% !important;
+        left: 0 !important;
+    }
+
+    #nav-toggle:checked + .sidebar {
+        left: 0 !important;
+        z-index: 100;
+        width: 345px;
+    }
+
+    #nav-toggle:checked + .sidebar .sidebar-brand,
+    #nav-toggle:checked + .sidebar li {
+        padding-left: 2rem;
+        text-align: left;
+    }
+
+    #nav-toggle:checked + .sidebar li a {
+        padding-left: 1rem;
+    }
+
+    #nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
+    #nav-toggle:checked + .sidebar li a span:last-child {
+        display: inline;
+    }
+
+    #nav-toggle:checked ~ .main-content {
+        margin-left: 0rem !important;
+    }
+}
+
+.dash-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 3rem;
+}
+  
+.card-single {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.card-body {
+    padding: 1.50rem !important;
+}
+.card-body h5 {
+ font-weight: bolder;
+}
+
+.card-body h6 {
+ font-weight: 600;
+}
+
+@media screen and (max-width: 600px) {
+    .dash-cards {
+        grid-template-columns: repeat(1, 1fr);
+        grid-column-gap: 1rem;
+    }
+
+    .card-single {
+        margin-bottom: 1rem;
+    }
+}
+
+.outer-wrapper {
+    margin: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    max-width: fit-content;
+    max-height: fit-content;
+}
+.table-wrapper {
+
+    overflow-y: scroll;
+    overflow-x: scroll;
+    height: fit-content;
+    max-height: 66.4vh;
+    
+    margin-top: 22px;
+    
+    margin: 15px;
+    padding-bottom: 20px;
+    
+}
+
+
+table {
+    
+    min-width: max-content;
+    
+    border-collapse: separate;
+    border-spacing: 0px;    
+    
+}
+
+
+
+table th{
+    position: sticky; 
+    top: 0px;
+    
+    background-color: #2D85DE;
+    color: #fff;
+    
+    text-align: center;
+    font-weight: normal;
+    font-size: 18px;
+    outline: 0.7px solid #b6cc00;
+    border: 1.5px solid #b6cc00;
+
+} 
+
+
+
+table th, table td {
+    
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+
+table td {
+    text-align: left;
+    
+    font-size: 15px;
+    border: 1px solid rgb(177, 177, 177);
+    padding-left: 20px;
+    
+}
+
+.scroll-bg {
+    margin: 10% auto;
+    padding: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 20px;
+}
+.scroll-div {
+    height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.search-card{
+    width: 100%;
+    border-radius: 14.243902206420898px;
+    padding: 20px 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 25px;
+}
+
+.search-card img {
+    width: 100%
+}
+
+.delete-button, .update-button {
+    outline: none !important;
+    border: 0;
+    box-shadow: none;
+    padding: 10px 15px;
+    background-color: rgb(233, 43, 43);
+    color: #fff;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.update-button {
+    background-color: #2D85DE;
+}
+
+
+.mymodal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+  
+.modal-content {
+    margin: 10% auto;
+    width: 40%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+    animation-name: modalopen;
+    animation-duration: 2s;
+}
+
+@media screen and (max-width: 650px) {
+    .modal-content {
+        width: 100%;
+        margin: 50% auto;
+    }
+}
+
+@media screen and (min-width: 700px) and (max-width: 1000px) {
+    .modal-content {
+        width: 100%;
+        margin: 50% auto;
+    }
+}
+  
+.modal-header h2,
+.modal-footer h3 {
+  margin: 0;
+}
+
+.modal-header {
+    background: #2D85DE;
+    padding: 15px;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal-body {
+    padding: 10px 20px;
+}
+
+
+.close {
+    color: #ccc;
+    float: right;
+    font-size: 30px;
+    color: #fff;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes modalopen {
+    from {
+        opacity: 0;
+    }
+    to {
+    opacity: 1;
+    }
+}
+
+.box-img, .box-img2 {
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, 
+    rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, 
+    rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, 
+    rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    padding-bottom: 20px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    max-width: 55%;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+}
+
+.box-img2 {
+    max-width: 100%;
+}
+
+.box-img2 img {
+    max-width: 100%;
+}
+
+.fl-img {
+    max-height: 50%;
+}
+
+@media screen and (max-width: 650px) {
+    .box-img {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+.mimipara {
+    padding: 5px 15px;
+    margin: 0;
+}
+
+.box-img img {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* .subItems {
+    display: flex;
+} */
+
+
+@media screen and (max-width: 850px) {
+    .subItems {
+        flex-direction: column;
+    }
+
+    .subForm {
+        width: 100%;
+    }
+}
+
+.dropdown-menu .dropdown-submenu-left {
+    right: 100%;
+    left: auto;
+}
+
+
+.dropdown-item {
+    color: #000;
+}
+
+.dropdown-menu > li:hover > .dropdown-submenu {
+    display: block;
+}
+
+.dropdown-menu {
+    background-color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+    color: #000;
+}
+
+.dropdown-menu li {
+    position: relative;
+}
+.dropdown-menu .dropdown-submenu .sub-category {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px;
+}
+
+.create {
+    outline: none !important;
+    box-shadow: none !important;
+    border: 0;
+    background-color: #2D85DE;
+    border-radius: 5px;
+    color: #fff;
+    padding: 0 5px;
+}
+
+.theLink {
+    list-style: none;
+    text-decoration: none;
+    color: #2D85DE;
+    cursor: pointer;
+}
+
+.theLink a {
+    margin-right: 30%;
+}
+
+
+.parent {
+    font-weight: 700;
+    text-align: left;
+}
+
+#nav-list {
+    padding: 20px;
+}
+
+hr {
+    background-color: rgb(66, 99, 17);
+}
+
+.oversight {
+    display: flex;
+    justify-content: space-around;
+}
+
+.container-over {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.overboard, .overQuiz {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 650px) {
+    .overQuiz {
+        flex-direction: column;
+    }
+}
+
+.searchcard {
+    position: relative;
+    background: #fff;
+    max-width: 325px;
+    width: 325px;
+    margin: 25px;
+    box-shadow: 0 5px 25px rgb(1 1 1 / 20%);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.searchcard-image {
+    max-height: 400px;
+}
+
+.searchcard-image img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.searchcard-info {
+    position: relative;
+    color: #222;
+    padding: 10px 20px 20px;
+}
+
+.searchcard-info h4 {
+    font-weight: 800px;
+    margin-bottom: 5px;
+}
+
+.searchcard-info p {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.scroll-me {
+    margin: 5% auto;
+    padding: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 20px;
+}
+
+.scroll-it, .scroll-ait, .scroll-ait2 {
+    height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.scroll-ait, .scroll-ait2 {
+    height: 200px;
+}
+
+.clent {
+    color: #2D85DE;
+    font-weight: bolder;
+}
+
+.default, .reading, .conversation {
+    outline: none;
+    box-shadow: none;
+    border: 0;
+    padding: 10px 15px;
+    background: #2D85DE;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 650px) {
+    .default, .reading, .conversation {
+        padding: 12px 5px;
+        font-size: 16px;
+    }
+}
+
+.reading, .conversation {
+    border: 1px solid rgb(197, 196, 196);
+    color: #2D85DE;
+    background: #fff;
+}
+
+.cat-head {
+    font-size: 18px;
+    text-align: center;
+}
+
+.myReading, .myConversation {
+    display: none;
+}
+
+.quiz-btn {
+    outline: none;
+    border: none;
+    box-shadow: none;
+    background-color: #2D85DE;
+    color: #fff;
+    padding: 15px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.quiz2 {
+    outline: none;
+    border: none;
+    box-shadow: none;
+    background-color: #2D85DE;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #fff;
+}
+
+.mydropdown {
+    text-align: center;
+    padding: 10px;
+}
+
+.top-three {
+    outline: none;
+    box-shadow: none;
+    border: 0;
+    background-color: #2D85DE;
+    color: #fff;
+    padding: 20px 15px;
+    border-radius: 10px;
+}
+
+.student-card {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+    rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.swichItem {
+    float: right;
+}
+
+.tin {
+    color: #2D85DE;
+    font-weight: 900;
+}
+
+.logspan {
+    color: #fff;
+}
+
+.boxInput, .boxInput2 {
+    display: none;
+}
+
+.box-option {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.optionItem {
+    outline: none;
+    border: 0;
+    background-color: #b6cc00;
+    padding: 15px 25px;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.pagemodal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.82);
+}
+
+/* loader */
+.preloader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 120px;
+    height: 120px;
+    margin: -76px 0 0 -76px;
+    border-radius: 50%;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+
+.ch-btn {
+    background: #2D85DE;
+    color: #cccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: none;
+    border: 0;
+    font-size: 12px;
+}
+
+.spin, .spin2 {
+    display: none;
+}
+
+
+.err-bg {
+    background: #000;
+}
+
+.err-box {
+    margin: 5% auto;
+}
+
+.err-box img {
+    max-width: 100%;
+}
+
+.err-box h3 {
+    font-weight: bolder;
+    color: #232057;
+}
+
+.err-box p {
+    color: #F8991D;
+}
+
+.err-btn {
+    outline: none;
+    box-shadow: rgb(90, 103, 115) 0px 20px 30px -10px;
+    border: 0;
+    padding: 10px 25px;
+    background: #2334A8;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
+.mim {
+    width: 5%;
+}
+>>>>>>> b4f7524bc04383ba2e0fa30e4e7a23e08acc32c3
