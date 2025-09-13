@@ -99,19 +99,21 @@
             </button>
         </div>
             <!-- images will be here  -->
-        <div>
-            <div class="row  IMG-SEC mt-5">
-                      <div class="col-lg-4 col-md-4 col-sm-4 mt-5 pt-lg-5 ">
-                        <img src="./images/Frame 180.png" alt="" class="img-fluid sec1-imgL pt-lg-5 ms-lg-5 ps-lg-5 mt-md-5">
-                      </div>
-                      <div class="col-lg-4 col-md-4 col-sm-4 mt-3 pt-md-4 ">
-                        <img src="./images/Frame 179.png" alt="" class="img-fluid sec1-imgM">
-                      </div>
-                      <div class="col-lg-4 col-md-4 col-sm-4 mt-3 pt-lg-5 ">
-                        <img src="./images/Frame 181.png" alt="" class="img-fluid sec1-imgR pt-lg-5 mt-lg-4 me-lg-5 pe-lg-5 pt-md-0">
-                      </div>
+        <div id="sec1-imag-sec">
+            <div class="row  IMG-SEC mt-5 pt-lg-5">
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xm-12">
+                  <img src="./images/Frame 180.png" alt="" class="img-fluid w-100 sec1-imgL pt-lg-4 ms-lg-5 ps-lg-5 mt-md-5 ">
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 mt-3 mt-lg-2 col-xm-12 ">
+                  <img src="./images/Frame 179.png" alt="" class="img-fluid sec1-imgM w-100">
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xm-12 mt-2 mt-lg-0 mt-md-5">
+                  <img src="./images/Frame 181.png" alt="" class="img-fluid sec1-imgR w-100 pt-lg-5 mt-lg-4 me-lg-5 pe-lg-5 ">
+                </div>
             </div>
+
           </div>
+
       </div>
     </section>
 
@@ -161,40 +163,41 @@
     <!-- section 3 starts here -->
     <section class="container-fluid sec3">
       <!-- row for the 2 columns -->
-      <div class="row mx-lg-5"> 
+      <div class="row ms-lg-5"> 
         <!-- left column -->
-          <div class="col-sm-12 col-md-6 col-lg-6 collection1"> 
-            <div class="container sec3-left" style="background-color: #F1F1F1; width: 100%; height: 45.5%;">
-             <div class=" sec3-pad mt-lg-5 pt-lg-5 ms-lg-5 ps-lg-4 ">
-               <h2 class="  mt-lg-5 pt-lg-5 my-2 mb-lg-3 mt-5 mt-md-0">BYC Collection 2021</h2>
-              <h3 class=" fw-5 fs-1 my-4 mb-lg-3 ">BYC Collection</h3>
-              <p class="explore-p fs-5 mb-2 mb-lg-5">The best everyday option in a Super Saver range within a <br>reasonable price. It is our responsibility to keep you <br>100 percent stylish. Be smart & trendy with us. </p>
-             <button type="button" class=" text-center ms-5 ms-lg-0 my-5 all-btn py-1 px-3 btn-outline-dark explore" onclick="exploreCollection(event)">
-                Explore
-              </button>
+          <div class="col-sm-12 col-md-12 col-lg-6 collection1"> 
+            <div class="container mt-5 mb-4 sec3-left d-flex justify-content-center align-items-center" >
+              <div class=" sec3-pad text-start ">
+                  <h2 class=" ">BYC Collection 2021</h2>
+                  <h3 class="my-4 mb-lg-3 ">BYC Collection</h3>
+                  <p class="explore-p fs-5 mb-2 ">The best everyday option in a Super Saver range within a <br>reasonable price. It is our responsibility to keep you <br>100 percent stylish. Be smart & trendy with us. </p>
+                 <button type="button" class=" text-center  all-btn btn-outline-dark explore" onclick="exploreCollection(event)">
+                    Explore
+                  </button>
+              </div>
+              <!-- image under the first column div  -->
             </div>
-            <!-- image under the first column div  -->
-            </div>
-            <div class="mt-lg-4 mt-5 mt-md-4 img-col">
-              <img src="./images/Frame 167.png" alt="" class="img-fluid mb-lg-4 collectionb" style="width: 80vw; height: 83vh;">
-            </div>
+                
+              <div class="mt-lg-4 mt-5 mt-md-4 img-col">
+                  <img src="./images/Frame 167.png" alt="" class="img-fluid mb-lg-4 ps-3 sec3-Img">
+              </div>
           </div>
 
           <!-- right column -->
-          <div class="col-sm-12 col-md-6 col-lg-6 mb-lg-5 sec3right-col">
+          <div class="col-sm-12 col-md-12 col-lg-6 mb-lg-5 sec3right-col">
             <!-- each image will be wrapped in a div with class "mt-lg-5" for margin-top on large screens  -->
             <div class="mt-lg-5 frames">
-              <img src="./images/Frame 166.png" alt="" class="img-fluid mb-5 mb-lg-4 collection2" >
+              <img src="./images/Frame 166.png" alt="" class="img-fluid mb-5 mb-lg-4 sec3-Img2">
               </div>
               
               <div>
-                <img src="./images/Frame 168.png" alt="" class="img-fluid collection3">
+                <img src="./images/Frame 168.png" alt="" class="img-fluid sec3-Img3">
               </div>
             </div>
       </div>
 
-            <div class="text-center mt-lg-4 pt-lg-5">
-              <button type="button" class=" text-center ms-5 ms-lg-0 my-5 all-btn py-1 px-3 btn-outline-dark" onclick="viewAllCollection(event)">
+            <div class="text-center mt-lg-4">
+              <button type="button" class=" text-center all-btn btn-outline-dark" onclick="viewAllCollection(event)">
                 View All
               </button>
             </div>
