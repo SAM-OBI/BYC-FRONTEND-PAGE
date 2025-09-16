@@ -13,19 +13,19 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-       <nav class="navbar navbar-expand-lg bg-white">
-        <div class="container-fluid"> 
+     <nav class="navbar navbar-expand-lg mb-5 mb-lg-5 pb-lg-5">
+        <div class="container-fluid mt-2"> 
               <!-- Left UL LI -->
                 <div class="d-none d-lg-flex">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link font-seog" href="#">Shop Products</a></li>
+                        <li class="nav-item"><a class="nav-link font-seog" href="./allProducts.html">Shop Products</a></li>
                         <li class="nav-item"><a class="nav-link" href="./blog.html">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./blog_home.html">FAQ</a></li>
                     </ul>
                 </div> 
 
             <!-- BYC LOGO (Center) -->
-             <a class="navbar-brand mx-lg-auto" href="#">
+             <a class="navbar-brand mx-lg-auto" href="./index.html">
               <img src="./images/BYC LOGO JPG FILE 1.png" alt="BYC Logo">
             </a> 
 
@@ -35,11 +35,16 @@
                   <li class="nav-item "><a class="nav-link" href="./aboutUs.html">About Us</a></li>
                   <li class="nav-item mx-lg-1"><a class="nav-link" href="./contact.html">Contact</a></li>
               </ul>
-              <div class="icon-links d-flex align-items-center">
+              <div class="icon-links d-flex align-items-center ">
                   <a href="#"><i class="fas fa-search mx-lg-3"></i></a>
-                  <a href="#"><i class="far fa-user mx-lg-2"></i></a>
-                  <a href="#"><i class="far fa-heart mx-lg-2"></i></a>
-                  <a href="#"><i class="fas fa-shopping-cart mx-lg-2"></i></a>
+                  <a href="./signUp.html" ><i class="fa-solid fa-user-plus mx-lg-2" id="loggedOut"></i></a>
+                  <a href="" class="user-login" id="loggedIn">
+                    <i class="fa-solid fa-user mx-lg-2 " id="loggedIn">
+                      <span class="status-dot"></span>
+                    </i>
+                  </a>
+                  <a href="./wishlist.html"><i class="far fa-heart mx-lg-2"></i></a>
+                  <a href="./cart.html"><i class="fas fa-shopping-cart mx-lg-2"></i></a>
               </div>
             </div>
             <!-- Mobile Toggler -->
@@ -49,18 +54,27 @@
         </div>
 
           <!-- Mobile Menu -->
-        <div class="collapse navbar-collapse " id="mobileMenu">
-            <ul class="navbar-nav text-start">
-                <li class="nav-item d-lg-none"><a class="nav-link" href="#">Shop Products</a></li>
+        <div class="collapse navbar-collapse mt-3" id="mobileMenu">
+            <ul class="navbar-nav text-start ps-3">
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./allProducts.html">Shop Products</a></li>
                 <li class="nav-item d-lg-none"><a class="nav-link" href="./blog.html">Blog</a></li>
-                <li class="nav-item d-lg-none"><a class="nav-link" href="#">FAQ</a></li>
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./blog_home.html">FAQ</a></li>
                 <li class="nav-item d-lg-none"><a class="nav-link" href="./aboutUs.html">About Us</a></li>
                 <li class="nav-item d-lg-none"><a class="nav-link" href="./contact.html">Contact</a></li>
                 <li class="nav-item d-flex justify-content-start  gap-3 mt-1 text-start">
-                  <a href="#" class="d-lg-none"><i class="fas fa-search text-dark"></i></a>
-                  <a href="#" class="d-lg-none"><i class="far fa-user text-dark"></i></a>
-                  <a href="#" class="d-lg-none"><i class="far fa-heart text-dark"></i></a>
-                  <a href="#" class="d-lg-none"><i class="fas fa-cart-shopping text-dark"></i></a>
+                  <!-- <a href="#" class="d-lg-none"><i class="fas fa-search text-dark"></i></a>
+                  <a href="./signUp.html" class="d-lg-none"><i class="fa-solid fa-user-plus mx-lg-2 regIcon"></a>
+                  <a href="./wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark"></i></a>
+                  <a href="./cart.html" class="d-lg-none"><i class="fas fa-cart-shopping text-dark"></i></a> -->
+                  <a href="" class="d-lg-none"><i class="fas fa-search text-dark"></i></a>
+                  <a href="./signUp.html" class="d-lg-none"><i class="fa-solid fa-user-plus mx-lg-2 regIcon text-dark" id="loggedOut"></i></a>
+                  <a href="" class="user-login" id="loggedIn">
+                    <i class="fa-solid fa-user mx-lg-2 " id="loggedIn">
+                      <span class="status-dot"></span>
+                    </i>
+                  </a>
+                  <a href="wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark"></i></a>
+                  <a href="./cart.html" class="d-lg-none"><i class="fas fa-cart-shopping text-dark"></i></a>
                 </li>
             </ul>
         </div>
@@ -93,7 +107,7 @@
           </small>
 
           <div class="my-lg-5 my-4 py-lg-4">
-            <img src="./images/IMG_7322.png" alt="" class="img-fluid w-100">
+            <img src="./images/IMG_7322.png" alt="" class="img-fluid w-100" style="max-width: 1342; max-height: 680px;">
           </div>
 
           <small class="homeBlog-p">
@@ -119,80 +133,92 @@
     </main>
 
         <!-- this section was used on the down page of the landing page. also section this contains a pagination from blog.html  -->
-    <section class="card-home-blog">
-      <h2 class="homeHeadng my-5 my-lg-5 mb-lg-5 pt-lg-5 text-center">More Blog news</h2>
-      <div class="row mx-lg-4 mx-2 pt-lg-4">
-          <!-- Product Card 1 left-->
-          <div class="card-sec5 mb-5 mb-lg-0" style=" width: 30rem;">
-                <img src="./images/Frame 169.png" class="img-fluid" alt="...">
-                <div class="card-body ps-lg-5 my-lg-4">
-                    <div class="d-flex  align-items-center mb-3">
-                        <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5">
+    <section class="container-fluid sec5 ">
+          <div class="text-center my-lg-5 py-lg-5"> <!-- text-center for the heading h2 -->
+            <h2 class="text-dark fw-5 fs-1 my-5">BYC AFRICA Blog News</h2>
+          </div>
+          <!-- row for the 3 product cards -->
+          <div class="row mx-lg-4">
+              <!-- Product Card 1 left-->
+            <div class="col-sm-12 col-md-4 col-lg-4">
+              <div class="card-sec5 mb-3 mb-lg-0 w-100" style=" width: 30rem;">
+                    <img src="./images/Frame 169.png" class="img-fluid" alt="...">
+                    <div class="card-body ps-lg-5 my-lg-4">
+                        <div class="d-flex  align-items-center mb-3">
+                            <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5">
 
-                        <!-- down section below image  -->
-                        <span><i class="fa-slab-press fa-regular fa-eye ms-lg-3 me-2 me-lg-2"></i></span>
-                        <span class="me-lg-5">35</span>
-                        <span><i class="fa-regular fa-heart me-2 ms-lg-0 ms-5"></i></span>
-                        <span>23</span>
+                            <!-- down section below image  -->
+                            <span><i class="fa-slab-press fa-regular fa-eye ms-lg-3 me-2 me-lg-2"></i></span>
+                            <span class="me-lg-5">35</span>
+                            <span><i class="fa-regular fa-heart me-2 ms-lg-0 ms-5"></i></span>
+                            <span>23</span>
+                        </div>
+                        <div class="wf mb-3 mb-lg-5"> 
+                            <span class="wade">Wade Warren</span>
+                            <span class="ms-lg-5 ms-4"> Fashion Designer</span>
+                        </div>
+                        <h3 class="card-text my-2 my-lg-4">How important are clothes <br>in your style?</h3>
+                        <p class="card-text mb-5 mb-lg-5">Amet minim mollit non deserunt ullamco est sit aliqua <br>dolor do amet sint. Velit officia consequat duis enim <br> velit mollit. Exercitation veniam consequat sunt nostrud <br> amet.</p>
+                        <a class="btn-tag me-lg-2" href="./blog.html#second-blog" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn"></i></a>
                     </div>
-                    <div class="wf mb-3 mb-lg-5"> 
-                        <span class="wade">Wade Warren</span>
-                        <span class="ms-lg-5 ms-4"> Fashion Designer</span>
-                    </div>
-                    <h3 class="card-text my-2 my-lg-4">How important are clothes <br>in your style?</h3>
-                    <p class="card-text mb-5 mb-lg-5">Amet minim mollit non deserunt ullamco est sit aliqua <br>dolor do amet sint. Velit officia consequat duis enim <br> velit mollit. Exercitation veniam consequat sunt nostrud <br> amet.</p>
-                    <a class="btn-tag me-lg-2" href="./blog.html#second-blog" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn"></i></a>
                 </div>
             </div>
 
-            <!-- Product Card 2 middle -->
-               <div class="card-sec5 mb-5 mt-3 mt-lg-0 mb-lg-0" style=" width: 30rem;">
-                <img src="./images/Frame 169 (1).png" class="img-fluid" alt="...">
-                <div class="card-body ps-lg-5 my-lg-4">
-                    <div class="d-flex  align-items-center mb-3">
-                        <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5">
 
-                        <!-- down section below image  -->
-                        <span><i class="fa-slab-press fa-regular fa-eye ms-lg-3 me-2 me-lg-2"></i></span>
-                        <span class="me-lg-5">35</span>
-                        <span><i class="fa-regular fa-heart me-2 ms-lg-0 ms-5"></i></span>
-                        <span>23</span>
+                <!-- Product Card 2 middle -->
+              <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="card-sec5 mb-3 mb-lg-0 w-100" style=" width: 30rem;">
+                    <img src="./images/Frame 169 (1).png" class="img-fluid" alt="...">
+                    <div class="card-body ps-lg-5 my-lg-4">
+                        <div class="d-flex  align-items-center mb-3">
+                            <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5">
+
+                            <!-- down section below image  -->
+                            <span><i class="fa-slab-press fa-regular fa-eye ms-lg-3 me-2 me-lg-2"></i></span>
+                            <span class="me-lg-5">35</span>
+                            <span><i class="fa-regular fa-heart me-2 ms-lg-0 ms-5"></i></span>
+                            <span>23</span>
+                        </div>
+                        <div class="wf mb-3 mb-lg-5"> 
+                            <span class="wade">Wade Warren</span>
+                            <span class="ms-lg-5 ms-4"> Fashion Designer</span>
+                        </div>
+                        <h3 class="card-text my-2 my-lg-4">How important are clothes <br>in your style?</h3>
+                        <p class="card-text mb-5 mb-lg-5">Amet minim mollit non deserunt ullamco est sit aliqua <br>dolor do amet sint. Velit officia consequat duis enim <br> velit mollit. Exercitation veniam consequat sunt nostrud <br> amet.</p>
+                        <a class="btn-tag me-lg-2" href="./blog.html#third-blog" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn"></i></a>
                     </div>
-                    <div class="wf mb-3 mb-lg-5"> 
-                        <span class="wade">Wade Warren</span>
-                        <span class="ms-lg-5 ms-4"> Fashion Designer</span>
-                    </div>
-                    <h3 class="card-text my-2 my-lg-4">How important are clothes <br>in your style?</h3>
-                    <p class="card-text mb-5 mb-lg-5">Amet minim mollit non deserunt ullamco est sit aliqua <br>dolor do amet sint. Velit officia consequat duis enim <br> velit mollit. Exercitation veniam consequat sunt nostrud <br> amet.</p>
-                    <a class="btn-tag me-lg-2" href="./blog.html#third-blog" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn"></i></a>
                 </div>
-            </div>
-            
+              </div>
 
-            <!-- Product Card 3 right -->
-               <div class="card-sec5 mb-3 mb-lg-4" style=" width: 30rem;">
-                <img src="./images/Frame 169 (2).png" class="img-fluid" alt="...">
-                <div class="card-body ps-lg-5 my-lg-4">
-                    <div class="d-flex  align-items-center mb-3">
-                        <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5">
+                
 
-                        <!-- down section below image  -->
-                        <span><i class="fa-slab-press fa-regular fa-eye ms-lg-3 me-2 me-lg-2"></i></span>
-                        <span class="me-lg-5">35</span>
-                        <span><i class="fa-regular fa-heart me-2 ms-lg-0 ms-5"></i></span>
-                        <span>23</span>
+                <!-- Product Card 3 right -->
+              <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="card-sec5 mb-3 mb-lg-0 w-100" style=" width: 30rem;">
+                    <img src="./images/Frame 169 (2).png" class="img-fluid" alt="...">
+                    <div class="card-body ps-lg-5 my-lg-4 ps-md-0">
+                        <div class="d-flex  align-items-center mb-3">
+                            <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5">
+
+                            <!-- down section below image  -->
+                            <span><i class="fa-slab-press fa-regular fa-eye ms-lg-3 me-2 me-lg-2"></i></span>
+                            <span class="me-lg-5">35</span>
+                            <span><i class="fa-regular fa-heart me-2 ms-lg-0 ms-5"></i></span>
+                            <span>23</span>
+                        </div>
+                        <div class="wf mb-3 mb-lg-5"> 
+                            <span class="wade">Wade Warren</span>
+                            <span class="ms-lg-5 ms-4"> Fashion Designer</span>
+                        </div>
+                        <h3 class="card-text my-2 my-lg-4">How important are clothes <br>in your style?</h3>
+                        <p class="card-text mb-5 mb-lg-5">Amet minim mollit non deserunt ullamco est sit aliqua <br>dolor do amet sint. Velit officia consequat duis enim <br> velit mollit. Exercitation veniam consequat sunt nostrud <br> amet.</p>
+                        <a class="btn-tag me-lg-2" href="./blog.html#first-blog" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn"></i></a>
                     </div>
-                    <div class="wf mb-3 mb-lg-5"> 
-                        <span class="wade">Wade Warren</span>
-                        <span class="ms-lg-5 ms-4"> Fashion Designer</span>
-                    </div>
-                    <h3 class="card-text my-2 my-lg-4">How important are clothes <br>in your style?</h3>
-                    <p class="card-text mb-5 mb-lg-5">Amet minim mollit non deserunt ullamco est sit aliqua <br>dolor do amet sint. Velit officia consequat duis enim <br> velit mollit. Exercitation veniam consequat sunt nostrud <br> amet.</p>
-                    <a class="btn-tag me-lg-2" href="./blog.html#first-blog" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn"></i></a>
                 </div>
-            </div>
-      </div>
-     </section>
+              </div>
+          </div>
+    </section>
+
 
      <!-- pagination here  -->
       <div>

@@ -13,19 +13,19 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-white">
-        <div class="container-fluid"> 
+    <nav class="navbar navbar-expand-lg mb-5 mb-lg-5 pb-lg-5">
+        <div class="container-fluid mt-2"> 
               <!-- Left UL LI -->
                 <div class="d-none d-lg-flex">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link font-seog" href="#">Shop Products</a></li>
+                        <li class="nav-item"><a class="nav-link font-seog" href="./allProducts.html">Shop Products</a></li>
                         <li class="nav-item"><a class="nav-link" href="./blog.html">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./blog_home.html">FAQ</a></li>
                     </ul>
                 </div> 
 
             <!-- BYC LOGO (Center) -->
-             <a class="navbar-brand mx-lg-auto" href="#">
+             <a class="navbar-brand mx-lg-auto" href="./index.html">
               <img src="./images/BYC LOGO JPG FILE 1.png" alt="BYC Logo">
             </a> 
 
@@ -35,11 +35,16 @@
                   <li class="nav-item "><a class="nav-link" href="./aboutUs.html">About Us</a></li>
                   <li class="nav-item mx-lg-1"><a class="nav-link" href="./contact.html">Contact</a></li>
               </ul>
-              <div class="icon-links d-flex align-items-center">
+              <div class="icon-links d-flex align-items-center ">
                   <a href="#"><i class="fas fa-search mx-lg-3"></i></a>
-                  <a href="#"><i class="far fa-user mx-lg-2"></i></a>
-                  <a href="#"><i class="far fa-heart mx-lg-2"></i></a>
-                  <a href="#"><i class="fas fa-shopping-cart mx-lg-2"></i></a>
+                  <a href="./signUp.html" ><i class="fa-solid fa-user-plus mx-lg-2" id="loggedOut"></i></a>
+                  <a href="" class="user-login" id="loggedIn">
+                    <i class="fa-solid fa-user mx-lg-2 " id="loggedIn">
+                      <span class="status-dot"></span>
+                    </i>
+                  </a>
+                  <a href="./wishlist.html"><i class="far fa-heart mx-lg-2"></i></a>
+                  <a href="./cart.html"><i class="fas fa-shopping-cart mx-lg-2"></i></a>
               </div>
             </div>
             <!-- Mobile Toggler -->
@@ -49,18 +54,27 @@
         </div>
 
           <!-- Mobile Menu -->
-        <div class="collapse navbar-collapse" id="mobileMenu">
-            <ul class="navbar-nav text-start">
-                <li class="nav-item d-lg-none"><a class="nav-link" href="#">Shop Products</a></li>
+        <div class="collapse navbar-collapse mt-3" id="mobileMenu">
+            <ul class="navbar-nav text-start ps-3">
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./allProducts.html">Shop Products</a></li>
                 <li class="nav-item d-lg-none"><a class="nav-link" href="./blog.html">Blog</a></li>
-                <li class="nav-item d-lg-none"><a class="nav-link" href="#">FAQ</a></li>
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./blog_home.html">FAQ</a></li>
                 <li class="nav-item d-lg-none"><a class="nav-link" href="./aboutUs.html">About Us</a></li>
                 <li class="nav-item d-lg-none"><a class="nav-link" href="./contact.html">Contact</a></li>
                 <li class="nav-item d-flex justify-content-start  gap-3 mt-1 text-start">
-                  <a href="#" class="d-lg-none"><i class="fas fa-search text-dark"></i></a>
-                  <a href="#" class="d-lg-none"><i class="far fa-user text-dark"></i></a>
-                  <a href="#" class="d-lg-none"><i class="far fa-heart text-dark"></i></a>
-                  <a href="#" class="d-lg-none"><i class="fas fa-cart-shopping text-dark"></i></a>
+                  <!-- <a href="#" class="d-lg-none"><i class="fas fa-search text-dark"></i></a>
+                  <a href="./signUp.html" class="d-lg-none"><i class="fa-solid fa-user-plus mx-lg-2 regIcon"></a>
+                  <a href="./wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark"></i></a>
+                  <a href="./cart.html" class="d-lg-none"><i class="fas fa-cart-shopping text-dark"></i></a> -->
+                  <a href="" class="d-lg-none"><i class="fas fa-search text-dark"></i></a>
+                  <a href="./signUp.html" class="d-lg-none"><i class="fa-solid fa-user-plus mx-lg-2 regIcon text-dark" id="loggedOut"></i></a>
+                  <a href="" class="user-login" id="loggedIn">
+                    <i class="fa-solid fa-user mx-lg-2 " id="loggedIn">
+                      <span class="status-dot"></span>
+                    </i>
+                  </a>
+                  <a href="wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark"></i></a>
+                  <a href="./cart.html" class="d-lg-none"><i class="fas fa-cart-shopping text-dark"></i></a>
                 </li>
             </ul>
         </div>
@@ -71,16 +85,16 @@
             <h1 class="text-center default-h1 mt-5 mt-lg-0 mb-5 pb-lg-5 mb-md-5">BYC AFRICA Blog News</h1>
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6">
-                        <img src="./images/Frame 170.png" class="card-img-top ms-lg-0 mb-5" alt="Blog Image 1">
+                    <img src="./images/Frame 170.png" class="card-img-top ms-lg-0 mb-5 image-fluid" alt="Blog Image 1">
                 </div>
                 
                 <div class="col-sm-12 col-md-6 col-lg-6 ">
-                    <h5 class="card-title mb-4 mb-lg-5 pb-lg-5">Fashion trend forecast for  Summer 2021</h5>
+                    <h5 class="card-title mb-4 mb-lg-5 ">Fashion trend forecast for  Summer 2021</h5>
                     <p class="card-text mb-5">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet <br> sint. Velit officia consequat duis enim velit mollit. Exercitation veniam <br>consequat sunt nostrud ametAmet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit <br> mollit. Exercitation veniam consequat sunt nostrud amet..</p>
                         <a class="btn-tag mb-lg-5" href="./blog_home.html" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn mb-md-5"></i></a>
-                    <div class="d-flex  align-items-center mb-md-5 mb-lg-4 mt-3 mt-lg-4 pt-lg-5">
+                    <div class="d-flex  align-items-center mb-md-5 mb-lg-3 mt-3 mt-lg-1 pt-lg-5">
                         
-                        <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5 mt-5 mt-lg-0 mb-4 mb-lg-0">
+                        <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5 mt-5 mt-lg-0 mb-4 mb-lg-0 image-fluid" style="max-width: 76px; max-width: 76px;">
                         <!-- down section below image  -->
                         <span><i class="fa-slab-press fa-regular fa-eye ms-lg-3 me-2 me-lg-2"></i></span>
                         <span class="me-lg-5">35</span>
@@ -100,14 +114,13 @@
        <section class="blog-section" id="second-blog">
         <div class="container mt-5 pt-5">
             <div class="row">
-               
-                <div class="col-sm-12 col-md-6 col-lg-6 ">
-                    <h5 class="card-title mb-5  mt-lg-0 mb-lg-5 pb-lg-5">Fashion trend forecast for  Summer 2021</h5>
+                <div class="col-sm-12 col-md-6 col-lg-6 order-2">
+                    <h5 class="card-title mb-4 mb-lg-5 ">Fashion trend forecast for  Summer 2021</h5>
                     <p class="card-text mb-5">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet <br> sint. Velit officia consequat duis enim velit mollit. Exercitation veniam <br>consequat sunt nostrud ametAmet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit <br> mollit. Exercitation veniam consequat sunt nostrud amet..</p>
-                        <a class="btn-tag mb-lg-5" href="#" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn mb-md-5"></i></a>
-                    <div class="d-flex  align-items-center mb-md-5 mb-lg-4 mt-3 mt-lg-4 pt-lg-5">
+                        <a class="btn-tag mb-lg-5" href="./blog_home.html" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn mb-md-5"></i></a>
+                    <div class="d-flex  align-items-center mb-md-5 mb-lg-3 mt-3 mt-lg-1 pt-lg-5">
                         
-                        <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5 mt-5 mt-lg-0 mb-4 mb-lg-0">
+                        <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5  mt-5 mt-lg-0 mb-4 mb-lg-0 image-fluid" style="max-width: 76px; max-width: 76px;">
                         <!-- down section below image  -->
                         <span><i class="fa-slab-press fa-regular fa-eye ms-lg-3 me-2 me-lg-2"></i></span>
                         <span class="me-lg-5">35</span>
@@ -119,11 +132,10 @@
                         <span class="ms-lg-5 ms-4"> Fashion Designer</span>
                     </div>
                 </div>
-                 <div class="col-sm-12 col-md-6 col-lg-6">
-                        <img src="./images/Frame 170 (1).png" class="card-img-top ms-lg-0 mb-5  mt-lg-0" alt="Blog Image 1">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <img src="./images/Frame 170 (1).png" class="card-img-top ms-lg-0 mb-5 image-fluid" alt="Blog Image 1">
                 </div>
                 
-
             </div>
         </div>
     </section>
@@ -133,16 +145,16 @@
         <div class="container mt-5 pt-5">
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6">
-                        <img src="./images/Frame 170 (2).png" class="card-img-top ms-lg-0 mb-5" alt="Blog Image 1">
+                    <img src="./images/Frame 170 (2).png" class="card-img-top ms-lg-0 mb-5 image-fluid" alt="Blog Image 1">
                 </div>
                 
                 <div class="col-sm-12 col-md-6 col-lg-6 ">
-                    <h5 class="card-title mb-4 mb-lg-5 pb-lg-5">Fashion trend forecast for  Summer 2021</h5>
+                    <h5 class="card-title mb-4 mb-lg-5 ">Fashion trend forecast for  Summer 2021</h5>
                     <p class="card-text mb-5">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet <br> sint. Velit officia consequat duis enim velit mollit. Exercitation veniam <br>consequat sunt nostrud ametAmet minim mollit non deserunt ullamco <br> est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit <br> mollit. Exercitation veniam consequat sunt nostrud amet..</p>
-                        <a class="btn-tag mb-lg-5" href="#" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn mb-md-5"></i></a>
-                    <div class="d-flex  align-items-center mb-md-5 mb-lg-4 mt-3 mt-lg-4 pt-lg-5">
+                        <a class="btn-tag mb-lg-5" href="./blog_home.html" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn mb-md-5"></i></a>
+                    <div class="d-flex  align-items-center mb-md-5 mb-lg-3 mt-3 mt-lg-1 pt-lg-5">
                         
-                        <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5 mt-4 mt-lg-0 mb-4 mb-lg-0">
+                        <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5 mt-5 mt-lg-0 mb-4 mb-lg-0 image-fluid" style="max-width: 76px; max-width: 76px;">
                         <!-- down section below image  -->
                         <span><i class="fa-slab-press fa-regular fa-eye ms-lg-3 me-2 me-lg-2"></i></span>
                         <span class="me-lg-5">35</span>
@@ -184,77 +196,89 @@
     </nav>
 
 
-     <footer class=" mt-5 py-4 pb-2 footer-font" style="background-color: #212121;">
-      <div class="container pt-lg-5 mt-lg-5 py-md-3 text-light">
+     <footer class=" mt-5 py-4 pb-2 footer-font " style="background-color: #212121;">
+        <div class="container pt-lg-5 mt-lg-5 py-md-3 text-light">
             <div class="row foot-row">
 
-              <div class="col-sm-12 col-md-2 mb-4 col-lg-3 mb-md-0 col-a ps-lg-5">
-                <h5 class="text-captalize mb-4 mb-lg-3">Company Info </h5>
-                <ul class="list-unstyled text-light">
-                  <li class="my-lg-2"><a href="#" class="text-light " style="text-decoration: none; ">About Us</a></li>
-                  <li class="my-2"><a href="#" class="text-light" style="text-decoration: none;">Affiliate</a></li>
-                  <li class="my-lg-2"><a href="#" class="text-light"style="text-decoration: none;">Fashion Blogger</a></li>
-                </ul>
-              </div>
-
-              <div class="col-sm-12 col-md-2 mb-4 col-lg-2 mb-md-0 col-b">
-                <h5 class="text-captalize mb-4 mb-lg-3">Help & Support</h5>
-                <ul class="list-unstyled text-light">
-                    <li class="my-lg-2"><a href="#" class="text-light " style="text-decoration: none;">Shipping Info</a></li>
-                    <li class="my-2"><a href="#" class="text-light" style="text-decoration: none;">Refunds</a></li>
-                    <li class="my-lg-2"><a href="#" class="text-light" style="text-decoration: none;">How to Order</a></li>
-                    <li class="my-2"><a href="#" class="text-light" style="text-decoration: none;">How to Track</a></li>
-                    <li class="my-lg-2"><a href="#" class="text-light" style="text-decoration: none;">Size Guide</a></li>
-                </ul>
-              </div>
-
-              <div class="col-sm-12 col-md-5 mb-4 col-lg-4 mb-md-0 col-c">
-                <h5 class="text-captalize mb-4 mb-lg-3">Customer Care</h5>
-                <ul class="list-unstyled">
-                    <li class="my-lg-2"><a href="#" class="text-light " style="text-decoration: none;">Contact Us</a></li>
-                    <li class="my-2"><a href="#" class="text-light" style="text-decoration: none;">payment Methods</a></li>
-                    <li class="my-lg-2 mb-2 mb-lg-0"><a href="#" class="text-light"style="text-decoration: none;">Fashion Blogger</a></li>
-                      <a href="#"><img src="./images/paypal.png" alt="paypal" style="width: 40px; height: 20px;"></a>
-                      <a href="#"><img src="./images/visa.png" class="mx-4 img-fluid my-lg-2" alt="visa" style="width: 40px; height: 20px;"></a>
-                      <a href="#"><img src="./images/MasterCard.png" alt="MasterCard" style="width: 40px; height: 20px;"></a>
-                </ul>
-              </div>
-
-              <div class="col-sm-12 col-md-3 mb-4 col-lg-3 col-d"> 
-                <h5 class="text-captalize mb-lg-3 mb-3">Signup For The Latest News</h5>
-                <form class="form">
-                    <span class="mail-span mb-3">
-                        <input type="email" class="text-start mb-lg-5 contact-mail" placeholder="Enter Email" aria-label="Email">
-                        <button class="email-btn" onclick="submitEmail(event)"><i class="fas fa-arrow-right text-light btn-arr"></i></button>
-                    </span>
-                </form>
-
-                <!-- Contact Section -->
-                <div class="contact-info mt-2">
-                  <a href="" class="text-decoration-none text-light">
-                    <i class="fa-regular fa-envelope fa-xl me-2 mb-4"></i>
-                    bycafrica@gmail.com
-                  </a>
-                  <br>
-                  <a href="" class="text-decoration-none text-light">
-                      <i class="fa-solid fa-phone me-2"></i>
-                      ‪+2348101375376‬ : +234905403403
-                  </a>
+                <div class="col-sm-12 col-md-2 mb-4 col-lg-2 mb-md-0 col-a ps-lg-2">
+                    <h5 class="text-captalize mb-lg-3">Company Info </h5>
+                    <ul class="list-unstyled text-light">
+                        <li class="my-2"><a href="#" class="text-light " style="text-decoration: none; ">About Us</a></li>
+                        <li><a href="#" class="text-light" style="text-decoration: none;">Affiliate</a></li>
+                        <li class="my-2"><a href="#" class="text-light"style="text-decoration: none;">Fashion Blogger</a></li>
+                    </ul>
                 </div>
-              </div>
+
+                <div class="col-sm-12 col-md-2 mb-4 col-lg- mb-md-0 col-b ps-lg-0">
+                    <h5 class="text-captalize mb-lg-3">Help & Support</h5>
+                    <ul class="list-unstyled text-light">
+                        <li class="my-2"><a href="#" class="text-light " style="text-decoration: none;">Shipping Info</a></li>
+                        <li><a href="#" class="text-light" style="text-decoration: none;">Refunds</a></li>
+                        <li class="my-2"><a href="#" class="text-light" style="text-decoration: none;">How to Order</a></li>
+                        <li><a href="#" class="text-light" style="text-decoration: none;">How to Track</a></li>
+                        <li class="my-2"><a href="#" class="text-light" style="text-decoration: none;">Size Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-12 col-md-5 mb-4 col-lg-4 mb-md-0 col-c  ps-lg-0">
+                    <h5 class="text-captalize mb-lg-3">Customer Care</h5>
+                    <ul class="list-unstyled">
+                        <li class="my-2"><a href="#" class="text-light " style="text-decoration: none;">Contact Us</a></li>
+                        <li><a href="#" class="text-light" style="text-decoration: none;">payment Methods</a></li>
+                        <li class="my-2"><a href="#" class="text-light"style="text-decoration: none;">Fashion Blogger</a></li>
+                        <a href="#"><img src="./images/paypal.png" alt="paypal" style="width: 40px; height: 20px;"></a>
+                        <a href="#"><img src="./images/visa.png" class="mx-4 img-fluid my-2" alt="visa" style="width: 40px; height: 20px;"></a>
+                        <a href="#"><img src="./images/MasterCard.png" alt="MasterCard" style="width: 40px; height: 20px;"></a>
+                        
+                    </ul>
+                </div>
+
+                <div class="col-sm-12 col-md-3 mb-4 col-lg-3 col-d ps-lg-0"> 
+                    <h5 class="text-captalize mb-3">Signup For The Latest News</h5>
+                    <form class="form">
+                        <span class="mail-span mb-3">
+                            <input type="email" class="text-start mb-lg-5 contact-mail" placeholder="Enter Email" aria-label="Email">
+                            <button class="email-btn" onclick="submitEmail(event)"><i class="fas fa-arrow-right text-light btn-arr"></i></button>
+                        </span>
+                    </form>
+
+                    <!-- Contact Section -->
+                    <div class="contact-info mt-2">
+                        <a href="" class="text-decoration-none text-light">
+                            <i class="fa-regular fa-envelope fa-xl me-2 mb-4"></i>
+                            bycafrica@gmail.com
+                        </a>
+                        <br>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a href="" class="text-decoration-none text-light">
+                                <i class="fa-solid fa-phone"></i>
+                                
+                            </a>
+                            <p class="pt-2 ps-3 ps-lg-0">+234810137537:+234905403403</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
-          <div class="text-center text-lg-center mt-5 pt-lg-5">
-                <a href="#"><i class="fa-brands fa-facebook fa-2xl text-dark" ></i></a>
-                <a href="#"><i class="fab fa-instagram fa-2xl mx-3 text-dark mx-lg-5"></i></a>
-                <a href="#"><i class="fab fa-twitter fa-2xl me-3 text-dark me-lg-5"></i></a>
-                <a href="#"><i class="fab fa-youtube fa-2xl text-dark mb-3 mb-lg-4"></i></a>
-              <hr style="border: 2px solid #fff; background-color: #fff; box-shadow: #e7e6e63d 0px 3px 8px;">
-              <p class="mt-5 copyright">All rights Reserved  copyright bycafrica 2021.</p>
-          </div>
-        <!-- Footer Content ends here -->
-      </div>
+            <div class="text-center text-lg-center mt-5 pt-lg-5">
+                <a href="#" class="text-decoration-none">
+                    <i class="fa-brands fa-facebook fa-2xl text-dark" ></i>
+                </a>
+                <a href="#" class="text-decoration-none">
+                    <i class="fab fa-instagram fa-2xl text-dark mx-lg-5 mx-3"></i>
+                </a>
+                <a href="#" class="text-decoration-none">
+                    <i class="fab fa-twitter fa-2xl text-dark me-lg-5 me-3"></i>
+                </a>
+                <a href="#" class="text-decoration-none">
+                    <i class="fab fa-youtube fa-2xl text-dark mb-3 mb-lg-4"></i>
+                </a>
+                <hr style="border: 2px solid #fff; background-color: #fff; box-shadow: #e7e6e63d 0px 3px 8px;">
+                <p class="mt-5 copyright">All rights Reserved  copyright bycafrica 2021.</p>
+            </div>
+            <!-- Footer Content ends here -->
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

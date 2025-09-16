@@ -133,12 +133,10 @@ function customerLogIn(event) {
                 // Update stored customer ID to the current one
                 localStorage.setItem("customerRegId", currentCustomerId);
 
-                const loggedInUser = document.getElementById("loggedIn");
-                const loggedOutUser = document.getElementById("loggedOut");
-                if(loggedOutUser) loggedOutUser.style.display = "none";
-                if(loggedInUser) loggedInUser.style.display = "inline-block";
+                
                     
                 } 
+
                 Swal.fire({
                         icon: 'success',
                         text: 'Login successful!',
@@ -169,6 +167,15 @@ function customerLogIn(event) {
             spinItem.style.display = "none";
         });
 }
+
+// function handleIconLog(){
+//     const loggedInUser = document.getElementById("loggedIn");
+//     const loggedOutUser = document.getElementById("loggedOut");
+//     if(loggedOutUser) loggedOutUser.style.display = "none";
+//     if(loggedInUser) loggedInUser.style.display = "inline-block";
+// }
+// handleIconLog();
+
 // indexedDB.html for sec1 
 function startRotatingText() {
     const words = ['Men', 'Women', 'Kids', 'Yourself'];
