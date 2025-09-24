@@ -12,36 +12,40 @@
     <!-- font awesome cdn  -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body onload="getProduct()">
-    <nav class="navbar navbar-expand-lg bg-white">
-        <div class="container-fluid"> 
+<body onload="getProduct(),checkLoginStatus()">
+    <nav class="navbar navbar-expand-lg mb-5 mb-lg-5 pb-lg-5">
+        <div class="container-fluid mt-2"> 
               <!-- Left UL LI -->
                 <div class="d-none d-lg-flex">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link font-seog" href="#">Shop Products</a></li>
+                        <li class="nav-item"><a class="nav-link font-seog" href="./allProducts.html">Shop Products</a></li>
                         <li class="nav-item"><a class="nav-link" href="./blog.html">Blog</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./blog_home.html">FAQ</a></li>
                     </ul>
                 </div> 
 
             <!-- BYC LOGO (Center) -->
-             <a class="navbar-brand mx-lg-auto" href="#">
-                <img src="./images/BYC LOGO JPG FILE 1.png" alt="BYC Logo">
+             <a class="navbar-brand mx-lg-auto" href="./index.html">
+              <img src="./images/BYC LOGO JPG FILE 1.png" alt="BYC Logo">
             </a> 
 
             <!-- Right Menu -->
             <div class="d-none d-lg-flex align-items-center">
-                <ul class="navbar-nav">
-                    <li class="nav-item "><a class="nav-link" href="#">About Us</a></li>
-                     <li class="nav-item mx-lg-1"><a class="nav-link" href="#">Contact</a></li>
-                </ul>
-                <div class="icon-links d-flex align-items-center search-box">
-                    <input type="text" placeholder="search...." class="search-input">
-                    <a href="#"><i class="fas fa-search mx-lg-3 search-btn"></i></a>
-                    <a href="#"><i class="far fa-user mx-lg-2"></i></a>
-                    <a href="#"><i class="far fa-heart mx-lg-2"></i></a>
-                    <a href="#"><i class="fas fa-shopping-cart mx-lg-2"></i></a>
-                </div>
+              <ul class="navbar-nav">
+                  <li class="nav-item "><a class="nav-link" href="./aboutUs.html">About Us</a></li>
+                  <li class="nav-item mx-lg-1"><a class="nav-link" href="./contact.html">Contact</a></li>
+              </ul>
+              <div class="icon-links d-flex align-items-center ">
+                  <a href="#"><i class="fas fa-search mx-lg-3"></i></a>
+                  <a href="./signUp.html" ><i class="fa-solid fa-user-plus mx-lg-2" id="loggedOut"></i></a>
+                  <a href="" class="user-login" id="loggedIn">
+                    <i class="fa-solid fa-user mx-lg-2 " id="loggedIn">
+                      <span class="status-dot"></span>
+                    </i>
+                  </a>
+                  <a href="./wishlist.html"><i class="far fa-heart mx-lg-2" id="fa-heart"></i></a>
+                  <a href="./cart.html"><i class="fas fa-shopping-cart mx-lg-2"></i></a>
+              </div>
             </div>
             <!-- Mobile Toggler -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
@@ -50,18 +54,27 @@
         </div>
 
           <!-- Mobile Menu -->
-        <div class="collapse navbar-collapse " id="mobileMenu">
-            <ul class="navbar-nav text-start">
-                <li class="nav-item d-lg-none"><a class="nav-link" href="#">Shop Products</a></li>
-                <li class="nav-item d-lg-none"><a class="nav-link" href="#">Blog</a></li>
-                <li class="nav-item d-lg-none"><a class="nav-link" href="#">FAQ</a></li>
-                <li class="nav-item d-lg-none"><a class="nav-link" href="#">About Us</a></li>
-                <li class="nav-item d-lg-none"><a class="nav-link" href="#">Contact</a></li>
+        <div class="collapse navbar-collapse mt-3" id="mobileMenu">
+            <ul class="navbar-nav text-start ps-3">
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./allProducts.html">Shop Products</a></li>
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./blog.html">Blog</a></li>
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./blog_home.html">FAQ</a></li>
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./aboutUs.html">About Us</a></li>
+                <li class="nav-item d-lg-none"><a class="nav-link" href="./contact.html">Contact</a></li>
                 <li class="nav-item d-flex justify-content-start  gap-3 mt-1 text-start">
-                  <a href="#" class="d-lg-none"><i class="fas fa-search text-dark"></i></a>
-                  <a href="#" class="d-lg-none"><i class="far fa-user text-dark"></i></a>
-                  <a href="#" class="d-lg-none"><i class="far fa-heart text-dark"></i></a>
-                  <a href="#" class="d-lg-none"><i class="fas fa-cart-shopping text-dark"></i></a>
+                  <!-- <a href="#" class="d-lg-none"><i class="fas fa-search text-dark"></i></a>
+                  <a href="./signUp.html" class="d-lg-none"><i class="fa-solid fa-user-plus mx-lg-2 regIcon"></a>
+                  <a href="./wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark"></i></a>
+                  <a href="./cart.html" class="d-lg-none"><i class="fas fa-cart-shopping text-dark"></i></a> -->
+                  <a href="" class="d-lg-none"><i class="fas fa-search text-dark"></i></a>
+                  <a href="./signUp.html" class="d-lg-none"><i class="fa-solid fa-user-plus mx-lg-2 regIcon text-dark" id="loggedOut"></i></a>
+                  <a href="" class="user-login" id="loggedIn">
+                    <i class="fa-solid fa-user mx-lg-2 " id="loggedIn">
+                      <span class="status-dot"></span>
+                    </i>
+                  </a>
+                  <a href="wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark" id="fa-heart"></i></a>
+                  <a href="./cart.html" class="d-lg-none"><i class="fas fa-cart-shopping text-dark"></i></a>
                 </li>
             </ul>
         </div>
@@ -72,15 +85,15 @@
         <nav aria-label="breadcrumb">
             <ul class="breadcrumb" style=" --bs-breadcrumb-divider: '>';">
                 <li class="breadcrumb-item "><a href="./landing.html" class="breadcrumb-item text-decoration-none text-dark">Home</a></li>
-                <li class="breadcrumb-item"><a href="allProducts.html" class="breadcrumb-item text-decoration-none text-dark">women</a></li>
-                <li class="breadcrumb-item active text-danger" aria-current="page">camsole</li>
+                <li class="breadcrumb-item"><a href="allProducts.html" class="breadcrumb-item text-decoration-none text-dark">Men</a></li>
+                <li class="breadcrumb-item active text-danger" aria-current="page">Boxers</li>
             </ul>
         </nav>
     </div>
 
     <!-- THIS SECTION uses ABOUTUS.HTML fil... -->
     <!-- PRODUCT CARDS  -->
-    <section class="about-sec3 px-3 mt-lg-5 mx-lg-4 "  style="height: 1280px; box-shadow: none;" >
+    <section class="about-sec3 px-3 mt-lg-5 mx-lg-4 "  style="box-shadow: none;" >
         <div class="d-flex justify-content-between align-items-center  mt-lg-5 mb-lg-3 pt-4 pt-lg-5 pb-2 pb-lg-1 ">
             <h4 class="">Boxers</h4>
             <div class="form-group">
@@ -96,7 +109,7 @@
         <hr style="border: 2px solid #f1eeeee4; background-color: #1e1d1d; box-shadow: #e7e6e63d 0px 3px 8px;">
         <div class="d-flex justify-content-between align-items-">
             <div>
-                <p class="pt-2">6 Product Found</p>
+                <p class="pt-2">6 Products Found</p>
             </div>
             <div class="text-end">
                 <a href="" class="text-decoration-none">
@@ -109,31 +122,34 @@
         </div>
         <hr style="border: 2px solid #f1eeeee4; background-color: #1e1d1d; box-shadow: #e7e6e63d 0px 3px 8px;">
         
-        <div class="row row-cols-md-5 row-cols-lg-5" style="height: 530px;" id="product-boxers">
+        
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 mb-5 pb-lg-5 h-lg-100"  id="product-boxers">
+            <!-- card 1  -->
             <div class="col-sm-12  product-card1 card-camsole">
-                <div class="card-aboutUs mb-3 mb-lg-0 w-100 " > 
-                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 490px;">
-                        <img src="./images/Image.png" class="img-fluid rounded-top" alt="...">
-                        <h3 class="card-text pt-2">MEN BOXERS<h3>
-                        <p class="text-p">BYC 1161</p>
+                <div class="card-aboutUs product-shadow1 py-3 py-lg-1  mb-3 mb-lg-0 w-100" > <!--style=" width: 30rem;"-->
+                    <img src="./images/Image.png" id="cam2img" class="img-fluid rounded-top mb-2 mb-lg-0 me-3 me-lg-0" alt="..." style="max-width: 100%; height: 180px;">
+                    <div class="card-body ps-lg-2 my-lg-4 ps-2 "> <!--card body was flexed on small screen-->
+                        <h3 class="card-text mt-lg-4">MEN BOXERS<h3>
+                        <p class="text-p">BYC 1163</p>
                         <p class="men-fash">Fashionable Men's Underwear Boxer <br> Cotton Underwear 3 In 1</p>
-                        <p class="mt-2 mt-lg-3 price">₦2,800.00</p>
-                        <div class="5-star mt-2 my-lg-4">
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200; width: 14px; height: 10px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                                <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                                <span class="star"><i class="fa-regular fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                                <span class="rating ms-2">4.05</span>
+                        <p class="mt-2 mt-lg-3 price">₦1,900</p>
+                        <div class="5-star my-lg-4">
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-regular fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="rating ms-3 ps-2">4.05</span>
                         </div>
                         <div class="d-flex d-lg-none Wishlist-btn">
-                            <button class="btn d-flex ps-1 me-2 hidden-btn" style="width: 93px; height: 40px; border-radius: 5px; color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
+                            <button class="btn d-flex ps-1 me-lg-2 me-5 hidden-btn" style="width: 93px; height: 40px; border-radius: 5px; color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
                                 <span href="#">
                                     <i class="far fa-heart me-2"></i>
                                 </span>
                                 <span style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Wishlist</span>
-                                </button>
-                                <button class="btn d-flex ps-1 pe-0 hidden-btn" style="width: 100px; height: 40px; border-radius: 5px; background-color: #BD3A3A; color: #ffffff; border: 1px solid #BD3A3A; outline: none;">
+                            </button>
+
+                            <button class="btn d-flex ps-1 pe-0 hidden-btn" style="width: 100px; height: 40px; border-radius: 5px; background-color: #BD3A3A; color: #ffffff; border: 1px solid #BD3A3A; outline: none;">
                                     <span href="#">
                                         <i class="fas fa-shopping-cart me-0"></i>
                                     </span>
@@ -144,148 +160,156 @@
                 </div>
             </div>
 
-            <div class="col-sm-12  product-card2 card-camsole">
-                <div class="card-aboutUs mb-3 mb-lg-0 w-100 " > 
-                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 490px;">
-                        <img src="./images/Image (2).png" class="img-fluid rounded-top" alt="...">
-                        <h3 class="card-text pt-2">MEN BOXERS<h3>
-                        <p class="text-p">BYC 1162</p>
-                        <p class="men-fash">Fashionable Men's Underwear Boxer <br> Cotton Underwear 3 In 1</p>
-                        <p class="mt-2 mt-lg-3 price">₦3,300.00</p>
-                        <div class="5-star mt-2 my-lg-4">
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200; width: 14px; height: 10px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="star"><i class="fa-regular fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="rating ms-2">4.05</span>
-                        </div>
-                        <div class="d-flex d-lg-none Wishlist-btn">
-                            <button class="btn d-flex ps-1 me-2" style="width: 93px; height: 40px; border-radius: 5px; color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
-                                <span href="#">
-                                    <i class="far fa-heart me-2"></i>
-                                </span>
-                                <span style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Wishlist</span>
-                            </button>
-                            <button class="btn d-flex ps-1 pe-0" style="width: 100px; height: 40px; border-radius: 5px; background-color: #BD3A3A; color: #ffffff; border: 1px solid #BD3A3A; outline: none;">
-                                <span href="#">
-                                    <i class="fas fa-shopping-cart me-0"></i>
-                                </span>
-                                <span class="ps-2" style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Buy Now</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-12  product-card3 card-camsole">
-                <div class="card-aboutUs mb-3 mb-lg-0 w-100 " > 
-                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 490px;">
-                        <img src="./images/Image.png" class="img-fluid rounded-top" alt="...">
-                        <h3 class="card-text pt-2">BOXERS<h3>
+            <!-- card 2  -->
+            <div class="col-sm-12  product-card1 card-camsole">
+                <div class="card-aboutUs product-shadow1 py-3  py-lg-1  mb-3 mb-lg-0 w-100" > <!--style=" width: 30rem;"-->
+                    <img src="./images/Image (2).png " id="cam2img" class="img-fluid rounded-top mb-2 mb-lg-0 me-3 me-lg-0" alt="..." style="max-width: 100%; height: 180px; object-fit: contain;">
+                    <div class="card-body ps-lg-2 my-lg-4 ps-2 "> <!--card body was flexed on small screen-->
+                        <h3 class="card-text mt-lg-4">MEN BOXERS<h3>
                         <p class="text-p">BYC 1163</p>
-                        <p class="men-fash">Amet minim mollit non deserunt <br> ullamco est sit. </p>
-                        <p class="mt-2 mt-lg-3 price">₦2,800.00</p>
-                        <div class="5-star mt-2 my-lg-4">
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200; width: 14px; height: 10px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="star"><i class="fa-regular fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="rating ms-2">4.05</span>
+                        <p class="men-fash">Fashionable Men's Underwear Boxer <br> Cotton Underwear 3 In 1</p>
+                        <p class="mt-2 mt-lg-3 price">₦1,900</p>
+                        <div class="5-star my-lg-4">
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-regular fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="rating ms-3 ps-2">4.05</span>
                         </div>
                         <div class="d-flex d-lg-none Wishlist-btn">
-                            <button class="btn d-flex ps-1 me-2" style="width: 93px; height: 40px; border-radius: 5px; color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
+                            <button class="btn d-flex ps-1 me-lg-2 me-5 hidden-btn" style="width: 93px; height: 40px; border-radius: 5px; color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
                                 <span href="#">
                                     <i class="far fa-heart me-2"></i>
                                 </span>
                                 <span style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Wishlist</span>
                             </button>
-                            <button class="btn d-flex ps-1 pe-0" style="width: 100px; height: 40px; border-radius: 5px; background-color: #BD3A3A; color: #ffffff; border: 1px solid #BD3A3A; outline: none;">
-                                <span href="#">
-                                    <i class="fas fa-shopping-cart me-0"></i>
-                                </span>
-                                <span class="ps-2" style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Buy Now</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-sm-12  product-card4  card-camsole">
-                <div class="card-aboutUs mb-3 mb-lg-0 w-100 " >       
-                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 490px;">
-                        <img src="./images/Image (3).png" class="img-fluid rounded-top" alt="...">
-                        <h3 class="card-text pt-2">MEN BOXERS<h3>
-                        <p class="text-p">BYC 1165</p>
-                        <p class="men-fash">Amet minim mollit non deserunt <br> ullamco est sit.</p>
-                        <p class="mt-2 mt-lg-3 price">₦2,800</p>
-                        <div class="5-star mt-2 my-lg-4">
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200; width: 14px; height: 10px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="star"><i class="fa-regular fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="rating ms-2">4.05</span>
-                        </div>
-                        <div class="d-flex d-lg-none Wishlist-btn">
-                            <button class="btn d-flex ps-1 me-2" style="width: 93px; height: 40px; border-radius: 5px; color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
-                                <span href="#">
-                                    <i class="far fa-heart me-2"></i>
-                                </span>
-                                <span style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Wishlist</span>
-                            </button>
-                            <button class="btn d-flex ps-1 pe-0" style="width: 100px; height: 40px; border-radius: 5px; background-color: #BD3A3A; color: #ffffff; border: 1px solid #BD3A3A; outline: none;">
-                                <span href="#">
-                                    <i class="fas fa-shopping-cart me-0"></i>
-                                </span>
-                                <span class="ps-2" style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Buy Now</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-12  product-card5 card-camsole">
-                <div class="card-aboutUs mb-3 mb-lg-0 w-100 " >          
-                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 490px;">
-                        <img src="./images/Image.png" class="img-fluid rounded-top" alt="...">
-                        <h3 class="card-text pt-2">MEN BOXER<h3>
-                        <p class="text-p">BYC 1166</p>
-                        <p class="men-fash">Amet minim mollit non deserunt <br> ullamco est sit.</p>
-                        <p class="mt-2 mt-lg-3 price">₦2,800.00</p>
-                        <div class="5-star mt-2 my-lg-4">
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200; width: 14px; height: 10px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="star"><i class="fa-regular fa-star fa-2xs" style="color: #FB8200;width: 14px;"></i></span>
-                            <span class="rating ms-2">4.05</span>
-                        </div>
-                        <div class="d-flex d-lg-none Wishlist-btn">
-                            <button class="btn d-flex ps-1 me-2 hidden-btn" style="width: 93px; height: 40px; border-radius: 5px; color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
-                                <span href="#">
-                                    <i class="far fa-heart me-2"></i>
-                                </span>
-                                <span style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Wishlist</span>
-                            </button>
                             <button class="btn d-flex ps-1 pe-0 hidden-btn" style="width: 100px; height: 40px; border-radius: 5px; background-color: #BD3A3A; color: #ffffff; border: 1px solid #BD3A3A; outline: none;">
-                                <span href="#">
-                                    <i class="fas fa-shopping-cart me-0"></i>
-                                </span>
-                                <span class="ps-2" style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Buy Now</span>
+                                    <span href="#">
+                                        <i class="fas fa-shopping-cart me-0"></i>
+                                    </span>
+                                    <span class="ps-2" style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Buy Now</span>
                             </button>
                         </div>
                     </div>
                 </div>
-            </div>                     
+            </div>
+
+            <!-- card 3  -->
+            <div class="col-sm-12  product-card1 card-camsole">
+                <div class="card-aboutUs product-shadow1 py-3  py-lg-1  mb-3 mb-lg-0 w-100" > <!--style=" width: 30rem;"-->
+                    <img src="./images/Image.png" id="cam2img" class="img-fluid rounded-top mb-2 mb-lg-0 me-3 me-lg-0" alt="..." style="max-width: 100%; height: 180px; object-fit: contain;">
+                    <div class="card-body ps-lg-2 my-lg-4 ps-2 "> <!--card body was flexed on small screen-->
+                        <h3 class="card-text mt-lg-4">MEN BOXERS<h3>
+                        <p class="text-p">BYC 1163</p>
+                        <p class="men-fash">Fashionable Men's Underwear Boxer <br> Cotton Underwear 3 In 1</p>
+                        <p class="mt-2 mt-lg-3 price">₦1,900</p>
+                        <div class="5-star my-lg-4">
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-regular fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="rating ms-3 ps-2">4.05</span>
+                        </div>
+                        <div class="d-flex d-lg-none Wishlist-btn">
+                            <button class="btn d-flex ps-1 me-lg-2 me-5 hidden-btn" style="width: 93px; height: 40px; border-radius: 5px; color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
+                                <span href="#">
+                                    <i class="far fa-heart me-2"></i>
+                                </span>
+                                <span style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Wishlist</span>
+                            </button>
+
+                            <button class="btn d-flex ps-1 pe-0 hidden-btn" style="width: 100px; height: 40px; border-radius: 5px; background-color: #BD3A3A; color: #ffffff; border: 1px solid #BD3A3A; outline: none;">
+                                    <span href="#">
+                                        <i class="fas fa-shopping-cart me-0"></i>
+                                    </span>
+                                    <span class="ps-2" style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Buy Now</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- card 4  -->
+            <div class="col-sm-12  product-card1 card-camsole">
+                <div class="card-aboutUs product-shadow1 py-3  py-lg-1  mb-3 mb-lg-0 w-100" > <!--style=" width: 30rem;"-->
+                    <img src="./images/Image (3).png" id="cam2img" class="img-fluid rounded-top mb-2 mb-lg-0 me-3 me-lg-0" alt="..." style="max-width: 100%; height: 180px; object-fit: contain;">
+                    <div class="card-body ps-lg-2 my-lg-4 ps-2 "> <!--card body was flexed on small screen-->
+                        <h3 class="card-text mt-lg-4">MEN BOXERS<h3>
+                        <p class="text-p">BYC 1163</p>
+                        <p class="men-fash">Fashionable Men's Underwear Boxer <br> Cotton Underwear 3 In 1</p>
+                        <p class="mt-2 mt-lg-3 price">₦1,900</p>
+                        <div class="5-star my-lg-4">
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-regular fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="rating ms-3 ps-2">4.05</span>
+                        </div>
+                        <div class="d-flex d-lg-none Wishlist-btn">
+                            <button class="btn d-flex ps-1 me-lg-2 me-5 hidden-btn" style="width: 93px; height: 40px; border-radius: 5px; color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
+                                <span href="#">
+                                    <i class="far fa-heart me-2"></i>
+                                </span>
+                                <span style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Wishlist</span>
+                            </button>
+
+                            <button class="btn d-flex ps-1 pe-0 hidden-btn" style="width: 100px; height: 40px; border-radius: 5px; background-color: #BD3A3A; color: #ffffff; border: 1px solid #BD3A3A; outline: none;">
+                                    <span href="#">
+                                        <i class="fas fa-shopping-cart me-0"></i>
+                                    </span>
+                                    <span class="ps-2" style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Buy Now</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- card 5  -->
+            <div class="col-sm-12  product-card1 card-camsole">
+                <div class="card-aboutUs product-shadow1 py-3  py-lg-1  mb-3 mb-lg-0 w-100" > <!--style=" width: 30rem;"-->
+                    <img src="./images/Image.png" id="cam2img" class="img-fluid rounded-top mb-2 mb-lg-0 me-3 me-lg-0" alt="..." style="max-width: 100%; height: 180px; object-fit: contain;">
+                    <div class="card-body ps-lg-2 my-lg-4 ps-2 "> <!--card body was flexed on small screen-->
+                        <h3 class="card-text mt-lg-4">MEN BOXERS<h3>
+                        <p class="text-p">BYC 1163</p>
+                        <p class="men-fash">Fashionable Men's Underwear Boxer <br> Cotton Underwear 3 In 1</p>
+                        <p class="mt-2 mt-lg-3 price">₦1,900</p>
+                        <div class="5-star my-lg-4">
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-solid fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="star"><i class="fa-regular fa-star fa-2xs" style="color: #FB8200;"></i></span>
+                            <span class="rating ms-3 ps-2">4.05</span>
+                        </div>
+                        <div class="d-flex d-lg-none Wishlist-btn">
+                            <button class="btn d-flex ps-1 me-lg-2 me-5 hidden-btn" style="width: 93px; height: 40px; border-radius: 5px; color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
+                                <span href="#">
+                                    <i class="far fa-heart me-2"></i>
+                                </span>
+                                <span style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Wishlist</span>
+                            </button>
+
+                            <button class="btn d-flex ps-1 pe-0 hidden-btn" style="width: 100px; height: 40px; border-radius: 5px; background-color: #BD3A3A; color: #ffffff; border: 1px solid #BD3A3A; outline: none;">
+                                    <span href="#">
+                                        <i class="fas fa-shopping-cart me-0"></i>
+                                    </span>
+                                    <span class="ps-2" style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Buy Now</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>                    
         </div>
     
         <!-- DOWN BOXERS PRODUCT CARD  -->
-        <div class="row row-cols-md-5 row-cols-lg-5" style="height: 950px;">
+        <div class="row row-cols-md-5 row-cols-lg-5" style="height: 950x;">
             <div class="col-sm-12  product-card1 card-camsole">
                 <div class="card-aboutUs mb-3 mb-lg-0 w-100 " > 
-                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 490px;">
+                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 77vh;">
                         <img src="./images/Image.png" class="img-fluid rounded-top" alt="...">
                         <h3 class="card-text pt-2">MEN BOXERS<h3>
                         <p class="text-p">BYC 1161</p>
@@ -319,7 +343,7 @@
 
             <div class="col-sm-12  product-card2 card-camsole">
                 <div class="card-aboutUs mb-3 mb-lg-0 w-100 " >     
-                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 490px;">
+                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 77vh;">
                         <img src="./images/Image (2).png" class="img-fluid rounded-top" alt="...">
                         <h3 class="card-text pt-2">MEN BOXERS<h3>
                         <p class="text-p">BYC 1162</p>
@@ -353,7 +377,7 @@
 
             <div class="col-sm-12  product-card3 card-camsole">
                 <div class="card-aboutUs mb-3 mb-lg-0 w-100 " > 
-                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 490px;">
+                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 77vh;">
                         <img src="./images/Image.png" class="img-fluid rounded-top" alt="...">
                         <h3 class="card-text pt-2">BOXERS<h3>
                         <p class="text-p">BYC 1163</p>
@@ -387,7 +411,7 @@
 
             <div class="col-sm-12  product-card4  card-camsole">
                 <div class="card-aboutUs mb-3 mb-lg-0 w-100 " >       
-                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 490px;">
+                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 77vh;">
                         <img src="./images/Image (3).png" class="img-fluid rounded-top" alt="...">
                         <h3 class="card-text pt-2">MEN BOXERS<h3>
                         <p class="text-p">BYC 1165</p>
@@ -421,7 +445,7 @@
 
             <div class="col-sm-12  product-card5 card-camsole">
                 <div class="card-aboutUs mb-3 mb-lg-0 w-100 " >       
-                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 490px;">
+                    <div class="card-body ps-lg-2  ps-2  product-shadow1" style="height: 77vh;">
                         <img src="./images/Image.png" class="img-fluid rounded-top" alt="...">
                         <h3 class="card-text pt-2">MEN BOXER<h3>
                         <p class="text-p">BYC 1166</p>
@@ -459,41 +483,41 @@
         <div class="container pt-lg-5 mt-lg-5 py-md-3 text-light">
             <div class="row foot-row">
 
-                <div class="col-sm-12 col-md-2 mb-4 col-lg-3 mb-md-0 col-a ps-lg-5">
+                <div class="col-sm-12 col-md-2 mb-4 col-lg-2 mb-md-0 col-a ps-lg-2">
                     <h5 class="text-captalize mb-lg-3">Company Info </h5>
                     <ul class="list-unstyled text-light">
-                        <li class="my-lg-2"><a href="#" class="text-light " style="text-decoration: none; ">About Us</a></li>
+                        <li class="my-2"><a href="#" class="text-light " style="text-decoration: none; ">About Us</a></li>
                         <li><a href="#" class="text-light" style="text-decoration: none;">Affiliate</a></li>
-                        <li class="my-lg-2"><a href="#" class="text-light"style="text-decoration: none;">Fashion Blogger</a></li>
+                        <li class="my-2"><a href="#" class="text-light"style="text-decoration: none;">Fashion Blogger</a></li>
                     </ul>
                 </div>
 
-                <div class="col-sm-12 col-md-2 mb-4 col-lg-2 mb-md-0 col-b">
+                <div class="col-sm-12 col-md-2 mb-4 col-lg- mb-md-0 col-b ps-lg-0">
                     <h5 class="text-captalize mb-lg-3">Help & Support</h5>
                     <ul class="list-unstyled text-light">
-                        <li class="my-lg-2"><a href="#" class="text-light " style="text-decoration: none;">Shipping Info</a></li>
+                        <li class="my-2"><a href="#" class="text-light " style="text-decoration: none;">Shipping Info</a></li>
                         <li><a href="#" class="text-light" style="text-decoration: none;">Refunds</a></li>
-                        <li class="my-lg-2"><a href="#" class="text-light" style="text-decoration: none;">How to Order</a></li>
+                        <li class="my-2"><a href="#" class="text-light" style="text-decoration: none;">How to Order</a></li>
                         <li><a href="#" class="text-light" style="text-decoration: none;">How to Track</a></li>
-                        <li class="my-lg-2"><a href="#" class="text-light" style="text-decoration: none;">Size Guide</a></li>
+                        <li class="my-2"><a href="#" class="text-light" style="text-decoration: none;">Size Guide</a></li>
                     </ul>
                 </div>
 
-                <div class="col-sm-12 col-md-5 mb-4 col-lg-4 mb-md-0 col-c">
+                <div class="col-sm-12 col-md-5 mb-4 col-lg-4 mb-md-0 col-c  ps-lg-0">
                     <h5 class="text-captalize mb-lg-3">Customer Care</h5>
                     <ul class="list-unstyled">
-                        <li class="my-lg-2"><a href="#" class="text-light " style="text-decoration: none;">Contact Us</a></li>
+                        <li class="my-2"><a href="#" class="text-light " style="text-decoration: none;">Contact Us</a></li>
                         <li><a href="#" class="text-light" style="text-decoration: none;">payment Methods</a></li>
-                        <li class="my-lg-2"><a href="#" class="text-light"style="text-decoration: none;">Fashion Blogger</a></li>
+                        <li class="my-2"><a href="#" class="text-light"style="text-decoration: none;">Fashion Blogger</a></li>
                         <a href="#"><img src="./images/paypal.png" alt="paypal" style="width: 40px; height: 20px;"></a>
-                        <a href="#"><img src="./images/visa.png" class="mx-4 img-fluid my-lg-2" alt="visa" style="width: 40px; height: 20px;"></a>
+                        <a href="#"><img src="./images/visa.png" class="mx-4 img-fluid my-2" alt="visa" style="width: 40px; height: 20px;"></a>
                         <a href="#"><img src="./images/MasterCard.png" alt="MasterCard" style="width: 40px; height: 20px;"></a>
                         
                     </ul>
                 </div>
 
-                <div class="col-sm-12 col-md-3 mb-4 col-lg-3 col-d"> 
-                    <h5 class="text-captalize mb-lg-3">Signup For The Latest News</h5>
+                <div class="col-sm-12 col-md-3 mb-4 col-lg-3 col-d p-lg-0"> 
+                    <h5 class="text-captalize mb-3">Signup For The Latest News</h5>
                     <form class="form">
                         <span class="mail-span mb-3">
                             <input type="email" class="text-start mb-lg-5 contact-mail" placeholder="Enter Email" aria-label="Email">
@@ -508,27 +532,29 @@
                             bycafrica@gmail.com
                         </a>
                         <br>
-                        <div class="d-flex align-items-center justify-content-center">
+                        <div class="d-flex align-items-center justify-content-lg-center">
                             <a href="" class="text-decoration-none text-light">
                                 <i class="fa-solid fa-phone"></i>
-                                
                             </a>
-                            <p class="pt-2">+234810137537:+234905403403</p>
+                            <div class="d-flex align-items-center justify-content-center pt-2 flex-colum">
+                                <p class="pt-2 ps-3 ps-lg-3">+234810137537:</p>
+                                <p class="pt-2">+234905403403</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
 
-            <div class="text-center text-lg-center mt-5 pt-lg-5 text-decoration-none">
-                <a href="#" class="">
+            <div class="text-center text-lg-center mt-5 pt-lg-5">
+                <a href="#" class="text-decoration-none">
                     <i class="fa-brands fa-facebook fa-2xl text-dark" ></i>
                 </a>
                 <a href="#" class="text-decoration-none">
-                    <i class="fab fa-instagram fa-2xl text-dark mx-lg-5"></i>
+                    <i class="fab fa-instagram fa-2xl text-dark mx-lg-5 mx-3"></i>
                 </a>
                 <a href="#" class="text-decoration-none">
-                    <i class="fab fa-twitter fa-2xl text-dark me-lg-5"></i>
+                    <i class="fab fa-twitter fa-2xl text-dark me-lg-5 me-3"></i>
                 </a>
                 <a href="#" class="text-decoration-none">
                     <i class="fab fa-youtube fa-2xl text-dark mb-3 mb-lg-4"></i>
@@ -539,8 +565,9 @@
             <!-- Footer Content ends here -->
         </div>
     </footer>
-    <script src="./js/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>   
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/index.js"></script>
 </body>
 </html>

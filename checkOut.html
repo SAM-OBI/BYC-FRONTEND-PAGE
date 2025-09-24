@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CARTCHECK | BYC</title>
+    <title>CHECKOUT | BYC</title>
     <!-- bootstrap cdn  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
@@ -12,8 +12,8 @@
     <!-- font awesome cdn  -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body onload="loadCart(),checkLoginStatus(),updateWishlistCount()">
-    <nav class="navbar navbar-expand-lg mb-5 mb-lg-5 pb-lg-5">
+<body onload="renderCheckout(),checkLoginStatus(),updateWishlistCount(),updateCartCount()">
+   <nav class="navbar navbar-expand-lg mb-5 mb-lg-5 pb-lg-5">
         <div class="container-fluid mt-2"> 
               <!-- Left UL LI -->
                 <div class="d-none d-lg-flex">
@@ -44,7 +44,7 @@
                     </i>
                   </a>
                   <a href="./wishlist.html"><i class="far fa-heart mx-lg-2" id="fa-heart"></i></a>
-                  <a href="./cart.html"  class="cart-icon">
+                  <a href="./cart.html"  class="cart-icon ">
                      <i class="fas fa-shopping-cart"></i>
                         <span id="cart-count" class="cart-count">0</span>
                 </a>
@@ -86,31 +86,106 @@
         </div>
     </nav> 
 
-    <main class="container">
-        <section id="cart-items" class="cart-sec1 p-lg-4">
-            <h6 >Cart <span id="cartLenght"></span> items(s)</h6>
-             <div class="container my-4" id="check-items"></div>
-  <!-- Cart totals -->
-                   <hr style="border: 1px solid #646262e4; background-color: #747373ff; box-shadow: #e7e6e63d 0px 3px 8px;">
+    
+  
 
-        <div class="container d-flex justify-content-end  mt-4 ">
-            <div>
-                <h4 class="text-start mb-3 fw-bold">CART TOTAL</h4>
+    <main class="container shadow rounded">
+                    <h4>Order Summary</h4>
+        <!-- Totals -->
+                <div class="checkout-container" style="display:flex; gap:2rem; align-items:flex-start;">
+  <!-- LEFT: Products -->
+  <div class="checkout-products" style="flex:2;">
+    <!-- <h2>Your Cart</h2> -->
+    <div id="checkoutItems"></div>
+  </div>
+  <!-- RIGHT: Totals -->
+  <div class="checkout-summary" style="flex:1; border:1px solid #ddd; padding:1rem; border-radius:8px;">
+    <h3>Order Summary</h3>
+    <div class="summary-row" style="display:flex; justify-content:space-between;">
+      <span>Subtotal</span>
+      <span id="subtotal">₦0</span>
+    </div>
+    <div class="summary-row" style="display:flex; justify-content:space-between;">
+      <span>Delivery Fee</span>
+      <span id="delivery">₦1000</span>
+    </div>
+    <div class="summary-row" style="display:flex; justify-content:space-between; font-weight:bold;">
+      <span>Total</span>
+      <span id="total">₦0</span>
+    </div>
+  </div>
+</div>
 
-                <div class="d-flex justify-content-between fw-medium">
-                    <p class="text-start">Subtotal</p>
-                    <p class="text-end" id="subtotal-price">₦0</p>
+        <section id="checkOut" class="check-items p-lg-4">
+            <div class="row">
+                <!-- Left: Products + Customer details -->
+                <!-- Customer Details -->
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xlg-6 ">
+                    <h5>Customer Details</h5>
+                    <form id="customerForm">
+                        <div class="mb-2">
+                            <label for="custName" class="form-label">Full Name</label>
+                            <input type="text" id="custName" class="form-control" >
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="custCompany" class="form-label">Company Name (optional)</label>
+                            <input type="text" id="custCompany" class="form-control" >
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="custcountry" class="form-label">Country/Region</label>
+                            <input type="text" id="custCountry" class="form-control" >
+                        </div>
+                        <div class="mb-2">
+                            <label for="custTown" class="form-label">Town/City</label>
+                            <input type="text" id="custTown" class="form-control" >
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="custState" class="form-label">State</label>
+                            <input type="text" id="custState" class="form-control" >
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="custaddress" class="form-label">Address</label>
+                            <input type="text" id="custaddress" class="form-control" >
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="custPhone" class="form-label">Phone</label>
+                            <input type="text" id="custPhone" class="form-control" >
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" id="custEmail" class="form-control" >
+                        </div>
+                        
+                        <!-- <div class="mb-2">
+                            <label for="custAddress" class="form-label">Email Address</label>
+                            <textarea id="custAddress" class="form-control" rows="2" required></textarea>
+                        </div> -->
+                        <input type="submit" class="btn btn-danger w-100 my-4" value="submit" onclick="registerCustomer(event)">
+                    </form>
                 </div>
-                <div class="d-flex justify-content-between fw-medium mt-2">
-                    <span>Total</span>
-                    <span id="total-price">₦0</span>
-                </div>
-                <div class="d-flex justify-content-end gap-3 mt-4 mb-3">
-                    <a href="allProducts.html" id="proceedTo" class="btn btn-outline-danger text-danger">Continue Shopping</a>
-                    <a href="checkOut.html" class="btn btn-danger">Proceed to Checkout</a>
+
+                <!-- Right: Payment -->
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xlg-6">
+                    <div class=" rounded p-3" style="background-color: #FFF8F8;">
+                        <h5>Payment Method</h5>
+                        <div class="form-check">
+                            <input class=" text-danger" type="radio" name="paymentMethod" id="payCard" value="card" checked>
+                            <label class="form-check-label" for="payCard">direct bank transfer</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="paymentMethod" id="payDelivery" value="delivery">
+                            <label class="form-check-label" for="payDelivery">secured online payment</label>
+                        </div>
+                        <button class="btn btn-success w-100 mt-3" onclick="submitCheckout()">Place Order</button>
+                    </div>
                 </div>
             </div>
-        </div>
         </section>
     </main>
 
@@ -203,5 +278,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>   
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 </html>

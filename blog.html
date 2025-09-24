@@ -12,7 +12,7 @@
     <!-- font awesome cdn  -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
+<body onload="checkLoginStatus()">
     <nav class="navbar navbar-expand-lg mb-5 mb-lg-5 pb-lg-5">
         <div class="container-fluid mt-2"> 
               <!-- Left UL LI -->
@@ -43,7 +43,7 @@
                       <span class="status-dot"></span>
                     </i>
                   </a>
-                  <a href="./wishlist.html"><i class="far fa-heart mx-lg-2"></i></a>
+                  <a href="./wishlist.html"><i class="far fa-heart mx-lg-2" id="fa-heart"></i></a>
                   <a href="./cart.html"><i class="fas fa-shopping-cart mx-lg-2"></i></a>
               </div>
             </div>
@@ -73,7 +73,7 @@
                       <span class="status-dot"></span>
                     </i>
                   </a>
-                  <a href="wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark"></i></a>
+                  <a href="wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark" id="fa-heart"></i></a>
                   <a href="./cart.html" class="d-lg-none"><i class="fas fa-cart-shopping text-dark"></i></a>
                 </li>
             </ul>
@@ -233,7 +233,7 @@
                     </ul>
                 </div>
 
-                <div class="col-sm-12 col-md-3 mb-4 col-lg-3 col-d ps-lg-0"> 
+                <div class="col-sm-12 col-md-3 mb-4 col-lg-3 col-d p-lg-0"> 
                     <h5 class="text-captalize mb-3">Signup For The Latest News</h5>
                     <form class="form">
                         <span class="mail-span mb-3">
@@ -249,12 +249,14 @@
                             bycafrica@gmail.com
                         </a>
                         <br>
-                        <div class="d-flex align-items-center justify-content-center">
+                        <div class="d-flex align-items-center justify-content-lg-center">
                             <a href="" class="text-decoration-none text-light">
                                 <i class="fa-solid fa-phone"></i>
-                                
                             </a>
-                            <p class="pt-2 ps-3 ps-lg-0">+234810137537:+234905403403</p>
+                            <div class="d-flex align-items-center justify-content-center pt-2 flex-colum">
+                                <p class="pt-2 ps-3 ps-lg-3">+234810137537:</p>
+                                <p class="pt-2">+234905403403</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -283,5 +285,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/index.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CARTCHECK | BYC</title>
+    <title>BYC PROJECT</title>
     <!-- bootstrap cdn  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
@@ -12,7 +12,14 @@
     <!-- font awesome cdn  -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body onload="loadCart(),checkLoginStatus(),updateWishlistCount()">
+<body onload="
+    checkLoginStatus(),
+    updateWishlistCount(),
+    loadRecentlyViewed(),
+    initProductDetails(),
+    updateCartCount()
+ 
+    ">
     <nav class="navbar navbar-expand-lg mb-5 mb-lg-5 pb-lg-5">
         <div class="container-fluid mt-2"> 
               <!-- Left UL LI -->
@@ -44,10 +51,9 @@
                     </i>
                   </a>
                   <a href="./wishlist.html"><i class="far fa-heart mx-lg-2" id="fa-heart"></i></a>
-                  <a href="./cart.html"  class="cart-icon">
-                     <i class="fas fa-shopping-cart"></i>
-                        <span id="cart-count" class="cart-count">0</span>
-                </a>
+                    <a href="./cart.html"  class="cart-icon">
+                        <i class="fas fa-shopping-cart" id="fa-shopping-cart"></i>
+                    </a>
               </div>
             </div>
             <!-- Mobile Toggler -->
@@ -76,42 +82,158 @@
                       <span class="status-dot"></span>
                     </i>
                   </a>
-                  <a href="wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark" id="fa-heart"></i></a>
-                  <a href="./cart.html"  class="cart-icon d-lg-none">
-                     <i class="fas fa-shopping-cart"></i>
-                        <span id="cart-count" class="cart-count">0</span>
-                </a>
+                    <a href="wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark" id="fa-heart"></i></a>
+                    <a href="./cart.html"  class="cart-icon d-lg-none">
+                        <i class="fas fa-shopping-cart" id="fa-shopping-cart"></i>
+                    </a>
                 </li>
             </ul>
         </div>
     </nav> 
 
-    <main class="container">
-        <section id="cart-items" class="cart-sec1 p-lg-4">
-            <h6 >Cart <span id="cartLenght"></span> items(s)</h6>
-             <div class="container my-4" id="check-items"></div>
-  <!-- Cart totals -->
-                   <hr style="border: 1px solid #646262e4; background-color: #747373ff; box-shadow: #e7e6e63d 0px 3px 8px;">
+    <!-- breadcrumb for contact us here  -->
+    <div class="container-fluid px-lg-5 mt-3 pb-lg-3 my-lg-5 my-5">
+        <nav aria-label="breadcrumb">
+            <ul class="breadcrumb" style=" --bs-breadcrumb-divider: '>';">
+                <li class="breadcrumb-item "><a href="./landing.html" class="breadcrumb-item text-decoration-none text-dark">Home</a></li>
+                <li class="breadcrumb-item"><a href="allProducts.html" class="breadcrumb-item text-decoration-none text-dark">Men</a></li>
+                <li class="breadcrumb-item active text-danger" aria-current="page">cart</li>
+            </ul>
+        </nav>
+    </div>
 
-        <div class="container d-flex justify-content-end  mt-4 ">
-            <div>
-                <h4 class="text-start mb-3 fw-bold">CART TOTAL</h4>
-
-                <div class="d-flex justify-content-between fw-medium">
-                    <p class="text-start">Subtotal</p>
-                    <p class="text-end" id="subtotal-price">₦0</p>
-                </div>
-                <div class="d-flex justify-content-between fw-medium mt-2">
-                    <span>Total</span>
-                    <span id="total-price">₦0</span>
-                </div>
-                <div class="d-flex justify-content-end gap-3 mt-4 mb-3">
-                    <a href="allProducts.html" id="proceedTo" class="btn btn-outline-danger text-danger">Continue Shopping</a>
-                    <a href="checkOut.html" class="btn btn-danger">Proceed to Checkout</a>
-                </div>
+    <main class="cart mx-3 mx-lg-1">
+        <section id="product-detail" class="cart-sec1 container   px-lg-0 py-4">
+            <div class="row mb-lg-5">
+                <div id="productItem"></div>
             </div>
-        </div>
+
+            <!-- Pagination Controls -->
+            <!-- <div id="paginationControls" class="pagination-controls mt-5">
+              <button id="prevBtn" class="nav-btn">&larr;</button>
+              <button id="nextBtn" class="nav-btn">&rarr;</button>
+            </div> -->
         </section>
+
+        <div id="fullDescription"></div>
+
+        <section class="cart-sec1 container px-lg-5 mt-lg-5">
+            <div id="productReviews" class="mt-5">
+                <h2 class="pt-4 fw-bold fs-4">Customer Reviews</h2>
+                <hr class="my-3" style="border: 2px solid #F1EEEE;">
+                <p class="fs-5" id="ratingNum">PRODUCT RATINGS (1129)</p>
+                <!-- customer review -->
+                <div class="avg-rating d-flex align-items-center  pt-3 mb-4 my-lg-5 pb-lg-3" >
+                    <div class="text-center p-lg-5 me-lg-5" style="background-color: #F8F5F5; width: 300px; height: 180px; border-radius: 10px;">
+                        <div class="rating-value d-flex justify-content-center align-items-center me-4">
+                            <p id="avgRating" class="fs-3 fw-bold">4.5</p>
+                            <p class=" fs-3">/5.0</p>
+                        </div>
+                        <div id="avgStars" class="stars"></div>
+                    </div>
+                    <!-- Rating distribution -->
+                    <div class="rating-distribution w-25">
+                        <div class="rating-row d-flex align-items-center  mb-1">
+                            <span class="stars fw-bolder fs-4">★</span>
+                            <span class="mx-4  fw-bold">5</span>
+                            <div class="bar bg-light ms-2">
+                                <div class="fill bg-warning" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="rating-row d-flex align-items-center mb-1">
+                            <span class="stars fw-bolder fs-4">★</span>
+                            <span class="mx-4  fw-bold">4</span>
+                            <div class="bar bg-light ms-2 me-2">
+                                <div class="fill bg-warning" style="width: 60%"></div>
+                            </div>
+                        </div>
+                            <div class="rating-row d-flex align-items-center mb-1">
+                            <span class="stars fw-bolder fs-4">★</span>
+                            <span class="mx-4  fw-bold">3</span>
+                            <div class="bar bg-light ms-2 me-2">
+                                <div class="fill bg-warning" style="width: 40%"></div>
+                            </div>
+                        </div>
+                        <div class="rating-row d-flex align-items-center mb-1">
+                            <span class="stars fw-bolder fs-4">★</span>
+                            <span class="mx-4  fw-bold">2</span>
+                            <div class="bar bg-light ms-2 me-2">
+                                <div class="fill bg-warning" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="rating-row d-flex align-items-center mb-1">
+                            <span class="stars fw-bolder fs-4">★</span>
+                            <span class="mx-4  fw-bold">1</span>
+                            <div class="bar bg-light ms-2 me-2">
+                                <div class="fill bg-warning" style="width: 20%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Product Reviews -->
+                
+                <div class=" d-flex align-items-center justify-content-between">
+                    <h2 class="fs-5 " id="reviewNum">PRODUCT REVIEWS(438)</h2>
+                    <div class="text-end ">
+                        <!-- <a href="#" id="seeAllReviews" class="text-decoration-none text-danger fw-medium">See all ></a> -->
+                        <button id="seeAllReviews" class="btn btn-link text-decoration-none text-danger fw-medium">See All</button>
+                    </div>
+                </div>
+                <hr class="mb-5 mt-1" style="border: 2px solid #F1EEEE;">
+                <div id="reviewsList" class="reviews-list">
+
+                    <!-- Individual review template -->
+                    <div class="review mb-3">
+                        <h6 class="fw-bold">Good product</h6>
+                        <p>The product lasts, the design is perfect I love it</p>
+                        <div class="d-flex  align-items-center">
+                            <div class="stars me-3">★★★★★</div>
+                            <small>12-08-2021 by JAMES JOHN</small>
+                        </div>
+                    </div>
+                    <hr class="mb-4" style="border: 2px solid #F1EEEE;">
+                    <div class="review mb-3">
+                        <h6 class="fw-bold">Good product</h6>
+                        <p>The product lasts, the design is perfect I love it</p>
+                        <div class="d-flex  align-items-center">
+                            <div class="stars me-3">★★★★★</div>
+                            <small>12-08-2021 by JAMES JOHN</small>
+                        </div>
+                    </div>
+                    <hr class="mb-4" style="border: 2px solid #F1EEEE;">
+                    <div class="review mb-3">
+                        <h6 class="fw-bold">Good product</h6>
+                        <p>The product lasts, the design is perfect I love it</p>
+                        <div class="stars">★★★★★</div>
+                        <small>12-08-2021 by JAMES JOHN</small>
+                    </div>
+                    <hr class="mb-4" style="border: 2px solid #F1EEEE;">
+                    <div class="review mb-3">
+                        <h6>Good product</h6>
+                        <p>The product lasts, the design is perfect I love it</p>
+                        <div class="d-flex  align-items-center">
+                            <div class="stars me-3">★★★★★</div>
+                            <small>12-08-2021 by JAMES JOHN</small>
+                        </div>
+                    </div>
+                    <hr class="mb-4" style="border: 2px solid #F1EEEE;">
+                        
+                </div>
+                    
+            </div>
+        </section>
+
+        <section class="about-sec3 px-3 px-lg-4 pt-5 pt-lg-0  mx-lg-4 mt-5 mt-lg-5">
+            <div class="d-flex justify-content-between align-items-center mt-lg-5 mb-lg-3 pt-4 pt-lg-5 pb-2 pb-lg-1 ">
+                <h4 class="">Recently Viewed</h4>
+                <button id="viewMoreRecent" style="border: none;background: transparent; color: #BD3A3A; font-size: 25px; display: none;">See all<span><i class="fa-solid fa-angle-left fa-flip-horizontal ms-3" style="color: #BD3A3A;"></i></span></button>
+            </div>
+            <hr style="border: 2px solid #f1eeeee4; background-color: #1e1d1d; box-shadow: #e7e6e63d 0px 3px 8px;">
+
+            <div id="recentlyViews" class="row"></div>
+        </section>
+
     </main>
 
 
