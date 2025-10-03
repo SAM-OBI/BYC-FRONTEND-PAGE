@@ -17,8 +17,8 @@
     updateWishlistCount(),
     loadRecentlyViewed(),
     initProductDetails(),
+    updateCartCount(),
     updateCartCount()
- 
     ">
     <nav class="navbar navbar-expand-lg mb-5 mb-lg-5 pb-lg-5">
         <div class="container-fluid mt-2"> 
@@ -52,8 +52,9 @@
                   </a>
                   <a href="./wishlist.html"><i class="far fa-heart mx-lg-2" id="fa-heart"></i></a>
                     <a href="./cart.html"  class="cart-icon">
-                        <i class="fas fa-shopping-cart" id="fa-shopping-cart"></i>
-                    </a>
+                     <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                </a>
               </div>
             </div>
             <!-- Mobile Toggler -->
@@ -84,8 +85,9 @@
                   </a>
                     <a href="wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark" id="fa-heart"></i></a>
                     <a href="./cart.html"  class="cart-icon d-lg-none">
-                        <i class="fas fa-shopping-cart" id="fa-shopping-cart"></i>
-                    </a>
+                     <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                </a>
                 </li>
             </ul>
         </div>

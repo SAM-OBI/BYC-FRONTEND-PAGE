@@ -104,39 +104,37 @@ function customerLogIn(event) {
         headers: { "Content-Type": "application/json" }, // :white_check_mark: tell backend it's JSON
         body: signData
     };
-        const url = "http://localhost:3001/byc/api/login";
+    const url = "http://localhost:3001/byc/api/login";
     fetch(url, signMethod)
         .then(response => response.json())
         .then(result => {
-            console.log("Login result:", result);
+            console.log("customer Login result:", result);
             if ( result.success && result.token && result._id) { // success (backend sends token)
                 // Store the new token
                 localStorage.setItem("customerLoginId", result._id);
                 localStorage.setItem("token", result.token);
-                // Decode token to get current customer ID
-                const currentCustomerId = localStorage.getItem("customerLoginId");
-                // Get previously stored customer ID
-                const prevCustomerId = localStorage.getItem("customerRegId");
-                if (prevCustomerId  !== currentCustomerId) {
-                    // Notify the user they are using a different account
-                    Swal.fire({
-                        icon: 'info',
-                        text: 'You are logging in with a different customer account!',
-                        confirmButtonColor: "#2d85de"
-                    });
-                setTimeout(() => {
-                }, 1500);
-                // Update stored customer ID to the current one
-                localStorage.setItem("customerRegId", currentCustomerId);
-                    
-                } 
-
+                // Decode token to get current admin ID
+                // const currentAdminId = getAdminIdFromToken(result.token);
+                // Get previously stored admin ID
+                // const prevAdminId = localStorage.getItem("adminId");
+                // if (prevAdminId && prevAdminId !== currentAdminId) {
+                //     // Notify the user they are using a different account
+                //     Swal.fire({
+                //         icon: 'info',
+                //         text: 'You are logging in with a different admin account!',
+                //         confirmButtonColor: "#2d85de"
+                //     });
+                // setTimeout(() => {
+                // }, 1500);
+                // // Update stored admin ID to the current one
+                // localStorage.setItem("adminId", currentAdminId);
+                // // Continue login flow...
+                //  }
                 Swal.fire({
-                        icon: 'success',
-                        text: 'Login successful!',
-                        confirmButtonColor: "#2d85de"
-                    });
-                
+                    icon: 'success',
+                    text: 'Login successful!',
+                    confirmButtonColor: "#2d85de"
+                });
                 // redirect after a short delay
                 setTimeout(() => {
                     location.href = "./index.html";
@@ -162,6 +160,9 @@ function customerLogIn(event) {
         });
 }
 
+
+
+
 // handles login icon 
 function checkLoginStatus() {
    const customerLoginId = localStorage.getItem("customerLoginId");
@@ -184,7 +185,7 @@ function startRotatingText() {
     function rotate() {
         display.textContent = words[index];
         index = (index + 1) % words.length; // loop back
-    }
+    };
     rotate(); // initialize immediately
     setInterval(rotate, 2000); // change every 2 seconds
 };
@@ -426,7 +427,7 @@ function loadProducts(page = 1, limit = 25) {
 
 // resuable fetchProducts api 
  function fetchProducts() {
-      const token = localStorage.getItem("key");
+      const token = localStorage.getItem("token");
       const headers = new Headers();
       headers.append("Authorization", `Bearer ${token}`);
       return fetch("http://localhost:3001/byc/api/products", { method: "GET", headers })
@@ -589,246 +590,593 @@ function loadWishlist() {
 }
 
 // FUNCTION FOR PRODUCT DETAILS 
-
 function initProductDetails() {
+  // --- Helper: sanitize finalCart in localStorage ---
+  function sanitizeFinalCart() {
+    try {
+      let fc = JSON.parse(localStorage.getItem("finalCart"));
+      if (!Array.isArray(fc)) {
+        if (fc == null) {
+          localStorage.setItem("finalCart", JSON.stringify([]));
+          return;
+        } else {
+          // if it's a single object, wrap it; otherwise reset
+          fc = typeof fc === "object" ? [fc] : [];
+        }
+      }
+
+      const cleaned = fc.map(item => {
+        if (!item || typeof item !== "object") return null;
+
+        // Normalize keys that earlier helper functions might have used
+        const id = item.id || item.productId || item._id || null;
+        if (!id) return null;
+
+        const size = item.size || item.selectedSize || null;
+        const color = item.color || item.selectedColor || null;
+
+        // Normalize quantity
+        let quantity = item.quantity ?? item.qty ?? item.Qty ?? 1;
+        quantity = Number(quantity);
+        if (!Number.isFinite(quantity) || quantity < 1) quantity = 1;
+
+        return { id, size, color, quantity };
+      }).filter(Boolean);
+
+      // If we removed / normalized things, persist and warn
+      if (JSON.stringify(cleaned) !== JSON.stringify(fc)) {
+        console.warn("finalCart had malformed entries — cleaned. New finalCart:", cleaned);
+        localStorage.setItem("finalCart", JSON.stringify(cleaned));
+      }
+    } catch (err) {
+      console.warn("Error sanitizing finalCart, resetting to [].", err);
+      localStorage.setItem("finalCart", JSON.stringify([]));
+    }
+  }
+
+  // sanitize at start to prevent later null errors
+  sanitizeFinalCart();
+
+  // ---------------- original function (kept IDs/classes, adjusted slightly) ----------------
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let currentIndex = parseInt(localStorage.getItem("currentProductIndex")) || 0;
+  let cartProducts = []; // store fetched product objects
+
+  async function fetchCartProducts() {
+    try {
+      const responses = await Promise.all(
+        cart.map(prodId =>
+          fetch(`http://localhost:3001/byc/api/products/${prodId}`).then(res => res.json())
+        )
+      );
+      // normalize product data
+      cartProducts = responses.map(r => r.product || r);
+      loadProduct(currentIndex);
+    } catch (err) {
+      console.error("Error fetching cart products:", err);
+      document.getElementById("productItem").innerHTML =
+        "<p class='text-danger'>Error loading products</p>";
+    }
+  }
+
   function loadProduct(index) {
-    if (cart.length === 0) {
-      document.getElementById("productItem").innerHTML = "<p>No products in cart</p>";
+    if (cart.length === 0 || cartProducts.length === 0) {
+      document.getElementById("productItem").innerHTML = "<p>No products details. Add product</p>";
       return;
     }
     if (index < 0) index = 0;
     if (index >= cart.length) index = cart.length - 1;
     currentIndex = index;
     localStorage.setItem("currentProductIndex", currentIndex);
-    const productId = cart[currentIndex];
-    fetch(`http://localhost:3001/byc/api/products/${productId}`)
-      .then(res => res.json())
-      .then(product => {
-        const p = product.product || product;
-        const mainImage = Array.isArray(p.image) ? p.image[0] : p.image;
-        document.getElementById("productItem").innerHTML = `
-          <div class="row mt-4">
-            <!-- Left side: main image + thumbnail carousel -->
-            <div class="col-md-6 text-center">
-              <div class="main-img mb-3">
-                <img id="mainProductImg" src="${mainImage}" class="img-fluid rounded"
-                     style="max-height: 350px; object-fit: contain;" alt="${p.name}">
-              </div>
-              <!-- Thumbnail carousel -->
-              <div class="thumb-carousel-wrapper position-relative mt-3">
-                <button class="thumb-prev btn btn-light position-absolute start-0 top-50 translate-middle-y" style="z-index:10;">
-                  <i class="fas fa-chevron-left"></i>
-                </button>
-                <div id="thumbCarousel" class="d-flex overflow-hidden" style="gap:10px; max-width:100%; scroll-behavior:smooth;">
-                  ${cart.map((prodId, i) => `
-                    <img src="${Array.isArray(p.image) ? p.image[0] : p.image}"
-                         class="thumb-img rounded border ${i === currentIndex ? 'active-thumb' : ''}"
-                         style="height:85px; width:70px; object-fit:cover; cursor:pointer; flex:0 0 auto;"
-                         data-id="${prodId}">
-                  `).join("")}
-                </div>
-                <button class="thumb-next btn btn-light position-absolute end-0 top-50 translate-middle-y" style="z-index:10;">
-                  <i class="fas fa-chevron-right"></i>
-                </button>
-              </div>
-            </div>
-            <!-- Right side: product info -->
-            <div class="col-md-6">
-              <div class="card-body">
-                <h4 class="fw-bold">${p.name}</h4>
-                <p class="fw-bold fs-5">${p.productNumber || "N/A"}</p>
-                <p class="fs-6 my-4">${p.description || "No description available."}</p>
-                <!-- Rating -->
-                <div class="mb-3">
-                  ${p.rating ? ":star:".repeat(Math.round(p.rating)) + ` (${p.rating})` : "No rating yet"}
-                </div>
-                <!-- Price -->
-                <hr style="border: 1px solid #646262e4; background-color: #747373ff; box-shadow: #e7e6e63d 0px 3px 8px;">
-                <div class="price fw-bold fs-4 mb-4">₦${p.price || "N/A"}.00</div>
-                <!-- Sizes + Colors -->
-                <div class="d-flex align-items-center available-size">
-                  <div>
-                    <label><strong>Available Size</strong></label>
-                    <div id="sizeOptions" class="d-flex gap-2 mb-3 mt-3">
-                      ${["S","M","L","XL"].map(s => `
-                        <div class="size-option px-3 py-2 border rounded"
-                             style="cursor:pointer;" data-size="${s}">${s}</div>
-                      `).join("")}
-                    </div>
-                  </div>
-                  <div class="ms-lg-5">
-                    <label><strong>Available Colors</strong></label>
-                    <div id="colorOptions" class="d-flex gap-2 mb-3 mt-4">
-                      ${["black","blue","orange","yellow"].map(c => `
-                        <div class="color-option border"
-                             style="width:30px; height:30px; border-radius:50%; background:${c}; cursor:pointer;"
-                             data-color="${c}"></div>
-                      `).join("")}
-                    </div>
-                  </div>
-                </div>
-                <!-- Quantity + Wishlist -->
-                <div class="d-flex my-3">
-                  <div class="d-flex align-items-center mb-3">
-                    <button class="bg-danger px-3 text-light" id="qtyMinus" style="border:none;height:44px;">-</button>
-                    <input type="number" id="productQty" value="1" min="1"
-                           class="form-control text-center mx-2" style="width:70px; border:none;">
-                    <button class="bg-danger px-3 text-light" id="qtyPlus" style="border:none;height:44px;">+</button>
-                  </div>
-                  <button class="btn d-flex ps-4 ms-4"
-                          onclick="addToWishlist('${p._id}')"
-                          style="width:40%; height:44px; border-radius:5px; color:#BD3A3A; border:1px solid #BD3A3A; outline:none;">
-                    <span><i class="far fa-heart me-2"></i></span>
-                    <span style="font-size:16px; font-weight:600;">Wishlist</span>
-                  </button>
-                </div>
-                <!-- Add to Cart -->
-                <button class="btn d-flex ps-1 ps-lg-5 pe-0"
-                        onclick="addToFinalCart('${p._id}')"
-                        style="width:74%; height:40px; border-radius:5px; background-color:#BD3A3A; color:#FFFFFF; border:1px solid #BD3A3A; outline:none;">
-                  <span><i class="fas fa-shopping-cart"></i></span>
-                  <span class="ps-lg-4 ps-2" style="font-size:16px; font-weight:600;">Add to Cart</span>
-                </button>
-              </div>
-            </div>
+    const p = cartProducts[currentIndex];
+    const mainImage = Array.isArray(p.image) ? p.image[0] : p.image;
+    document.getElementById("productItem").innerHTML = `
+      <div class="row mt-4">
+        <!-- Left side: main image + thumbnail carousel -->
+        <div class="col-md-6 text-center">
+          <div class="main-img mb-3">
+            <img id="mainProductImg" src="${mainImage}" class="img-fluid rounded mb-4"
+                 style="max-height: 350px; object-fit: contain;" alt="${p.name}">
           </div>
-        `;
-        // === Size selection ===
-        document.querySelectorAll(".size-option").forEach(el => {
-          el.addEventListener("click", () => {
-            document.querySelectorAll(".size-option").forEach(s => {
-              s.style.outline = "";
-              s.style.boxShadow = "";
-            });
-            el.style.outline = "1.5px solid #bd3a3a";
-            el.style.boxShadow = "0 0 1px #bd3a3a";
-            localStorage.setItem("selectedSize", el.dataset.size);
-          });
+          <!-- Thumbnail carousel -->
+          <div class="thumb-carousel-wrapper position-relative mt-3">
+            <button class="thumb-prev btn btn-light position-absolute start-0 top-50 translate-middle-y" style="z-index:10;">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <div id="thumbCarousel" class="d-flex overflow-hidden ms-lg-5"
+                 style="gap:10px; max-width:75%; scroll-behavior:smooth;">
+              ${cartProducts
+                .map(
+                  (prod, i) => `
+                <img src="${Array.isArray(prod.image) ? prod.image[0] : prod.image}"
+                     class="thumb-img rounded border ${i === currentIndex ? "active-thumb" : ""}"
+                     style="height:85px; object-fit:cover; cursor:pointer;"
+                     data-index="${i}">
+              `
+                )
+                .join("")}
+            </div>
+            <button class="thumb-next btn btn-light position-absolute end-0 top-50 translate-middle-y" style="z-index:10;">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        <!-- Right side: product info -->
+        <div class="col-md-6">
+          <div class="card-body">
+            <h4 class="fw-bold">${p.name}</h4>
+            <p class="fw-bold fs-5">${p.productNumber || "N/A"}</p>
+            <p class="fs-6 my-4">${p.description || "No description available."}</p>
+            <!-- Rating -->
+            <div class="mb-3">
+              ${p.rating ? "★".repeat(Math.round(p.rating)) + ` (${p.rating})` : "No rating yet"}
+            </div>
+            <!-- Price -->
+            <hr style="border: 1px solid #646262e4; background-color: #747373ff; box-shadow: #e7e6e63d 0px 3px 8px;">
+            <div class="price fw-bold fs-4 mb-4">₦${p.price || "N/A"}.00</div>
+            <!-- Sizes + Colors -->
+            <div class="d-flex align-items-center available-size">
+              <div>
+                <label><strong>Available Size</strong></label>
+                <div id="sizeOptions" class="d-flex gap-2 mb-3 mt-3">
+                  ${["S", "M", "L", "XL"]
+                    .map(
+                      s => `
+                    <div class="size-option px-3 py-2 border rounded"
+                         style="cursor:pointer;" data-size="${s}">${s}</div>
+                  `
+                    )
+                    .join("")}
+                </div>
+              </div>
+              <div class="ms-lg-5">
+                <label><strong>Available Colors</strong></label>
+                <div id="colorOptions" class="d-flex gap-2 mb-3 mt-4">
+                  ${["black", "blue", "orange", "yellow"]
+                    .map(
+                      c => `
+                    <div class="color-option border"
+                         style="width:30px; height:30px; border-radius:50%; background:${c}; cursor:pointer;"
+                         data-color="${c}"></div>
+                  `
+                    )
+                    .join("")}
+                </div>
+              </div>
+            </div>
+            <!-- Quantity + Wishlist -->
+            <div class="d-flex my-3">
+              <div class="d-flex align-items-center mb-3">
+                <button class="bg-danger px-3 text-light" id="qtyMinus" style="border:none;height:44px;">-</button>
+                <input type="number" id="productQty" value="1" min="1"
+                       class="form-control text-center mx-2" style="width:70px; border:none;">
+                <button class="bg-danger px-3 text-light" id="qtyPlus" style="border:none;height:44px;">+</button>
+              </div>
+              <button class="btn d-flex ps-4 ms-4"
+                      onclick="addToWishlist('${p._id}')"
+                      style="width:40%; height:44px; border-radius:5px; color:#BD3A3A; border:1px solid #BD3A3A; outline:none;">
+                <span><i class="far fa-heart me-2"></i></span>
+                <span style="font-size:16px; font-weight:600;">Wishlist</span>
+              </button>
+            </div>
+            <!-- Add to Cart -->
+            <button class="btn d-flex ps-1 ps-lg-5 pe-0"
+                    onclick="addToFinalCart('${p._id}')"
+                    style="width:74%; height:40px; border-radius:5px; background-color:#BD3A3A; color:#FFFFFF; border:1px solid #BD3A3A; outline:none;">
+              <span><i class="fas fa-shopping-cart"></i></span>
+              <span class="ps-lg-4 ps-2" style="font-size:16px; font-weight:600;">Add to Cart</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+    // === Size selection ===
+    document.querySelectorAll(".size-option").forEach(el => {
+      el.addEventListener("click", () => {
+        document.querySelectorAll(".size-option").forEach(s => {
+          s.style.outline = "";
+          s.style.boxShadow = "";
         });
-        // === Color selection ===
-        document.querySelectorAll(".color-option").forEach(el => {
-          el.addEventListener("click", () => {
-            document.querySelectorAll(".color-option").forEach(c => c.style.outline = "");
-            el.style.outline = "2px solid grey";
-            localStorage.setItem("selectedColor", el.dataset.color);
-          });
-        });
-        // === Quantity controls ===
-        let qtyInput = document.getElementById("productQty");
-        document.getElementById("qtyPlus").addEventListener("click", () => {
-          qtyInput.value = parseInt(qtyInput.value) + 1;
-        });
-        document.getElementById("qtyMinus").addEventListener("click", () => {
-          let current = parseInt(qtyInput.value);
-          if (current > 1) qtyInput.value = current - 1;
-        });
-        // === Carousel controls ===
-        const thumbCarousel = document.getElementById("thumbCarousel");
-        const prevBtn = document.querySelector(".thumb-prev");
-        const nextBtn = document.querySelector(".thumb-next");
-        prevBtn.addEventListener("click", () => {
-          thumbCarousel.scrollBy({ left: -100, behavior: "smooth" });
-        });
-        nextBtn.addEventListener("click", () => {
-          thumbCarousel.scrollBy({ left: 100, behavior: "smooth" });
-        });
-        // Auto-scroll every 5s
-        setInterval(() => {
-          thumbCarousel.scrollBy({ left: 100, behavior: "smooth" });
-        }, 5000);
-        // Click thumbnail
-        document.querySelectorAll(".thumb-img").forEach(img => {
-          img.addEventListener("click", () => {
-            document.querySelectorAll(".thumb-img").forEach(i => i.classList.remove("active-thumb"));
-            img.classList.add("active-thumb");
-            const prodId = img.dataset.id;
-            loadProduct(cart.indexOf(prodId));
-          });
-        });
-      })
-      .catch(err => {
-        console.error("Error loading product:", err);
-        document.getElementById("productItem").innerHTML = "<p class='text-danger'>Error loading product</p>";
+        el.style.outline = "1.5px solid #BD3A3A";
+        el.style.boxShadow = "0 0 1px #BD3A3A";
+        localStorage.setItem("selectedSize", el.dataset.size);
       });
+    });
+    // === Color selection ===
+    document.querySelectorAll(".color-option").forEach(el => {
+      el.addEventListener("click", () => {
+        document.querySelectorAll(".color-option").forEach(c => (c.style.outline = ""));
+        el.style.outline = "2px solid grey";
+        localStorage.setItem("selectedColor", el.dataset.color);
+      });
+    });
+    // === Quantity controls ===
+    let qtyInput = document.getElementById("productQty");
+    document.getElementById("qtyPlus").addEventListener("click", () => {
+      qtyInput.value = parseInt(qtyInput.value) + 1;
+    });
+    document.getElementById("qtyMinus").addEventListener("click", () => {
+      let current = parseInt(qtyInput.value);
+      if (current > 1) qtyInput.value = current - 1;
+    });
+    // === Carousel controls (4 per scroll) ===
+    const thumbCarousel = document.getElementById("thumbCarousel");
+    const prevBtn = document.querySelector(".thumb-prev");
+    const nextBtn = document.querySelector(".thumb-next");
+    thumbCarousel.style.display = "flex";
+    thumbCarousel.style.overflowX = "hidden";
+    thumbCarousel.style.scrollBehavior = "smooth";
+    document.querySelectorAll(".thumb-img").forEach(img => {
+      img.style.flex = "0 0 25%";
+      img.style.maxWidth = "25%";
+    });
+    const scrollAmount = thumbCarousel.offsetWidth;
+    prevBtn.addEventListener("click", () => {
+      thumbCarousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+    nextBtn.addEventListener("click", () => {
+      thumbCarousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+    // === Click thumbnail to switch product ===
+    document.querySelectorAll(".thumb-img").forEach(img => {
+      img.addEventListener("click", () => {
+        document.querySelectorAll(".thumb-img").forEach(i => i.classList.remove("active-thumb"));
+        img.classList.add("active-thumb");
+        const idx = parseInt(img.dataset.index, 10);
+        loadProduct(idx);
+      });
+    });
   }
+
   // === Wishlist ===
-  window.addToWishlist = function(productId) {
+  window.addToWishlist = function (productId) {
     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     if (!wishlist.includes(productId)) {
       wishlist.push(productId);
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
-      Swal.fire({ icon:'success', title:'Product Added to Wishlist', toast:true, timer:1200, position:'top' });
+      Swal.fire({
+        icon: "success",
+        title: "Product Added to Wishlist",
+        toast: true,
+        timer: 1200,
+        position: "top"
+      });
     } else {
-      Swal.fire({ icon:'info', title:'Product Already in Wishlist', toast:true, timer:1200, position:'top' });
+      Swal.fire({
+        icon: "info",
+        title: "Product Already in Wishlist",
+        toast: true,
+        timer: 1200,
+        position: "top"
+      });
     }
   };
-  // === Add to Cart with validation ===
-  window.addToFinalCart = function(productId) {
+
+  // === Add to Cart with validation (fixed) ===
+  window.addToFinalCart = function (productId) {
     const size = localStorage.getItem("selectedSize");
     const color = localStorage.getItem("selectedColor");
     const qty = parseInt(document.getElementById("productQty").value, 10);
+
     if (!size || !color) {
-      Swal.fire({ icon:'info', title:'Please select size and color.', toast:true, timer:1200, position:'top' });
+      Swal.fire({
+        icon: "info",
+        title: "Please select size and color.",
+        toast: true,
+        timer: 1200,
+        position: "top"
+      });
       return;
     }
+
     let finalCart = JSON.parse(localStorage.getItem("finalCart")) || [];
-    let exists = finalCart.find(item =>
-      item.id === productId && item.size === size && item.color === color
+    let exists = finalCart.find(
+      item => item.id === productId && item.size === size && item.color === color
     );
+
     if (exists) {
-      Swal.fire({ icon:'info', title:'Item Already in Cart', toast:true, timer:1200, position:'top' });
+      Swal.fire({
+        icon: "info",
+        title: "Item Already in Cart",
+        toast: true,
+        timer: 1200,
+        position: "top"
+      });
       return;
     }
+
+    // :white_check_mark: push with qty
     finalCart.push({ id: productId, size, color, quantity: qty });
     localStorage.setItem("finalCart", JSON.stringify(finalCart));
-    updateCartCount();
+
+    // Clear size & color so they must reselect
+    localStorage.removeItem("selectedSize");
+    localStorage.removeItem("selectedColor");
+
+    Swal.fire({
+      icon: "success",
+      title: "Item Added to cart",
+      toast: true,
+      timer: 1200,
+      position: "top"
+    });
+
     window.location.href = "./cart.html";
   };
-  loadProduct(currentIndex);
+
+  fetchCartProducts();
 }
 
 
-    function addToFinalCart(productId) {
-      const size = localStorage.getItem("selectedSize");
-      const color = localStorage.getItem("selectedColor");
-      const qty = document.getElementById("productQty").value;
-      if (!size || !color) {
-        Swal.fire({
-            icon: 'info',
-            title: 'Please select size and color before adding to cart.',
-            showConfirmButton: false,
-            timer: 1200,
-            toast: true,
-            position: 'top',
-            background: '#fff',
-            color: '#bd3a3a'
-        });
 
-        return;
-      }
-      let finalCart = JSON.parse(localStorage.getItem("finalCart")) || [];
-      finalCart.push({ id: productId, size: size, color: color, quantity: parseInt(qty) });
-      localStorage.setItem("finalCart", JSON.stringify(finalCart));
-      Swal.fire({
-            icon: 'success',
-            title: 'Item Added to cart',
-            showConfirmButton: false,
-            timer: 1200,
-            toast: true,
-            position: 'top',
-            background: '#fff',
-            color: '#bd3a3a'
-        });
-        window.location.href = "./cart.html";
-        return;
-    }
-    function updateCartCount() {
+
+// function initProductDetails() {
+//   let cart = JSON.parse(localStorage.getItem("cart")) || [];
+//   let currentIndex = parseInt(localStorage.getItem("currentProductIndex")) || 0;
+//   let cartProducts = []; // store fetched product objects
+//   async function fetchCartProducts() {
+//     try {
+//       const responses = await Promise.all(
+//         cart.map(prodId =>
+//           fetch(`http://localhost:3001/byc/api/products/${prodId}`).then(res => res.json())
+//         )
+//       );
+//       // normalize product data
+//       cartProducts = responses.map(r => r.product || r);
+//       loadProduct(currentIndex);
+//     } catch (err) {
+//       console.error("Error fetching cart products:", err);
+//       document.getElementById("productItem").innerHTML =
+//         "<p class='text-danger'>Error loading products</p>";
+//     }
+//   }
+//   function loadProduct(index) {
+//     if (cart.length === 0 || cartProducts.length === 0) {
+//       document.getElementById("productItem").innerHTML = "<p>No products in cart</p>";
+//       return;
+//     }
+//     if (index < 0) index = 0;
+//     if (index >= cart.length) index = cart.length - 1;
+//     currentIndex = index;
+//     localStorage.setItem("currentProductIndex", currentIndex);
+//     const p = cartProducts[currentIndex];
+//     const mainImage = Array.isArray(p.image) ? p.image[0] : p.image;
+//     document.getElementById("productItem").innerHTML = `
+//       <div class="row mt-4">
+//         <!-- Left side: main image + thumbnail carousel -->
+//         <div class="col-md-6 text-center">
+//           <div class="main-img mb-3">
+//             <img id="mainProductImg" src="${mainImage}" class="img-fluid rounded mb-4"
+//                  style="max-height: 350px; object-fit: contain;" alt="${p.name}">
+//           </div>
+//           <!-- Thumbnail carousel -->
+//           <div class="thumb-carousel-wrapper position-relative mt-3">
+//             <button class="thumb-prev btn btn-light position-absolute start-0 top-50 translate-middle-y" style="z-index:10;">
+//               <i class="fas fa-chevron-left"></i>
+//             </button>
+//             <div id="thumbCarousel" class="d-flex overflow-hidden ms-lg-5"
+//                  style="gap:10px; max-width :75%; scroll-behavior:smooth;">
+//               ${cartProducts
+//                 .map(
+//                   (prod, i) => `
+//                 <img src="${Array.isArray(prod.image) ? prod.image[0] : prod.image}"
+//                      class="thumb-img rounded border ${i === currentIndex ? "active-thumb" : ""}"
+//                      style="height:85px; object-fit:cover; cursor:pointer;"
+//                      data-index="${i}">
+//               `
+//                 )
+//                 .join("")}
+//             </div>
+//             <button class="thumb-next btn btn-light position-absolute end-0 top-50 translate-middle-y" style="z-index:10;">
+//               <i class="fas fa-chevron-right"></i>
+//             </button>
+//           </div>
+//         </div>
+//         <!-- Right side: product info -->
+//         <div class="col-md-6">
+//           <div class="card-body">
+//             <h4 class="fw-bold">${p.name}</h4>
+//             <p class="fw-bold fs-5">${p.productNumber || "N/A"}</p>
+//             <p class="fs-6 my-4">${p.description || "No description available."}</p>
+//             <!-- Rating -->
+//             <div class="mb-3">
+//               ${p.rating ? "★".repeat(Math.round(p.rating)) + ` (${p.rating})` : "No rating yet"}
+//             </div>
+//             <!-- Price -->
+//             <hr style="border: 1px solid #646262e4; background-color: #747373ff; box-shadow: #e7e6e63d 0px 3px 8px;">
+//             <div class="price fw-bold fs-4 mb-4">₦${p.price || "N/A"}.00</div>
+//             <!-- Sizes + Colors -->
+//             <div class="d-flex align-items-center available-size">
+//               <div>
+//                 <label><strong>Available Size</strong></label>
+//                 <div id="sizeOptions" class="d-flex gap-2 mb-3 mt-3">
+//                   ${["S", "M", "L", "XL"]
+//                     .map(
+//                       s => `
+//                     <div class="size-option px-3 py-2 border rounded"
+//                          style="cursor:pointer;" data-size="${s}">${s}</div>
+//                   `
+//                     )
+//                     .join("")}
+//                 </div>
+//               </div>
+//               <div class="ms-lg-5">
+//                 <label><strong>Available Colors</strong></label>
+//                 <div id="colorOptions" class="d-flex gap-2 mb-3 mt-4">
+//                   ${["black", "blue", "orange", "yellow"]
+//                     .map(
+//                       c => `
+//                     <div class="color-option border"
+//                          style="width:30px; height:30px; border-radius:50%; background:${c}; cursor:pointer;"
+//                          data-color="${c}"></div>
+//                   `
+//                     )
+//                     .join("")}
+//                 </div>
+//               </div>
+//             </div>
+//             <!-- Quantity + Wishlist -->
+//             <div class="d-flex my-3">
+//               <div class="d-flex align-items-center mb-3">
+//                 <button class="bg-danger px-3 text-light" id="qtyMinus" style="border:none;height:44px;">-</button>
+//                 <input type="number" id="productQty" value="1" min="1"
+//                        class="form-control text-center mx-2" style="width:70px; border:none;">
+//                 <button class="bg-danger px-3 text-light" id="qtyPlus" style="border:none;height:44px;">+</button>
+//               </div>
+//               <button class="btn d-flex ps-4 ms-4"
+//                       onclick="addToWishlist('${p._id}')"
+//                       style="width:40%; height:44px; border-radius:5px; color:#BD3A3A; border:1px solid #BD3A3A; outline:none;">
+//                 <span><i class="far fa-heart me-2"></i></span>
+//                 <span style="font-size:16px; font-weight:600;">Wishlist</span>
+//               </button>
+//             </div>
+//             <!-- Add to Cart -->
+//             <button class="btn d-flex ps-1 ps-lg-5 pe-0"
+//                     onclick="addToFinalCart('${p._id}')"
+//                     style="width:74%; height:40px; border-radius:5px; background-color:#BD3A3A; color:#FFFFFF; border:1px solid #BD3A3A; outline:none;">
+//               <span><i class="fas fa-shopping-cart"></i></span>
+//               <span class="ps-lg-4 ps-2" style="font-size:16px; font-weight:600;">Add to Cart</span>
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     `;
+//     // === Size selection ===
+//     document.querySelectorAll(".size-option").forEach(el => {
+//       el.addEventListener("click", () => {
+//         document.querySelectorAll(".size-option").forEach(s => {
+//           s.style.outline = "";
+//           s.style.boxShadow = "";
+//         });
+//         el.style.outline = "1.5px solid #bd3a3a";
+//         el.style.boxShadow = "0 0 1px #bd3a3a";
+//         localStorage.setItem("selectedSize", el.dataset.size);
+//       });
+//     });
+//     // === Color selection ===
+//     document.querySelectorAll(".color-option").forEach(el => {
+//       el.addEventListener("click", () => {
+//         document.querySelectorAll(".color-option").forEach(c => (c.style.outline = ""));
+//         el.style.outline = "2px solid grey";
+//         localStorage.setItem("selectedColor", el.dataset.color);
+//       });
+//     });
+//     // === Quantity controls ===
+//     let qtyInput = document.getElementById("productQty");
+//     document.getElementById("qtyPlus").addEventListener("click", () => {
+//       qtyInput.value = parseInt(qtyInput.value) + 1;
+//     });
+//     document.getElementById("qtyMinus").addEventListener("click", () => {
+//       let current = parseInt(qtyInput.value);
+//       if (current > 1) qtyInput.value = current - 1;
+//     });
+//     // === Carousel controls (4 per scroll) ===
+//     const thumbCarousel = document.getElementById("thumbCarousel");
+//     const prevBtn = document.querySelector(".thumb-prev");
+//     const nextBtn = document.querySelector(".thumb-next");
+//     // setup carousel styles
+//     thumbCarousel.style.display = "flex";
+//     thumbCarousel.style.overflowX = "hidden";
+//     thumbCarousel.style.scrollBehavior = "smooth";
+//     // each thumb takes 25% width (4 per row)
+//     document.querySelectorAll(".thumb-img").forEach(img => {
+//       img.style.flex = "0 0 25%";
+//       img.style.maxWidth = "25%";
+//     });
+//     const scrollAmount = thumbCarousel.offsetWidth;
+//     prevBtn.addEventListener("click", () => {
+//       thumbCarousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+//     });
+//     nextBtn.addEventListener("click", () => {
+//       thumbCarousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
+//     });
+//     // === Click thumbnail to switch product ===
+//     document.querySelectorAll(".thumb-img").forEach(img => {
+//       img.addEventListener("click", () => {
+//         document
+//           .querySelectorAll(".thumb-img")
+//           .forEach(i => i.classList.remove("active-thumb"));
+//         img.classList.add("active-thumb");
+//         const idx = parseInt(img.dataset.index, 10);
+//         loadProduct(idx);
+//       });
+//     });
+//   }
+//   // === Wishlist ===
+//   window.addToWishlist = function (productId) {
+//     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+//     if (!wishlist.includes(productId)) {
+//       wishlist.push(productId);
+//       localStorage.setItem("wishlist", JSON.stringify(wishlist));
+//       Swal.fire({
+//         icon: "success",
+//         title: "Product Added to Wishlist",
+//         toast: true,
+//         timer: 1200,
+//         position: "top"
+//       });
+//     } else {
+//       Swal.fire({
+//         icon: "info",
+//         title: "Product Already in Wishlist",
+//         toast: true,
+//         timer: 1200,
+//         position: "top"
+//       });
+//     }
+//   };
+//   // === Add to Cart with validation ===
+  
+//   window.addToFinalCart = function (productId) {
+//   const size = localStorage.getItem("selectedSize");
+//   const color = localStorage.getItem("selectedColor");
+//   const qty = parseInt(document.getElementById("productQty").value, 10);
+//   if (!size || !color) {
+//     Swal.fire({
+//       icon: "info",
+//       title: "Please select size and color.",
+//       toast: true,
+//       timer: 1200,
+//       position: "top"
+//     });
+//     return;
+//   }
+//   let finalCart = JSON.parse(localStorage.getItem("finalCart")) || [];
+//   let exists = finalCart.find(
+//     item => item.id === productId && item.size === size && item.color === color
+//   );
+//   if (exists) {
+//     Swal.fire({
+//       icon: "info",
+//       title: "Item Already in Cart",
+//       toast: true,
+//       timer: 1200,
+//       position: "top"
+//     });
+//     return;
+//   }
+//   // :white_check_mark: push with qty
+//   finalCart.push({ id: productId, size, color, quantity: qty });
+//   localStorage.setItem("finalCart", JSON.stringify(finalCart));
+//   // Clear size & color so they must reselect
+//   localStorage.removeItem("selectedSize");
+//   localStorage.removeItem("selectedColor");
+//   Swal.fire({
+//     icon: "success",
+//     title: "Item Added to cart",
+//     toast: true,
+//     timer: 1200,
+//     position: "top"
+//   });
+//   window.location.href = "./cart.html";
+// };
+ 
+//   fetchCartProducts();
+// }
+
+function updateCartCount() {
   let finalCart = JSON.parse(localStorage.getItem("finalCart")) || [];
-  let count = finalCart.reduce((sum, item) => sum + item.quantity, 0);
-  let cartCountEl = document.getElementById("cart-count");
-  if (cartCountEl) cartCountEl.textContent = count;
+  document.getElementById("cart-count").textContent = finalCart.length;
 }
 
 
@@ -880,11 +1228,7 @@ function updateWishlistCount() {
     }
 }
 
-
-
-
-
-    // CART.HTML API FUNCTI0N -----
+// CART.HTML API FUNCTI0N -----
 function loadCart() {
   let finalCart = JSON.parse(localStorage.getItem("finalCart")) || [];
   // Update cart count
@@ -927,21 +1271,22 @@ function loadCart() {
             <div class="d-flex gap-2 mt-2">
               <button class="btn d-flex ps-4 hidden-btn wishlist-btn" data-id="${p._id}"
                 style="width: 153px; height: 40px; border-radius: 5px; color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
-                <i class="far fa-heart me-2"></i> Wishlist
+                <i class="far fa-heart me-2 mt-1"></i> Wishlist
               </button>
-              <button class="btn d-flex text-light ps-4 ms-lg-3 hidden-btn remove-btn" data-id="${p._id}"
+              <button class="btn d-flex text-light ps-4 ms-lg-3 hidden-btn remove-btn"
+                data-id="${p._id}" data-size="${p.size}" data-color="${p.color}"
                 style="width: 153px; height: 40px; border-radius: 5px; background-color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
-                <i class="fa-solid fa-trash me-2"></i> Remove
+                <i class="fa-solid fa-trash me-2 mt-1"></i> Remove
               </button>
             </div>
           </div>
           <div class="col-md-5 d-flex mt-3" style="border-left: 2px solid #F3F0F0;">
             <div class="text-center" style="border-right: 2px solid #F3F0F0;">
               <h6 class="fw-2">Quantity</h6>
-              <div class="d-flex">
+              <div class="d-flex pe-3">
                 <button class="py-1 px-2 text-light minus-btn" style="background-color: #BD3A3A; border: none;">-</button>
                 <input type="number" class="form-control qty mx-2 text-center" value="${p.qty}" min="1"
-                       data-id="${p._id}" style="width:70px;">
+                       data-id="${p._id}" data-size="${p.size}" data-color="${p.color}" style="width:70px;">
                 <button class="py-1 px-2 text-light plus-btn" style="background-color: #BD3A3A; border: none;">+</button>
               </div>
             </div>
@@ -969,39 +1314,67 @@ function attachCartEvents(products) {
       let val = parseInt(input.value) || 1;
       if (val > 1) {
         input.value = val - 1;
-        updateQty(products[i]._id, input.value);
+        updateQty(products[i]._id, products[i].size, products[i].color, input.value);
       }
     });
     plusBtn.addEventListener("click", () => {
       let val = parseInt(input.value) || 1;
       input.value = val + 1;
-      updateQty(products[i]._id, input.value);
+      updateQty(products[i]._id, products[i].size, products[i].color, input.value);
     });
     input.addEventListener("change", () => {
-      updateQty(products[i]._id, input.value);
+      updateQty(products[i]._id, products[i].size, products[i].color, input.value);
     });
   });
   document.querySelectorAll(".remove-btn").forEach(btn => {
-    btn.addEventListener("click", e => removeItem(e.currentTarget.dataset.id));
+    btn.addEventListener("click", e => {
+      const id = e.currentTarget.dataset.id;
+      const size = e.currentTarget.dataset.size;
+      const color = e.currentTarget.dataset.color;
+      removeItem(id, size, color);
+    });
   });
   document.querySelectorAll(".wishlist-btn").forEach(btn => {
     btn.addEventListener("click", e => addToWishlist(e.currentTarget.dataset.id));
   });
 }
-// === Update Qty in finalCart ===
-function updateQty(id, qty) {
+// === Update Qty in finalCart (check size + color too) ===
+function updateQty(id, size, color, qty) {
   let finalCart = JSON.parse(localStorage.getItem("finalCart")) || [];
   finalCart = finalCart.map(item =>
-    item.id === id ? { ...item, quantity: parseInt(qty) } : item
+    item.id === id && item.size === size && item.color === color
+      ? { ...item, quantity: parseInt(qty) }
+      : item
   );
   localStorage.setItem("finalCart", JSON.stringify(finalCart));
   loadCart();
 }
-// === Remove Item ===
-function removeItem(id) {
+// === Remove Item by id + size + color ===
+function removeItem(productId, selectedSize, selectedColor) {
   let finalCart = JSON.parse(localStorage.getItem("finalCart")) || [];
-  finalCart = finalCart.filter(item => item.id !== id);
+  finalCart = finalCart.map(item => {
+    if (
+      item.id === productId &&
+      item.size === selectedSize &&
+      item.color === selectedColor
+    ) {
+      if (item.quantity > 1) {
+        item.quantity -= 1; // reduce only one
+        return item;
+      } else {
+        return null; // remove if last one
+      }
+    }
+    return item;
+  }).filter(item => item !== null);
   localStorage.setItem("finalCart", JSON.stringify(finalCart));
+  Swal.fire({
+    icon: "success",
+    title: "Updated!",
+    text: "The item was updated in your cart.",
+    timer: 1500,
+    showConfirmButton: false
+  });
   loadCart();
 }
 // === Add to Wishlist ===
@@ -1015,179 +1388,75 @@ function addToWishlist(productId) {
     Swal.fire({ icon:'info', title:'Already in Wishlist', toast:true, timer:1200, position:'top' });
   }
 }
+// CODE ENDS HERE 
 
-
-
-
-    // function loadCart() {
-    //   let finalCart = JSON.parse(localStorage.getItem("finalCart")) || [];
-    //   if (finalCart.length === 0) {
-    //     document.getElementById("check-items").innerHTML = "<p>Your cart is empty, Add items</p>";
-    //     return;
-    //   }
-    //   fetchProducts().then(allProducts => {
-    //     // Map cart items with product details
-    //     let productsInCart = finalCart.map(item => {
-    //       let product = allProducts.find(p => p._id === item.id);
-    //       return { ...product, qty: item.qty };
-    //     }).filter(p => p._id); // remove undefined
-    //     renderCheckCart(productsInCart);
-    //   });
-    // }
-    //   // Quantity & Remove events
-    // function attachCheckEvents(products) {
-    //   // +/- quantity
-    //   document.querySelectorAll(".qty").forEach((input, i) => {
-    //     const minusBtn = input.parentElement.querySelector(".minus-btn");
-    //     const plusBtn = input.parentElement.querySelector(".plus-btn");
-    //     minusBtn.addEventListener("click", () => {
-    //       let val = parseInt(input.value) || 1;
-    //       if (val > 1) input.value = val - 1;
-    //       updateQty(products[i]._id, input.value);
-    //     });
-    //     plusBtn.addEventListener("click", () => {
-    //       let val = parseInt(input.value) || 1;
-    //       input.value = val + 1;
-    //       updateQty(products[i]._id, input.value);
-    //     });
-    //     input.addEventListener("change", () => {
-    //       updateQty(products[i]._id, input.value);
-    //     });
-    //   });
-    //   // Remove item
-    //   document.querySelectorAll(".remove-btn").forEach(btn => {
-    //     btn.addEventListener("click", e => {
-    //       const id = e.currentTarget.getAttribute("data-id");
-    //       removeItem(id);
-    //     });
-    //   });
-    // }
-    // function updateQty(id, qty) {
-    //   let finalCart = JSON.parse(localStorage.getItem("finalCart")) || [];
-    //   finalCart = finalCart.map(item => item.id === id ? { ...item, qty: parseInt(qty) } : item);
-    //   localStorage.setItem("finalCart", JSON.stringify(finalCart));
-    //   loadCheckCart(); // refresh totals
-    // }
-    // function removeItem(id) {
-    //   let finalCart = JSON.parse(localStorage.getItem("finalCart")) || [];
-    //   finalCart = finalCart.filter(item => item.id !== id);
-    //   localStorage.setItem("finalCart", JSON.stringify(finalCart));
-    //   loadCheckCart();
-    // }
-
-    // function renderCheckCart(products) {
-    //   let html = "";
-    //   let subtotal = 0;
-    //   products.forEach((p, i) => {
-    //     let totalPrice = p.price * p.qty;
-    //     subtotal += totalPrice;
-    //     html += `
-    //         <div class="row  p-3 mb-5 align-items-cente" style="border-top: 2px solid #F1EEEE">
-    //             <!-- Image -->
-    //             <div class="col-md-2">
-    //                 <img src="${p.image}" class="img-fluid rounded" alt="${p.name}">
-    //             </div>
-    //             <!-- Details -->
-    //             <div class="col-md-4 ms-3 me-lg-5 mt-3">
-    //                 <h5 class="fw-bolder">${p.name}</h5>
-    //                 <p class="mb-3 fw-bold">${p.productNumber || "N/A"}</p>
-    //                 <p class="mb-3">${p.description || ""}</p>
-    //                 <div class="d-flex gap-2 mt-2">
-    //                     <button class="btn d-flex  ps-4 hidden-btn wishlist-btn" data-id="${p._id}"  style="width: 153px; height: 40px; border-radius: 5px; color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
-    //                                 <span href="#">
-    //                                     <i class="far fa-heart me-2"></i>
-    //                                 </span>
-    //                                 <span style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Wishlist</span>
-    //                     </button>
-    //                     <button class="btn d-flex text-light  ps-4 ms-lg-3 hidden-btn remove-btn" data-id="${p._id}"  style="width: 153px; height: 40px; border-radius: 5px; background-color: #BD3A3A; border: 1px solid #BD3A3A; outline: none;">
-    //                                 <span href="#">
-    //                                     <i class="fa-solid fa-trash me-2"></i>
-    //                                 </span>
-    //                                 <span style="font-size: 16px; font-weight: 600; font-family: 'Segoe UI', sans-serif;">Remove</span>
-    //                     </button>
-                       
-    //                 </div>
-    //             </div>
-    //             <!-- Quantity & Prices -->
-    //             <div class="col-md-5 d-flex mt-3" style = "border-left: 2px  solid #F3F0F0;">
-    //                     <div class="text-center" style = " border-right: 2px  solid #F3F0F0;">
-    //                         <h6 class="fw-2">Quantity</h6>
-    //                         <div class = "d-flex">
-    //                             <button  class="py-1 px-2 text-light plus-btn" style ="background-color: #BD3A3A; border: none;">+</button>
-    //                             <input type="number" class="form-control qty mx-2 text-center" value="${p.qty}" min="1" data-id="${p._id}" style="width:70px;">
-    //                             <button class="py-1 px-2 me-3 text-light minus-btn" style ="background-color: #BD3A3A; border: none;">-</button>
-    //                         </div>
-    //                     </div>
-    //                     <div class="text-lg-center ms-3 ms-lg-5">
-    //                         <h6 class="mb-1">Unit Price: ₦${p.price}</h6>
-    //                         <h2 class="fw-bold">₦${totalPrice}</h2>
-    //                     </div>
-    //             </div>
-    //         </div>
-    //     `;
-    //   });
-    //   document.getElementById("check-items").innerHTML = html;
-    //   document.getElementById("subtotal-price").textContent = "₦" + subtotal;
-    //   document.getElementById("total-price").textContent = "₦" + subtotal;
-    //   attachCheckEvents(products);
-    // }
-//   CODE ENDS HERE 
-
-
-
-// function to render checkout 
-function renderCheckout(cart = []) {
-  const cartContainer = document.getElementById("cart-items");
-  const subtotalEl = document.getElementById("subtotal-price");
-  const deliveryEl = document.getElementById("delivery-fee");
-  const totalEl = document.getElementById("total-price");
-  cartContainer.innerHTML = "";
-  // Ensure subtotal is always a number
-  let subtotal = 0;
-  if (Array.isArray(cart) && cart.length > 0) {
-    cart.forEach(product => {
-      const price = Number(product.price) || 0;
-      const qty = Number(product.quantity) || 0;
-      subtotal += price * qty;
-      const item = document.createElement("div");
-      item.style.border = "1px solid #ddd";
-      item.style.padding = "10px";
-      item.style.marginBottom = "10px";
-      item.style.display = "flex";
-      item.style.gap = "15px";
-      item.innerHTML = `
-        <img src="${product.image || 'https://via.placeholder.com/80'}"
-             alt="${product.name || 'Product'}" width="80" height="80" style="object-fit:cover;">
-        <div>
-          <h4>${product.name || "Unnamed Product"}</h4>
-          <p>Product ID: ${product.id || product.productId || "N/A"}</p>
-          <p>${product.description || "No description"}</p>
-          <p>Price: $${price}</p>
-          <p>Quantity: ${qty}</p>
-          <button onclick="modifyCart('${product.id || product.productId}')">Modify Cart</button>
-        </div>
-      `;
-      cartContainer.appendChild(item);
-    });
-  } else {
-    cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+// function for checkout 
+async function loadCheckout() {
+  let finalCart = JSON.parse(localStorage.getItem("finalCart")) || [];
+  // If cart is empty
+  if (finalCart.length === 0) {
+    document.getElementById("checkout-summary").innerHTML = `
+      <p>Your cart is empty. Please add items.</p>
+    `;
+    document.getElementById("subtotal").innerText = "₦0";
+    document.getElementById("delivery").innerText = "₦0";
+    document.getElementById("total").innerText = "₦0";
+    return;
   }
-  // Safe delivery fee
-  const deliveryFee = subtotal > 0 ? 5 : 0;
-  const total = subtotal + deliveryFee;
-  subtotalEl.textContent = `$${subtotal}`;
-  deliveryEl.textContent = `$${deliveryFee}`;
-  totalEl.textContent = `$${total}`;
-  // This will never be null
-  return {
-    subtotal,
-    deliveryFee,
-    total,
-    finalCart: cart
-  };
+  // Fetch all products (assuming you already have this function)
+  const allProducts = await fetchProducts();
+  // Map cart items with product details
+  let productsInCart = finalCart.map(item => {
+    let product = allProducts.find(p => p._id === item.id);
+    if (!product) return null;
+    return {
+      ...product,
+      qty: item.quantity,
+      size: item.size,
+      color: item.color
+    };
+  }).filter(p => p);
+  // === Render Products ===
+  let html = "";
+  let subtotal = 0;
+  productsInCart.forEach(p => {
+    let totalPrice = p.price * p.qty;
+    subtotal += totalPrice;
+    html += `
+      <div class="checkout-item row mb-4 align-items-start p-3 border-bottom">
+        <!-- Image -->
+        <div class="col-md-3">
+          <img src="${Array.isArray(p.image) ? p.image[0] : p.image}"
+               class="img-fluid rounded"
+               alt="${p.name}">
+        </div>
+        <!-- Details -->
+        <div class="col-md-9 mt-3">
+          <h5 class="fw-bold">${p.name}</h5>
+          <p class="fw-bold">${p.productNumber}</p>
+          <p>${p.description || "No description"}</p>
+          <p class="fw-bold fs-4"> ₦${p.price}.00</p>
+          <p><small class="me-3 fs-6 fw-normal">Quantity:</small> ${p.qty}</p>
+          
+          <button onclick="window.location.href='cart.html'"
+                  class="btn text-light px-5" style="background-color:#BD3A3A;">
+            Modify Cart
+          </button>
+        </div>
+      </div>
+    `;
+  });
+  document.getElementById("checkout-summary").innerHTML = html;
+  // === Totals (Right side) ===
+  let deliveryFee = 1000; // later we can fetch from backend
+  let total = subtotal + deliveryFee;
+  document.getElementById("subtotal").innerText = `₦${subtotal.toLocaleString()}`;
+  document.getElementById("delivery").innerText = `₦${deliveryFee.toLocaleString()}`;
+  document.getElementById("total").innerText = `₦${total.toLocaleString()}`;
 }
 
-// function for customer address shipping 
+
+
 function registerCustomer(event) {
     event.preventDefault();
     const customer = {
@@ -1195,41 +1464,251 @@ function registerCustomer(event) {
         company: document.getElementById("custCompany").value.trim(),
         country: document.getElementById("custCountry").value.trim(),
         city: document.getElementById("custTown").value.trim(),
-        address: document.getElementById("custaddress").value.trim(),
+        address: document.getElementById("custaddress").value.trim(), // match backend schema
         state: document.getElementById("custState").value.trim(),
         phone: document.getElementById("custPhone").value.trim(),
-        email: document.getElementById("custEmail").value,
-  };
-  if (!customer.name || !customer.phone || !customer.email || !customer.state || !customer.country || !customer.city || !customer.address) {
-    Swal.fire("Missing Fields", "Please fill out all required fields","warning");
-    return;
-  }
-  fetch("http://localhost:3001/byc/api/customers", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(customer)
-  })
+        email: document.getElementById("custEmail").value.trim(),
+    };
+    // Validate required fields
+    if (!customer.name || !customer.phone || !customer.email || !customer.state || !customer.country || !customer.city || !customer.address) {
+     Swal.fire("Missing Fields", "Please fill out all required fields","warning");
+     return;
+   }
+    fetch("http://localhost:3001/byc/api/customers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(customer)
+    })
     .then(res => res.json())
     .then(result => {
-        console.log(result)
-      if (result._id) {
-        localStorage.setItem("customerId", result._id);
-        // localStorage.setItem("productId", result._id);
-        Swal.fire(
-            "Success", 
-            "Customer registered successfully, procceed to checkout!",
-             "success");
-      } else {
-        Swal.fire("Error", "Email already registered", "error");
-      }
+      console.log(result)
+        if (result._id) {
+            // Save customer snapshot to localStorage exactly as backend expects
+            localStorage.setItem("customerId", result._id);
+            localStorage.setItem("customerName", result.name);
+            localStorage.setItem("customerEmail", result.email);
+            localStorage.setItem("customerPhone", result.phone);
+            localStorage.setItem("customerCountry", result.country);
+            localStorage.setItem("customerState", result.state);
+            localStorage.setItem("customerAddress", result.address); // key matches backend
+            localStorage.setItem("customerCity", result.city);
+            localStorage.setItem("customerCompany", result.company || "");
+            Swal.fire(
+                "Success",
+                "Customer registered successfully, proceed to checkout!",
+                "success"
+            );
+        } else {
+            Swal.fire("Error", result.message || "Email Already Registered" );
+        }
     })
     .catch(err => {
-      Swal.fire("Error", err.message, "error");
+        console.error(err);
+        Swal.fire("Error", "Something went wrong during registration.", "error");
     });
 }
 
-// // FUNCTION FOR CHECKOUT SUBMIT 
+// FUNCTIN FOR PLACING ORDER
+// async function placeOrder(event) {
+//     event.preventDefault();
+//     const paymentOption = document.querySelector('input[name="paymentOption"]:checked')?.value;
+//     if (!paymentOption) {
+//         Swal.fire("Error", "Please select a payment method.", "warning");
+//         return;
+//     }
+//     const finalCart = JSON.parse(localStorage.getItem("finalCart")) || [];
+//     const customerId = localStorage.getItem("customerId");
+//     if (!customerId) {
+//         Swal.fire("Error", "Please login or register before placing an order.", "error");
+//         return;
+//     }
+//     if (finalCart.length === 0) {
+//         Swal.fire("Error", "Your cart is empty!", "warning");
+//         return;
+//     }
+//     try {
+//         // Fetch product details
+//         const productIds = finalCart.map(item => item.id);
+//         const productsResponse = await fetch(`http://localhost:3001/byc/api/products?ids=${productIds.join(",")}`);
+//         const products = await productsResponse.json();
+//         const payloadCart = finalCart.map(item => {
+//             const product = products.find(p => p._id === item.id);
+//             if (!product) throw new Error(`Product not found: ${item.id}`);
+//             return {
+//                 productId: product._id,
+//                 name: product.name,
+//                 image: product.image,
+//                 price: product.price,
+//                 productNumber: product.productNumber || "",
+//                 quantity: item.quantity,
+//                 subTotal: product.price * item.quantity,
+//                 size: Array.isArray(item.size) ? item.size : [item.size || ""],
+//                 color: Array.isArray(item.color) ? item.color : [item.color || ""]
+//             };
+//         });
+//         const customerSnapshot = {
+//             name: localStorage.getItem("customerName"),
+//             email: localStorage.getItem("customerEmail"),
+//             phone: localStorage.getItem("customerPhone"),
+//             country: localStorage.getItem("customerCountry"),
+//             state: localStorage.getItem("customerState"),
+//             address: localStorage.getItem("customerAddress"),
+//             city: localStorage.getItem("customerCity"),
+//             company: localStorage.getItem("customerCompany") || ""
+//         };
+//         // Create order in backend
+//         const createResponse = await fetch("http://localhost:3001/byc/api/orders/create", {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify({
+//                 customerId,
+//                 customerSnapshot,
+//                 items: payloadCart
+//             })
+//         });
+//         const createData = await createResponse.json();
+//         if (!createResponse.ok) {
+//             Swal.fire("Error", "Error placing order: " + createData.message, "error");
+//             return;
+//         }
+//         // Handle Paystack
+//         if (paymentOption === "paystack") {
+//             // Call your backend to initialize Paystack
+//             const paystackResponse = await fetch("https://api.paystack.co/transaction/initialize", {
+//                 method: "POST",
+//                 headers: { 
+//                   // "Authorization": "Bearer pk_test_a305fefb51d9c71a912d89b09d56cd66c5e1fa19",
+//                   "Content-Type": "application/json"
+//                  },
+//                 body: JSON.stringify({
+//                     email: localStorage.getItem("customerEmail"),
+//                     amount: 5000, // test amount
+//                     orderId: createData.orderId
+//                 })
+//             });
+//             const paystackData = await paystackResponse.json();
+//             if (!paystackResponse.ok || !paystackData.data?.authorization_url) {
+//                 Swal.fire("Error", "Error initializing payment.", "error");
+//                 return;
+//             }
+//             // Redirect to Paystack checkout
+//             window.location.href = paystackData.data.authorization_url;
+//         // Handle Cash on Delivery
+//         } else if (paymentOption === "cod") {
+//             Swal.fire("Success", "Order placed successfully with Cash on Delivery.", "success")
+//                 .then(() => {
+//                     localStorage.removeItem("finalCart");
+//                     localStorage.removeItem("cart");
+//                     localStorage.setItem("cartCleared", Date.now());
+//                     window.location.href = "order-success.html";
+//                 });
+//         }
+//     } catch (err) {
+//         console.error(err);
+//         Swal.fire("Error", "Something went wrong while placing your order: " + err.message, "error");
+//     }
+// }
+
+async function placeOrder(event) {
+    event.preventDefault();
+    const paymentOption = document.querySelector('input[name="paymentOption"]:checked')?.value;
+    if (!paymentOption) {
+        Swal.fire("Error", "Please select a payment method.", "warning");
+        return;
+    }
+    const finalCart = JSON.parse(localStorage.getItem("finalCart")) || [];
+    const customerId = localStorage.getItem("customerId");
+    if (!customerId) {
+        Swal.fire("Error", "Please login or register before placing an order.", "error");
+        return;
+    }
+    if (finalCart.length === 0) {
+        Swal.fire("Error", "Your cart is empty!", "warning");
+        return;
+    }
+    try {
+        // Fetch product details
+        const productIds = finalCart.map(item => item.id);
+        const productsResponse = await fetch(`http://localhost:3001/byc/api/products?ids=${productIds.join(",")}`);
+        const products = await productsResponse.json();
+        const payloadCart = finalCart.map(item => {
+            const product = products.find(p => p._id === item.id);
+            if (!product) throw new Error(`Product not found: ${item.id}`);
+            return {
+                productId: product._id,
+                name: product.name,
+                image: product.image,
+                price: product.price,
+                productNumber: product.productNumber || "",
+                quantity: item.quantity,
+                subTotal: product.price * item.quantity,
+                size: Array.isArray(item.size) ? item.size : [item.size || ""],
+                color: Array.isArray(item.color) ? item.color : [item.color || ""]
+            };
+        });
+        const customerSnapshot = {
+            name: localStorage.getItem("customerName"),
+            email: localStorage.getItem("customerEmail"),
+            phone: localStorage.getItem("customerPhone"),
+            country: localStorage.getItem("customerCountry"),
+            state: localStorage.getItem("customerState"),
+            address: localStorage.getItem("customerAddress"),
+            city: localStorage.getItem("customerCity"),
+            company: localStorage.getItem("customerCompany") || ""
+        };
+        // Create order in backend
+        const createResponse = await fetch("http://localhost:3001/byc/api/orders/create", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                customerId,
+                customerSnapshot,
+                items: payloadCart
+            })
+        });
+        const createData = await createResponse.json();
+        if (!createResponse.ok) {
+            Swal.fire("Error", "Error placing order: " + createData.message, "error");
+            return;
+        }
+        // :white_check_mark: Handle Paystack
+        if (paymentOption === "paystack") {
+            const paystackResponse = await fetch("https://api.paystack.co/transaction/initialize", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer sk_test_b71e30a3b3b1ab745093aa0131a0be0dece6c606",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: localStorage.getItem("customerEmail"),
+                    amount: 5000, // test amount
+                    callback_url: "http://127.0.0.1:5501/order-callback.html", // :white_check_mark: frontend page
+                    metadata: { orderId: createData.orderId }
+                })
+            });
+            const paystackData = await paystackResponse.json();
+            if (!paystackResponse.ok || !paystackData.data?.authorization_url) {
+                Swal.fire("Error", "Error initializing payment.", "error");
+                return;
+            }
+            // Redirect to Paystack checkout
+            window.location.href = paystackData.data.authorization_url;
+        // :white_check_mark: Handle Cash on Delivery
+        } else if (paymentOption === "cod") {
+            Swal.fire("Success", "Order placed successfully with Cash on Delivery.", "success")
+                .then(() => {
+                    // Clear localStorage and notify other tabs
+                    localStorage.removeItem("finalCart");
+                    localStorage.removeItem("cart");
+                    localStorage.setItem("cartCleared", Date.now());
+                    // Redirect to success page
+                    window.location.href = "order-success.html";
+                });
+        }
+    } catch (err) {
+        console.error(err);
+        Swal.fire("Error", "Something went wrong while placing your order: " + err.message, "error");
+    }
+}
 
 
-
-// Place order

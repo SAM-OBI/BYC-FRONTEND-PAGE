@@ -21,6 +21,51 @@ html {
 
 /* js api calls used  */
 /* all products api  */
+
+/* search input  */
+#searchInput {
+    display: none;
+    position: absolute;
+    top:20%;
+    /* transform: translateY(-60%); */
+    left: 540px !important;
+    height: 35px;
+    padding: 5px 10px;
+    z-index: 20;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid ;
+    outline: none;
+}
+/* Dropdown results */
+#searchResults {
+    display: none;
+    position: absolute;
+    top: 65px;
+    left: 560px;
+    background: white;
+    border-top: none;
+    border-bottom: 2px solid #ccc;
+    max-height: 250px;
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 20;
+}
+#searchResults li {
+    padding: 8px 10px;
+    cursor: pointer;
+}
+#searchResults li:hover {
+    background: #f0f0f0;
+}
+/* Hide navbar elements */
+.nav-item.hide,
+.navbar-brand.hide {
+    display: none !important;
+}
+
 .shadow{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
@@ -174,6 +219,24 @@ html {
   transform: scale(1.05);
 }
 
+input[type="radio"] {
+      appearance: none;
+      /* -ms-transform-origin-z: none;  */
+      width: 30px; 
+      height: 30px;
+      border: 2px solid #BD3A3A !important; 
+      border-radius: 50%; 
+      cursor: pointer;
+      /* background-color: red !important; */
+
+    }
+
+    /* Add red background when checked */
+    input[type="radio"]:checked {
+      background-color: #BD3A3A !important ;
+      border: 2px solid white;
+    }
+
 /* ends here api  */
 
 /* update password  */
@@ -223,6 +286,25 @@ html {
     background-color: #4CAF50; /* Green color */
     border-radius: 50%;
 }
+.cart-icon{
+    position: relative;
+}
+.cart-count{
+    position: absolute;
+    top: -4px;
+    right: -15px;
+    background: red;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+}
     /* input search button for nav  */
     .search-box{
         position: relative;
@@ -260,7 +342,15 @@ html {
     .search-input:focus{
         outline: #000000;
     }
-    
+    .end-0{
+        right: 40px !important;
+    }
+    .start-0{
+        left: 6px !important;
+    }
+    .card-title{
+        font-family: "Noto Sans", sans-serif; 
+    }
 /* END CODE FOR NAV  */
 
     /* styling for index.html starts here LOGIN FORM*/
@@ -660,107 +750,8 @@ li>.sec4-a:hover{
     color: #212121;
     font-family: "Jost", sans-serif;
 }
-.custom-card {
-      border: none;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
-}
-.custom-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-.custom-card img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-}
-.author-box {
-      background: #E0E0E0;
-      /* padding: 0.5rem 1rem; */
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 14px;
-}
-.author-box img {
-      width: 62px;
-      height: 62px;
-      object-fit: cover;
-}
 
-.card-sec5 span, .card-sec5 .fa-regular{
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 100%;
-    color: #424242;
-}
-.wade{
-    font-weight: 700 !important;
-    font-size: 20px !important;
-    line-height: 100% !important;
-    color: #212121 !important;
-}
-.index-sec5 h3{
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 120%;
-    color: #212121;
-}
-.index-sec5 p{
-    font-family: "Lato", sans-serif;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 140%;
-    color: #424242;
-    margin-bottom: 4rem;
-}
-.index-sec5 a{
-    margin-bottom: 4rem;
-}
-.index-sec5 .card-body{
-    height: 74vh !important;
-}
 /* END CODE FOR FIRST LANDING PAGE */
-
-/* STYLING FOR FIRST BLOG PAGE  */
-/* default typography for h5 and p blog section */
-.blog-section .card-title{
-    font-family: "Noto Sans", sans-serif;
-    font-weight: 700;
-    font-size: 26px;
-    line-height: 100%;
-    color: #212121;
-}
-.card-img-top{
-    max-width: 50vw !important;
-     max-width: 70vw !important;
-}
-.blog-section .card-text{
-    font-weight: 450 !important;
-    color: #424242;
-}
-
-.default-h1{
-    font-weight: 700;
-    font-size: 48px;
-    font-family: "Jost", sans-serif;
-}
-
-/* PAGINATION START  */
-.page-link{
-    width: 43px;
-    height: 43px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    border: none;
-    outline: none;
-}
-.page-link:hover
-{
-border: 1px solid #FB8200;
-}
-/* PAGINATION END  */
-/* END FOR FIRST BLOG  */
 
 /* CODE FOR BLOG-HOME SECTION(SECOND BLOG) */
 .home-blog{
@@ -772,17 +763,8 @@ border: 1px solid #FB8200;
     color: rgba(0, 0, 0, 0.5);
 }
 
-.homeBlog-p{
-    font-weight: 400 !important;
-    font-size: 16px;
-    width: 100%;
-    color: #424242;
-    line-height: 100%;
-    font-family: "Noto Sans", sans-serif;
-
-}
     .homeHeadng{
-        font-size: 48px !important;
+        font-size: 40px !important;
         font-weight: 700;
         line-height: 100%;
         font-family: "Noto Sans", sans-serif !important;
@@ -1042,8 +1024,27 @@ border: 1px solid #FB8200;
         align-items: start !important;
         margin-left: 0 !important;
     }
-    
+    .paymentCard{
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    .payimg{
+        margin: 1rem 2.32rem;
+    }
+    #thumbCarousel{
+        margin-left: 2.3rem;
+    }
+    .end-0{
+        right: 0 !important;
+    }
 
+    .checkout-container{
+        flex-direction: column;
+    }
+    .summary-row{
+        gap: 10rem;
+    }
+    
     /* ends  */
     #productCarousel{
     display: none !important;
@@ -1214,7 +1215,7 @@ border: 1px solid #FB8200;
     margin-left: 0rem;
   }
   .index-sec5 .card-body{
-    height: 54vh !important;
+    height: 74vh !important;
     }
     
 
@@ -1321,6 +1322,19 @@ border: 1px solid #FB8200;
 
 /* media query for tablet and desktop  */
 @media (min-width: 601px) and (max-width: 1200px) {
+    /* api call  */
+    .shadow {
+        margin-right: 1rem !important;
+        margin-left: 3rem ;
+        padding: 1rem 2rem !important;
+    }
+    #onlinePayment{
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    .btn-tag {
+        margin-top: 8rem !important;
+    }
     /* update password  */
    #productCarousel{
     display: none !important;
@@ -1329,7 +1343,13 @@ border: 1px solid #FB8200;
         max-width: 20px !important;
         max-height: 23px !important;
     }
-    
+
+         .index-sec5 .card-body {
+        height: 40vh !important;
+    }
+    .med{
+        margin-bottom: 2rem;
+    }
   /* login  */
     .index{
         height: 720px !important;
@@ -1543,13 +1563,10 @@ border: 1px solid #FB8200;
     }
     .index{
         height: 1000px;
-        margin-left: 100px;
-        margin-right: 100px;
+        /* margin-left: 100px; */
+        /* margin-right: 100px; */
     }
-    /* footer  */
-    /* .footercontact {
-        justify-content: none !important;
-    } */
+    
      
     .product-img{
     width: 100%;

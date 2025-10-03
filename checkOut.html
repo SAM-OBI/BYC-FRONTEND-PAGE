@@ -12,7 +12,7 @@
     <!-- font awesome cdn  -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body onload="renderCheckout(),checkLoginStatus(),updateWishlistCount(),updateCartCount()">
+<body onload="checkLoginStatus(),updateWishlistCount(),updateCartCount(),loadCheckout()">
    <nav class="navbar navbar-expand-lg mb-5 mb-lg-5 pb-lg-5">
         <div class="container-fluid mt-2"> 
               <!-- Left UL LI -->
@@ -89,39 +89,48 @@
     
   
 
-    <main class="container shadow rounded">
-                    <h4>Order Summary</h4>
+    <main class="container shadow rounded px-4 px-md-1 px-lg-0">
+        <div class="px-4">
+            <h6 class=" pb-1 pt-4 fw-bold fs-5">Order Summary <span id="cartLenght"></span> items(s)</h6>
+            <hr class="border ">
+        </div>
         <!-- Totals -->
-                <div class="checkout-container" style="display:flex; gap:2rem; align-items:flex-start;">
-  <!-- LEFT: Products -->
-  <div class="checkout-products" style="flex:2;">
-    <!-- <h2>Your Cart</h2> -->
-    <div id="checkoutItems"></div>
-  </div>
-  <!-- RIGHT: Totals -->
-  <div class="checkout-summary" style="flex:1; border:1px solid #ddd; padding:1rem; border-radius:8px;">
-    <h3>Order Summary</h3>
-    <div class="summary-row" style="display:flex; justify-content:space-between;">
-      <span>Subtotal</span>
-      <span id="subtotal">₦0</span>
-    </div>
-    <div class="summary-row" style="display:flex; justify-content:space-between;">
-      <span>Delivery Fee</span>
-      <span id="delivery">₦1000</span>
-    </div>
-    <div class="summary-row" style="display:flex; justify-content:space-between; font-weight:bold;">
-      <span>Total</span>
-      <span id="total">₦0</span>
-    </div>
-  </div>
-</div>
+        <div class="checkout-container px-lg-4" style="display:flex; gap:2rem; align-items:flex-start;">
+            <!-- LEFT: Products -->
+            <div class="checkout-products" style="flex:2;">
+                <!-- <h2>Your Cart</h2> -->
+                <div id="checkout-summary"></div>
+            </div>
+            <!-- RIGHT: Totals -->
+            <div class="checkout-summary border-start ps-4" style="flex:1;">
+                <div class="summary-row" style="display:flex; justify-content:space-between;">
+                    <span>Subtotal</span>
+                    <span id="subtotal">₦0</span>
+                </div>
+                <div class="summary-row my-3" style="display:flex; justify-content:space-between;">
+                    <span>Delivery Fee</span>
+                    
+                    <span id="delivery">₦1000</span>
+                </div>
+                <hr class="border mt-4">
+                <div class="summary-row mt-1" style="display:flex; justify-content:space-between; font-weight:bold;">
+                    <span>Total</span>
+                    <span id="total">₦0</span>
+                </div>
+            </div>
+        </div>
 
         <section id="checkOut" class="check-items p-lg-4">
             <div class="row">
                 <!-- Left: Products + Customer details -->
+              <hr class="border">
+
+       
                 <!-- Customer Details -->
-                <div class="col-sm-12 col-md-6 col-lg-6 col-xlg-6 ">
-                    <h5>Customer Details</h5>
+                <div class="col-sm-12 col-md-6 col-lg-5 col-xlg-6 ">
+                    <p class="fw-bold">SHIPPING ADDRESS</p>
+              <hr class="border">
+    
                     <form id="customerForm">
                         <div class="mb-2">
                             <label for="custName" class="form-label">Full Name</label>
@@ -170,21 +179,37 @@
                     </form>
                 </div>
 
+                
                 <!-- Right: Payment -->
-                <div class="col-sm-12 col-md-6 col-lg-6 col-xlg-6">
-                    <div class=" rounded p-3" style="background-color: #FFF8F8;">
-                        <h5>Payment Method</h5>
-                        <div class="form-check">
-                            <input class=" text-danger" type="radio" name="paymentMethod" id="payCard" value="card" checked>
-                            <label class="form-check-label" for="payCard">direct bank transfer</label>
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xlg-6 pe-lg-0  ms-lg-5 ps-lg-5">
+                    <P class="fw-bold">PAYMENT METHOD</P>
+                   <hr class="border">
+        
+                    <div class=" rounded p-2 p-lg-4" style="background-color: #FFF8F8; margin-top: 2rem;">
+                        
+                        <div>
+                            <div class="d-flex mb-3">
+                                <input class="" type="radio" name="paymentOption" id="payCard" >
+                            <label class="form-check-label ms-3" for="payCard">Direct bank transfer</label>
+                            </div>
+                            
+                            <p class="p-2 ms-lg-5 bg-light" style="font-size: 10px;">Make your payment directly into our bank account. <br> Please use your Order ID as the payment reference. <br> Your order will not be shipped until the funds have cleared in our account.</p>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="paymentMethod" id="payDelivery" value="delivery">
-                            <label class="form-check-label" for="payDelivery">secured online payment</label>
+                        <div id="onlinePayment" class="d-flex align-items-center justify-content-between mt-5 paymentCard">
+                            <div class="d-flex">
+                                <input class="" type="radio" name="paymentOption" id="paystack" value="paystack">
+                                <label class="form-check-label ms-3" for="paystack">secured online payment</label>
+                            </div>
+                            <div class="border p-2 rounded">
+                                <img src="./images/paystack-seeklogo.png" id="paystack" alt="" class="image-fluid payimg" style="width: 200px;">
+                            </div>
                         </div>
-                        <button class="btn btn-success w-100 mt-3" onclick="submitCheckout()">Place Order</button>
+                        <div class="ms-lg-5 ms-2 mb-2" style="margin-top: 4rem; font-size: 10px;">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.</div>
                     </div>
+                    <button class="btn text-light w-100 mt-3 mb-5" style="background-color: #BD3A3A;" onclick="placeOrder(event)" >Place Order</button>
+
                 </div>
+
             </div>
         </section>
     </main>
@@ -278,6 +303,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>   
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script>
+        window.addEventListener("storage", function(event){
+            if (event.key === "cartCleared"){
+                window.location.reload();
+            }
+        });
+    </script>
 </body>
 </html>

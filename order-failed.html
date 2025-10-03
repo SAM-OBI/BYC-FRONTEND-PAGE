@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Payment Failed</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    window.onload = function () {
+      // :x: Show failure popup
+      Swal.fire({
+        icon: "error",
+        title: "Payment Failed",
+        text: "Something went wrong. Please try again.",
+        timer: 3000,
+        showConfirmButton: false
+      });
+      // :x: Redirect back to checkout page
+      setTimeout(() => {
+        window.location.href = "/checkout.html";
+      }, 3000);
+    };
+  </script>
+</head>
+<body></body>
+</html>

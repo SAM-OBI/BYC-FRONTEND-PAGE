@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Processing Payment...</title>
+  <script>
+    window.onload = async function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const reference = urlParams.get("reference");
+      if (!reference) {
+        window.location.href = "/order-failed.html"; // No reference → fail
+        return;
+      }
+      try {
+        const response = await fetch(`http://localhost:3001/byc/api/orders/verify?reference=${reference}`);
+        const data = await response.json();
+        if (data.success) {
+          // :white_check_mark: Redirect to your success page
+          window.location.href = "order-success.html";
+        } else {
+          // :x: Redirect to your failed page
+          window.location.href = "order-failed.html";
+        }
+      } catch (err) {
+        console.error("Verify error:", err);
+        window.location.href = "order-failed.html";
+      }
+    };
+  </script>
+</head>
+<body>
+  <h2>Verifying your payment... Please wait.</h2>
+</body>
+</html>

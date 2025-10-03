@@ -12,7 +12,7 @@
     <!-- font awesome cdn  -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body onload="checkLoginStatus()">
+<body onload="checkLoginStatus(),loadSingleBlog(),loadMoreBlogs()">
      <nav class="navbar navbar-expand-lg mb-5 mb-lg-5 pb-lg-5">
         <div class="container-fluid mt-2"> 
               <!-- Left UL LI -->
@@ -93,159 +93,33 @@
           </nav>
         </div>
 
-        <div class="text-center">
+        <!-- Main Single Blog Section -->
+        <section class="container my-5">
+            <div class="text-center">
           <h1 class="my-3 my-lg-5 pb-lg-5 px-2 text-start text-lg-center homeHeadng">How important are shoes in your style?</h1>
         </div>
-
-        <section class="container-fluid px-lg-5 mb-lg-5 pb-lg-5">
-          <small class="homeBlog-p ">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat <br>
-            sunt nostrud ametAmet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation   <br>
-            veniam consequat sunt nostrud amet..Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit <br>
-            mollit. Exercitation veniam consequat sunt nostrud ametAmet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat <br>
-            duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet..Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit <br>
-            officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ametAmet minim mollit non deserunt ullamco est sit aliqua dolor do <br>
-          </small>
-
-          <div class="my-lg-5 my-4 py-lg-4">
-            <img src="./images/IMG_7322.png" alt="" class="img-fluid w-100" style="max-width: 1342; max-height: 680px;">
-          </div>
-
-          <small class="homeBlog-p">
-            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat
-            sunt nostrud ametAmet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation
-            veniam consequat sunt nostrud amet..Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit 
-            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat 
-            sunt nostrud ametAmet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation
-            veniam consequat sunt nostrud amet..Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit 
-            mollit. Exercitation veniam consequat sunt nostrud ametAmet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat
-            duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet..Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-            officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ametAmet minim mollit non deserunt ullamco est sit aliqua dolor doAmet 
-            minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud
-            ametAmet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt
-            nostrud amet..Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit Amet minim mollit non deserunt ullamco
-            est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ametAmet minim mollit non deserunt ullamco 
-            est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet..Amet minim mollit non deserunt ullamco
-            est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ametAmet minim mollit non deserunt ullamco est
-            sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet..Amet minim mollit non deserunt ullamco est 
-            sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud ametAmet minim mollit non deserunt ullamco est sit aliqua dolor do  
-          </small>
+            <div id="singleBlog" class="text-center">
+                <!-- Blog content will be injected here -->
+            </div>
         </section>
+
+        <!-- More Blog News Section -->
+        <section class="container my-5 pt-lg-5">
+            <h2 class="fw-bold text-center mb-4 my-lg-5 mb-5  py-lg-5">More Blog News</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4" id="moreBlogRow">
+                <!-- Cards will be injected here -->
+            </div>
+            <!-- Pagination -->
+            <nav class="mt-4">
+                <ul class="pagination justify-content-center" id="moreBlogPagination">
+                <!-- Pagination buttons will be injected here -->
+                </ul>
+            </nav>
+        </section>
+
     </main>
 
-        <!-- this section was used on the down page of the landing page. also section this contains a pagination from blog.html  -->
-    <section class="container-fluid sec5 ">
-          <div class="text-center my-lg-5 py-lg-5"> <!-- text-center for the heading h2 -->
-            <h2 class="text-dark fw-5 fs-1 my-5">BYC AFRICA Blog News</h2>
-          </div>
-          <!-- row for the 3 product cards -->
-          <div class="row mx-lg-4">
-              <!-- Product Card 1 left-->
-            <div class="col-sm-12 col-md-4 col-lg-4">
-              <div class="card-sec5 mb-3 mb-lg-0 w-100" style=" width: 30rem;">
-                    <img src="./images/Frame 169.png" class="img-fluid" alt="...">
-                    <div class="card-body ps-lg-5 my-lg-4">
-                        <div class="d-flex  align-items-center mb-3">
-                            <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5">
 
-                            <!-- down section below image  -->
-                            <span><i class="fa-slab-press fa-regular fa-eye ms-lg-3 me-2 me-lg-2"></i></span>
-                            <span class="me-lg-5">35</span>
-                            <span><i class="fa-regular fa-heart me-2 ms-lg-0 ms-5"></i></span>
-                            <span>23</span>
-                        </div>
-                        <div class="wf mb-3 mb-lg-5"> 
-                            <span class="wade">Wade Warren</span>
-                            <span class="ms-lg-5 ms-4"> Fashion Designer</span>
-                        </div>
-                        <h3 class="card-text my-2 my-lg-4">How important are clothes <br>in your style?</h3>
-                        <p class="card-text mb-5 mb-lg-5">Amet minim mollit non deserunt ullamco est sit aliqua <br>dolor do amet sint. Velit officia consequat duis enim <br> velit mollit. Exercitation veniam consequat sunt nostrud <br> amet.</p>
-                        <a class="btn-tag me-lg-2" href="./blog.html#second-blog" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn"></i></a>
-                    </div>
-                </div>
-            </div>
-
-
-                <!-- Product Card 2 middle -->
-              <div class="col-sm-12 col-md-4 col-lg-4">
-                  <div class="card-sec5 mb-3 mb-lg-0 w-100" style=" width: 30rem;">
-                    <img src="./images/Frame 169 (1).png" class="img-fluid" alt="...">
-                    <div class="card-body ps-lg-5 my-lg-4">
-                        <div class="d-flex  align-items-center mb-3">
-                            <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5">
-
-                            <!-- down section below image  -->
-                            <span><i class="fa-slab-press fa-regular fa-eye ms-lg-3 me-2 me-lg-2"></i></span>
-                            <span class="me-lg-5">35</span>
-                            <span><i class="fa-regular fa-heart me-2 ms-lg-0 ms-5"></i></span>
-                            <span>23</span>
-                        </div>
-                        <div class="wf mb-3 mb-lg-5"> 
-                            <span class="wade">Wade Warren</span>
-                            <span class="ms-lg-5 ms-4"> Fashion Designer</span>
-                        </div>
-                        <h3 class="card-text my-2 my-lg-4">How important are clothes <br>in your style?</h3>
-                        <p class="card-text mb-5 mb-lg-5">Amet minim mollit non deserunt ullamco est sit aliqua <br>dolor do amet sint. Velit officia consequat duis enim <br> velit mollit. Exercitation veniam consequat sunt nostrud <br> amet.</p>
-                        <a class="btn-tag me-lg-2" href="./blog.html#third-blog" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn"></i></a>
-                    </div>
-                </div>
-              </div>
-
-                
-
-                <!-- Product Card 3 right -->
-              <div class="col-sm-12 col-md-4 col-lg-4">
-                  <div class="card-sec5 mb-3 mb-lg-0 w-100" style=" width: 30rem;">
-                    <img src="./images/Frame 169 (2).png" class="img-fluid" alt="...">
-                    <div class="card-body ps-lg-5 my-lg-4 ps-md-0">
-                        <div class="d-flex  align-items-center mb-3">
-                            <img src="./images/Image (1).png" alt="" class="me-4 me-lg-5">
-
-                            <!-- down section below image  -->
-                            <span><i class="fa-slab-press fa-regular fa-eye ms-lg-3 me-2 me-lg-2"></i></span>
-                            <span class="me-lg-5">35</span>
-                            <span><i class="fa-regular fa-heart me-2 ms-lg-0 ms-5"></i></span>
-                            <span>23</span>
-                        </div>
-                        <div class="wf mb-3 mb-lg-5"> 
-                            <span class="wade">Wade Warren</span>
-                            <span class="ms-lg-5 ms-4"> Fashion Designer</span>
-                        </div>
-                        <h3 class="card-text my-2 my-lg-4">How important are clothes <br>in your style?</h3>
-                        <p class="card-text mb-5 mb-lg-5">Amet minim mollit non deserunt ullamco est sit aliqua <br>dolor do amet sint. Velit officia consequat duis enim <br> velit mollit. Exercitation veniam consequat sunt nostrud <br> amet.</p>
-                        <a class="btn-tag me-lg-2" href="./blog.html#first-blog" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn"></i></a>
-                    </div>
-                </div>
-              </div>
-          </div>
-    </section>
-
-
-     <!-- pagination here  -->
-      <div>
-            <nav aria-label="Page navigation ">
-        <ul class="pagination justify-content-center my-5 py-lg-5">
-                <li class="page-item">
-                    <a class="page-link text-black" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link text-black mx-3" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link text-black" href="#">2</a>
-                </li>
-                <li class="page-item " aria-current="page">
-                    <a class="page-link text-black mx-3" href="#">3</a>
-                </li>
-                <li class="page-item">
-                <a class="page-link text-black" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                </a>
-                </li>
-       </ul>
-    </nav>
-      </div>
     <footer class=" mt-5 py-4 pb-2 footer-font " style="background-color: #212121;">
         <div class="container pt-lg-5 mt-lg-5 py-md-3 text-light">
             <div class="row foot-row">
@@ -337,5 +211,139 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/index.js"></script>
+    <script>
+  // Truncate helper
+  function truncateContent(text, wordLimit) {
+    const words = text.split(" ");
+    if (words.length <= wordLimit) return text;
+    return words.slice(0, wordLimit).join(" ") + "...";
+  }
+  // 1. Load Single Blog
+//   async function loadSingleBlog() {
+//     const params = new URLSearchParams(window.location.search);
+//     const blogId = params.get("id");
+//     if (!blogId) return;
+//     try {
+//       const res = await fetch(`http://localhost:3001/byc/api/blogs/published/${blogId}`);
+//       const blog = await res.json();
+//       console.log(blog);
+//       // Split content into first part and rest
+//       const words = blog.content.split(" ");
+//       const intro = words.slice(0, 30).join(" ");
+//       const rest = words.slice(30).join(" ");
+//       document.getElementById("singleBlog").innerHTML = `
+//         <!-- Truncated intro -->
+//         <p class="text-muted mb-4">${intro}...</p>
+//         <!-- Centered image -->
+//         <img src="${blog.blogImage}" alt="Blog image"
+//           class="img-fluid my-4 "
+//           style="max-height: 500px; object-fit: cover;">
+//         <!-- Full remaining content -->
+//         <p class="text-dark mt-4" style="line-height:1.8;">${rest}</p>
+//       `;
+//     } catch (err) {
+//       console.error("Error loading single blog:", err);
+//     }
+//   }
+  
+  async function loadSingleBlog() {
+  const params = new URLSearchParams(window.location.search);
+  const blogId = params.get("id");
+  if (!blogId) {
+    document.getElementById("singleBlog").innerHTML = "<p>No blog ID found in URL.</p>";
+    return;
+  }
+  try {
+    const res = await fetch(`http://localhost:3001/byc/api/blogs/published/${blogId}`);
+    if (!res.ok) throw new Error("Failed to fetch blog");
+    const data = await res.json();
+    console.log("Blog data received:", data);
+    const blog = data.blog; // :white_check_mark: extract actual blog object
+    if (!blog || !blog.content) {
+      document.getElementById("singleBlog").innerHTML = "<p>Blog content not available.</p>";
+      return;
+    }
+    // Split into intro + rest
+    const words = blog.content.split(" ");
+    const intro = words.slice(0, 30).join(" ");
+    const rest = words.slice(30).join(" ");
+    document.getElementById("singleBlog").innerHTML = `
+      <!-- Intro -->
+      <p class="text-muted mb-4">${intro}...</p>
+      <!-- Centered image (first image in array) -->
+      <img src="${Array.isArray(blog.blogImage) ? blog.blogImage[0] : blog.blogImage}"
+        alt="Blog image"
+        class="img-fluid my-3 my-lg-5 rounded"
+        style="max-height: 500px; width: 100%; object-fit: cover;">
+      <!-- Rest of the content -->
+      <p class="text-dark mt-4" style="line-height:1.8;">${rest}</p>
+    `;
+  } catch (err) {
+    console.error("Error loading single blog:", err);
+    document.getElementById("singleBlog").innerHTML = "<p>Error loading blog.</p>";
+  }
+}
+  // 2. Load More Blog News with Pagination
+  async function loadMoreBlogs(page = 1, perPage = 3) {
+    try {
+      const res = await fetch("http://localhost:3001/byc/api/blogs/published");
+      const blogs = await res.json();
+      // Sort latest first
+      const sortedBlogs = blogs.reverse();
+      // Pagination
+      const totalPages = Math.ceil(sortedBlogs.length / perPage);
+      const start = (page - 1) * perPage;
+      const paginatedBlogs = sortedBlogs.slice(start, start + perPage);
+      // Render cards
+      document.getElementById("moreBlogRow").innerHTML = paginatedBlogs.map(blog => `
+        <div class="col med">
+            <div class="card h-100 border-0 rounded-0">
+                <!-- Blog Image -->
+                <img src="${blog.blogImage}" class="rounded-0" alt="Blog image" style=" width: 100%; height: 400px; object-fit: cover;">
+                <div class="card-body text-start ms-2 midh"  style = "height: 500px;">
+                    <!-- Profile & meta -->
+                    <div class="d-flex align-items-center my-3 " style ="background-color : #E0E0E0;">
+                        <img src="${blog.profileImage}" class=" me-2" width="80" height="80" alt="Profile">
+                        
+                        <div class="ms-5 d-flex gap-5">
+                            <span ><i class="fa-slab-press fa-regular fa-eye ms-lg-3 me-2 me-lg-2"></i> 35</span>
+                            <span><i class="fa-regular fa-heart me-2 ms-lg-0 ms-5"></i> 23</span>
+                          </div>
+                    </div>
+                    <div class="d-flex gap-2 mb-5">
+                        <small class="fw-bold fs-6">${blog.profileName}</small><br>
+                        <small class="text-muted fs-6">.${blog.ownersProfession}</small>
+                      </div>
+                    <!-- Title -->
+                    <h5 class="fw-bold" style="height: 70px;">${truncateContent(blog.title, 8)}</h5>
+                    <!-- Content -->
+                    <p class="text-muted mb-5" style="height: 90px;">${truncateContent(blog.content, 23)}</p>
+                    <!-- Read More -->
+                    <a class="btn-tag " href="./blog.html#first-blog" role="button">Read more<i class="fa-solid fa-arrow-right fa-l arrow-btn"></i></a>
+
+                </div>
+            </div>
+        </div>
+      `).join("");
+      // Render pagination
+      document.getElementById("moreBlogPagination").innerHTML = `
+        <li class="page-item ${page === 1 ? 'disabled' : ''}">
+          <a class="page-link" href="#" onclick="loadMoreBlogs(${page - 1}, ${perPage})">&laquo;</a>
+        </li>
+        ${Array.from({ length: totalPages }, (_, i) => `
+          <li class="page-item ${i + 1 === page ? 'active' : ''}">
+            <a class="page-link" href="#" onclick="loadMoreBlogs(${i + 1}, ${perPage})">${i + 1}</a>
+          </li>
+        `).join("")}
+        <li class="page-item ${page === totalPages ? 'disabled' : ''}">
+          <a class="page-link" href="#" onclick="loadMoreBlogs(${page + 1}, ${perPage})">&raquo;</a>
+        </li>
+      `;
+    } catch (err) {
+      console.error("Error loading more blogs:", err);
+    }
+  }
+
+</script>
 </body>
 </html>
