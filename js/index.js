@@ -246,6 +246,117 @@ function showCategoryKids(event) {
     // clickedLink.classList.add('active');
 }
 
+// for search input 
+        function initNavbarSearch() {
+    const navbar = document.querySelector(".navbar");
+    if (!navbar) return;
+    // Create search input
+    const searchInput = document.createElement("input");
+    searchInput.id = "searchInput";
+    searchInput.placeholder = "Search for products...";
+    navbar.appendChild(searchInput);
+    // Create dropdown
+    const searchResults = document.createElement("ul");
+    searchResults.id = "searchResults";
+    navbar.appendChild(searchResults);
+    // Elements to hide while search is active
+    const hideElements = [
+        document.querySelector('.abbt'),
+        document.querySelector('.abbt '),
+        document.querySelector('.navbar-brand') // logo
+    ];
+    const searchIcon = navbar.querySelector(".fa-search");
+    // Toggle search input visibility
+    function toggleSearch(show) {
+        if (show) {
+            searchInput.style.display = "inline-block";
+            // Calculate total width of elements to hide
+            let totalWidth = 0;
+            hideElements.forEach(el => {
+                if (el) {
+                    totalWidth += el.getBoundingClientRect().width + 75;
+                    el.classList.add("hide");
+                }
+            });
+            searchInput.style.width = totalWidth + "px";
+            // Position input at the left of the first hidden element
+            if (hideElements[2]) { // logo
+                const rect = hideElements[2].getBoundingClientRect();
+                searchInput.style.left = rect.left + "560px";
+            }
+            searchResults.style.width = totalWidth + "700px";
+            searchInput.focus();
+        } else {
+            searchInput.style.display = "none";
+            searchResults.style.display = "none";
+            hideElements.forEach(el => el?.classList.remove("hide"));
+        }
+    }
+    // Fetch products from API
+    let productsCache = [];
+    async function fetchProducts() {
+        try {
+            const res = await fetch("http://localhost:3001/byc/api/products");
+            const data = await res.json();
+            return data; // array of products with `name` field
+        } catch (err) {
+            console.error(err);
+            return [];
+        }
+    }
+    // Input typing event
+    searchInput.addEventListener("input", async () => {
+        const query = searchInput.value.toLowerCase().trim();
+        if (!query) {
+            searchResults.style.display = "none";
+            return;
+        }
+        if (!productsCache.length) {
+            productsCache = await fetchProducts();
+        }
+        const matches = productsCache.filter(p => p.name.toLowerCase().includes(query));
+        searchResults.innerHTML = matches.length
+            ? matches.map(p => `<li data-name="${p.name}">${p.name}</li>`).join("")
+            : "<li>No product found</li>";
+        searchResults.style.display = "block";
+    });
+    // Click on dropdown item
+    searchResults.addEventListener("click", e => {
+        if (e.target.tagName === "LI" && e.target.textContent !== "No product found") {
+            localStorage.setItem("searchQuery", e.target.dataset.name);
+            window.location.href = "./allProducts.html";
+            toggleSearch(false);
+        }
+    });
+    // Enter key behavior
+    searchInput.addEventListener("keydown", e => {
+        if (e.key === "Enter") {
+            const query = searchInput.value.trim();
+            if (query) {
+                localStorage.setItem("searchQuery", query);
+                window.location.href = "./allProducts.html";
+            }
+            toggleSearch(false);
+        }
+    });
+    // Click outside to close
+    document.addEventListener("click", e => {
+        if (!searchInput.contains(e.target) && !searchIcon.parentElement.contains(e.target)) {
+            toggleSearch(false);
+        }
+    });
+    // Click search icon (fix: prevent <a> default)
+    searchIcon.parentElement.addEventListener("click", e => {
+        e.preventDefault(); // prevent page jump
+        toggleSearch(true);
+    });
+  }
+  // Initialize after DOM is ready
+  document.addEventListener("DOMContentLoaded", () => {
+    setupTabs();
+    initNavbarSearch();
+  });
+
 
 // ALL PRODUCTS API
 function loadProducts(page = 1, limit = 25) {

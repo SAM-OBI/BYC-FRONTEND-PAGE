@@ -12,7 +12,7 @@
     <!-- font awesome cdn  -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body onload="checkLoginStatus(),loadSingleBlog(),loadMoreBlogs()">
+<body onload="checkLoginStatus(),loadSingleBlog(),loadMoreBlogs(),initNavbarSearch(),updateWishlistCount()">
      <nav class="navbar navbar-expand-lg mb-5 mb-lg-5 pb-lg-5">
         <div class="container-fluid mt-2"> 
               <!-- Left UL LI -->
@@ -30,21 +30,24 @@
             </a> 
 
             <!-- Right Menu -->
-            <div class="d-none d-lg-flex align-items-center">
-              <ul class="navbar-nav">
-                  <li class="nav-item "><a class="nav-link" href="./aboutUs.html">About Us</a></li>
-                  <li class="nav-item mx-lg-1"><a class="nav-link" href="./contact.html">Contact</a></li>
+            <div class="d-none d-lg-flex align-items-center ">
+              <ul class="navbar-nav gap-2">
+                  <li class="nav-item "><a class="nav-link abbt" href="./aboutUs.html">About Us</a></li>
+                  <li class="nav-item "><a class="nav-link abbt" href="./contact.html">Contact</a></li>
               </ul>
               <div class="icon-links d-flex align-items-center ">
-                  <a href="#"><i class="fas fa-search mx-lg-3"></i></a>
+                  <a href="#"><i class="fas fa-search mx-lg-1"></i></a>
                   <a href="./signUp.html" ><i class="fa-solid fa-user-plus mx-lg-2" id="loggedOut"></i></a>
                   <a href="" class="user-login" id="loggedIn">
-                    <i class="fa-solid fa-user mx-lg-2 " id="loggedIn">
+                    <i class="fa-solid fa-user mx-lg-1 " id="loggedIn">
                       <span class="status-dot"></span>
                     </i>
                   </a>
-                  <a href="./wishlist.html"><i class="far fa-heart mx-lg-2" id="fa-heart"></i></a>
-                  <a href="./cart.html"><i class="fas fa-shopping-cart mx-lg-2"></i></a>
+                  <a href="./wishlist.html"><i class="far fa-heart mx-lg-2 me-lg-4" id="fa-heart"></i></a>
+                  <a href="./cart.html"  class="cart-icon">
+                     <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                </a>
               </div>
             </div>
             <!-- Mobile Toggler -->
@@ -74,7 +77,10 @@
                     </i>
                   </a>
                   <a href="wishlist.html" class="d-lg-none"><i class="far fa-heart text-dark" id="fa-heart"></i></a>
-                  <a href="./cart.html" class="d-lg-none"><i class="fas fa-cart-shopping text-dark"></i></a>
+                  <a href="./cart.html"  class="cart-icon d-lg-none">
+                     <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                </a>
                 </li>
             </ul>
         </div>
@@ -110,8 +116,8 @@
                 <!-- Cards will be injected here -->
             </div>
             <!-- Pagination -->
-            <nav class="mt-4">
-                <ul class="pagination justify-content-center" id="moreBlogPagination">
+            <nav class="my-5">
+                <ul class="pagination justify-content-center gap-2 my-5 py-lg-5" id="moreBlogPagination">
                 <!-- Pagination buttons will be injected here -->
                 </ul>
             </nav>
@@ -212,6 +218,8 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/index.js"></script>
     <script>
+  
+
   // Truncate helper
   function truncateContent(text, wordLimit) {
     const words = text.split(" ");
@@ -219,33 +227,7 @@
     return words.slice(0, wordLimit).join(" ") + "...";
   }
   // 1. Load Single Blog
-//   async function loadSingleBlog() {
-//     const params = new URLSearchParams(window.location.search);
-//     const blogId = params.get("id");
-//     if (!blogId) return;
-//     try {
-//       const res = await fetch(`http://localhost:3001/byc/api/blogs/published/${blogId}`);
-//       const blog = await res.json();
-//       console.log(blog);
-//       // Split content into first part and rest
-//       const words = blog.content.split(" ");
-//       const intro = words.slice(0, 30).join(" ");
-//       const rest = words.slice(30).join(" ");
-//       document.getElementById("singleBlog").innerHTML = `
-//         <!-- Truncated intro -->
-//         <p class="text-muted mb-4">${intro}...</p>
-//         <!-- Centered image -->
-//         <img src="${blog.blogImage}" alt="Blog image"
-//           class="img-fluid my-4 "
-//           style="max-height: 500px; object-fit: cover;">
-//         <!-- Full remaining content -->
-//         <p class="text-dark mt-4" style="line-height:1.8;">${rest}</p>
-//       `;
-//     } catch (err) {
-//       console.error("Error loading single blog:", err);
-//     }
-//   }
-  
+
   async function loadSingleBlog() {
   const params = new URLSearchParams(window.location.search);
   const blogId = params.get("id");

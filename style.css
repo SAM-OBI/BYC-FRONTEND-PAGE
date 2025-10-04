@@ -351,6 +351,18 @@ input[type="radio"] {
     .card-title{
         font-family: "Noto Sans", sans-serif; 
     }
+    .active>.page-link, .page-link.active {
+    z-index: 3;
+    color: #000;
+    background-color: #FFFFFF;
+    border-color: #FB8200;
+}
+.page-link{
+    color: #000;
+    background-color: #FFFFFF;
+    width: 43px !important;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
 /* END CODE FOR NAV  */
 
     /* styling for index.html starts here LOGIN FORM*/

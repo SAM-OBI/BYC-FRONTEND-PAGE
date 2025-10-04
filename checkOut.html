@@ -12,7 +12,7 @@
     <!-- font awesome cdn  -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body onload="checkLoginStatus(),updateWishlistCount(),updateCartCount(),loadCheckout()">
+<body onload="checkLoginStatus(),updateWishlistCount(),updateCartCount(),loadCheckout(),initNavbarSearch()">
    <nav class="navbar navbar-expand-lg mb-5 mb-lg-5 pb-lg-5">
         <div class="container-fluid mt-2"> 
               <!-- Left UL LI -->
@@ -30,21 +30,21 @@
             </a> 
 
             <!-- Right Menu -->
-            <div class="d-none d-lg-flex align-items-center">
-              <ul class="navbar-nav">
-                  <li class="nav-item "><a class="nav-link" href="./aboutUs.html">About Us</a></li>
-                  <li class="nav-item mx-lg-1"><a class="nav-link" href="./contact.html">Contact</a></li>
+            <div class="d-none d-lg-flex align-items-center ">
+              <ul class="navbar-nav gap-2">
+                  <li class="nav-item "><a class="nav-link abbt" href="./aboutUs.html">About Us</a></li>
+                  <li class="nav-item "><a class="nav-link abbt" href="./contact.html">Contact</a></li>
               </ul>
               <div class="icon-links d-flex align-items-center ">
-                  <a href="#"><i class="fas fa-search mx-lg-3"></i></a>
+                  <a href="#"><i class="fas fa-search mx-lg-1"></i></a>
                   <a href="./signUp.html" ><i class="fa-solid fa-user-plus mx-lg-2" id="loggedOut"></i></a>
                   <a href="" class="user-login" id="loggedIn">
-                    <i class="fa-solid fa-user mx-lg-2 " id="loggedIn">
+                    <i class="fa-solid fa-user mx-lg-1 " id="loggedIn">
                       <span class="status-dot"></span>
                     </i>
                   </a>
-                  <a href="./wishlist.html"><i class="far fa-heart mx-lg-2" id="fa-heart"></i></a>
-                  <a href="./cart.html"  class="cart-icon ">
+                  <a href="./wishlist.html"><i class="far fa-heart mx-lg-2 me-lg-4" id="fa-heart"></i></a>
+                  <a href="./cart.html"  class="cart-icon">
                      <i class="fas fa-shopping-cart"></i>
                         <span id="cart-count" class="cart-count">0</span>
                 </a>
@@ -85,10 +85,6 @@
             </ul>
         </div>
     </nav> 
-
-    
-  
-
     <main class="container shadow rounded px-4 px-md-1 px-lg-0">
         <div class="px-4">
             <h6 class=" pb-1 pt-4 fw-bold fs-5">Order Summary <span id="cartLenght"></span> items(s)</h6>
